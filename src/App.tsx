@@ -1,12 +1,23 @@
-function App() {
-  return (
-    <div className="App">
-      <img src="/src/assets/react.svg" alt="react" />
-      <div className="text-3xl font-bold underline text-blue-500">
-        Hello ESC Project!!
-      </div>
-    </div>
-  );
-}
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import TestPage from "@/pages/test-page";
+import Main from "@/pages/main";
+import Onboarding from "@/pages/onboarding";
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+  },
+  {
+    path: "/onboarding",
+    element: <Onboarding />,
+  },
+  {
+    path: "/test",
+    element: <TestPage />,
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}
