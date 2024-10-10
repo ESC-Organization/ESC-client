@@ -2,7 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+       spacing: {
+        '40': '9rem'
+      },
+    },
     fontFamily: {
       sans: ["DNFBitBitv2", "sans-serif"],
     },

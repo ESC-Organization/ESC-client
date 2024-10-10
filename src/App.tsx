@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TestPage from '@/pages/test-page';
 import Main from '@/pages/main-page';
 import Onboarding from '@/pages/onboarding';
-
+import StepOne from './pages/quiz/StepOne';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/onboarding',
     element: <Onboarding />,
+  },
+  {
+    path: '/step1',
+    element: <StepOne />,
   },
   {
     path: '/test',
