@@ -1,22 +1,23 @@
-import Mainbox from "./mainbox";
+import Mainbox from './mainbox';
 
 interface AvatarChatProps {
-    props: number;
+  props: number;
 }
 
 const AvatarChat: React.FC<AvatarChatProps> = ({ props }) => {
-    const imageSrc = `/images/avatar/${props}.png`; 
+  const imageSrc = `/images/avatar/${props}.png`;
 
-    return (
-        <div className="relative w-full justify-center">
-            <div className="w-full max-w-[500px] absolute bottom-[150px]">
-                <div className="w-40 absolute h-[200px] -top-[125px]">
-                    <img src={imageSrc} alt={`Avatar Step ${props}`} /> {/* Use the dynamic image source */}
-                </div>
-                <Mainbox />
-            </div>
+  return (
+    <div className="relative w-full justify-center">
+      <div className="w-full max-w-[500px] absolute bottom-[150px]">
+        <div className="w-40 absolute h-[200px] -top-[125px]">
+          <img src={imageSrc} alt={`Avatar Step ${props}`} />{' '}
+          {/* Use the dynamic image source */}
         </div>
-    );
-}
+        <Mainbox />
+      </div>
+    </div>
+  );
+};
 
 export default AvatarChat;
