@@ -1,5 +1,5 @@
 import React from 'react';
-import Mainbox from './mainbox';
+import Mainbox from './Mainbox';
 interface AvatarChatProps {
   props: number;
 }
