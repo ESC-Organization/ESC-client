@@ -1,10 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Landing from './pages/landing/Landing';
+import QuizOne from './pages/quiz1/QuizOne';
 import TestPage from '@/pages/test-page';
 import Main from '@/pages/main-page';
 import Onboarding from '@/pages/onboarding';
-import StepOne from './pages/quiz/StepOne';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
     element: <Onboarding />,
   },
   {
-    path: '/step1',
-    element: <StepOne />,
+    path: '/landing',
+    element: <Landing />,
+  },
+  {
+    path: '/quiz1',
+    element: <QuizOne />,
   },
   {
     path: '/test',

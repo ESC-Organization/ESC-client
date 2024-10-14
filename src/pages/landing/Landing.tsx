@@ -1,6 +1,6 @@
 import AvatarChat from '@/component/chatbox/AvatarChat';
 
-export default function StepOne() {
+export default function Landing() {
   return (
     <div className="flex justify-center w-full h-full bg-[#86C5E3]">
       <div className="w-full max-w-[500px] absolute bottom-0">
