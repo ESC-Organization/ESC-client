@@ -17,7 +17,7 @@ export default function CharacterSelection() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full relative">
+    <div className="flex flex-col w-screen h-full relative">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -26,7 +26,7 @@ export default function CharacterSelection() {
       />
 
       {/* 콘텐츠 */}
-      <div className="z-10 flex flex-1 flex-col items-center">
+      <div className="z-10 flex flex-1 flex-col items-center overflow-hidden">
         <div className="pt-[80px]">
           <AngledBox>
             <span className="text-white text-[2.5rem]">캐릭터 선택</span>
