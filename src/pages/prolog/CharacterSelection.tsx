@@ -105,7 +105,7 @@ export default function CharacterSelection() {
         </div>
 
         {/* 하단 버튼 */}
-        <div className="mb-8 text-center position-absolute bottom-0 ">
+        <div className="mb-8 text-center">
           <div className="flex flex-col items-center gap-8">
             <AngledBox>
               <span
