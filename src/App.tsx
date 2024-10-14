@@ -3,6 +3,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
+import QuizTwo from './pages/quiz2/QuizTwo';
 import TestPage from '@/pages/test-page';
 import Main from '@/pages/main-page';
 import Onboarding from '@/pages/onboarding';
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/quiz1',
     element: <QuizOne />,
+  },
+  {
+    path: '/quiz2',
+    element: <QuizTwo />,
   },
   {
     path: '/test',
