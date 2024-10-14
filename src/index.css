@@ -1,6 +1,8 @@
 @font-face {
   font-family: 'DNFBitBitv2';
   src: url('/src/assets/fonts/DNFBitBitv2.ttf') format('truetype');
+  font-family: 'DNFBitBitv2';
+  src: url('/src/assets/fonts/DNFBitBitv2.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -11,6 +13,10 @@
 @media (max-width: 500px) {
   #root {
     width: 100%;
+  }
+  .content-wrapper {
+    transform: scale(0.8); /* 콘텐츠만 축소 */
+    transform-origin: center;
   }
 }
 body {
