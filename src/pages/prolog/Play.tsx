@@ -15,7 +15,7 @@ export default function Play() {
   };
 
   return (
-    <div className="flex flex-col w-screen relative overflow-hidden">
+    <div className="flex flex-col w-screen relative ">
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{
@@ -33,7 +33,7 @@ export default function Play() {
           </AngledBox>
         </div>
         {/* 하단 버튼 영역*/}
-        <div className="mb-8 text-center position-absolute bottom-0 ">
+        <div className="mb-8 text-center">
           <div className="flex flex-col items-center gap-4">
             <AngledBox>
               <span

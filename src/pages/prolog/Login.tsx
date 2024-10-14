@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledInputBox from '@/component/prolog/AngledInputBox';
+import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
+import BottomButton from '@/component/prolog/BottomButton';
 
 export default function Login() {
   const [nickname, setNickname] = useState<string>('');
@@ -33,7 +35,7 @@ export default function Login() {
       />
 
       {/* 콘텐츠 */}
-      <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
+      <div className="z-10 flex flex-1 flex-col items-center justify-between relative overflow-hidden">
         <div className="pt-16">
           <AngledBox>
             <span className="text-white text-[2.5rem]">로그인</span>
@@ -42,7 +44,7 @@ export default function Login() {
 
         {/* 입력 영역 */}
         <div className="content-wrapper w-full flex-1 flex items-center justify-center">
-          <AngledBox>
+          <AngledMonkeyBox>
             <div className="flex flex-col px-2 py-8 gap-4">
               <div>
                 <span className="text-white text-[1.5rem] text-left">
@@ -59,7 +61,6 @@ export default function Login() {
                 />
               </AngledInputBox>
               <div className="pt-2" />
-
               <div>
                 <span className="text-white text-[1.5rem] text-left">
                   전화번호
@@ -75,38 +76,11 @@ export default function Login() {
                 />
               </AngledInputBox>
             </div>
-          </AngledBox>
+          </AngledMonkeyBox>
         </div>
 
         {/* 하단 버튼 영역 */}
-        <div className="mb-8 text-center position-absolute bottom-0 ">
-          <AngledBox>
-            <span
-              className="text-white text-[1.5rem] cursor-pointer"
-              onClick={handleLogin}
-            >
-              다음
-            </span>
-          </AngledBox>
-          <div className="mt-12 w-[50%] mx-auto">
-            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
-          </div>
-
-          <div className="absolute -right-0 bottom-32">
-            <img
-              src="src/assets/images/prolog/character-myungwoong.png"
-              alt="Character Myungwoong"
-              className="w-[110px] h-auto"
-            />
-          </div>
-          <div className="absolute -left-0 bottom-12">
-            <img
-              src="src/assets/images/prolog/character-yuloong.png"
-              alt="Character Yuloong"
-              className="w-[100px] h-auto"
-            />
-          </div>
-        </div>
+        <BottomButton buttonText="로그인" onClickEvent={handleLogin} />
       </div>
     </div>
   );
