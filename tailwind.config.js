@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       spacing: {
@@ -21,7 +22,9 @@ export default {
     },
     fontFamily: {
       sans: ['DNFBitBitv2', 'sans-serif'],
+      sans: ['DNFBitBitv2', 'sans-serif'],
     },
   },
+  plugins: [require('tailwind-scrollbar-hide')],
   plugins: [require('tailwind-scrollbar-hide')],
 };
