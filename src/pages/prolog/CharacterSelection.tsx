@@ -27,14 +27,14 @@ export default function CharacterSelection() {
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center overflow-hidden">
-        <div className="pt-[80px]">
+        <div className="pt-16">
           <AngledBox>
             <span className="text-white text-[2.5rem]">캐릭터 선택</span>
           </AngledBox>
         </div>
 
         {/* 캐릭터 선택 섹션 */}
-        <div className="flex flex-col mt-auto mb-auto mx-4">
+        <div className="content-wrapper flex flex-col mt-auto mb-auto mx-4">
           <div className="flex ">
             <div
               className={
@@ -105,17 +105,23 @@ export default function CharacterSelection() {
         </div>
 
         {/* 하단 버튼 */}
-        <div className="mb-8 text-center">
-          <AngledBox>
-            <span
-              className="text-white text-[1.5rem] cursor-pointer"
-              onClick={handleNavigateToLogin}
-            >
-              플레이하기
-            </span>
-          </AngledBox>
-          <div className="mt-12 w-[50%] mx-auto">
-            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+        <div className="mb-8 text-center position-absolute bottom-0 ">
+          <div className="flex flex-col items-center gap-8">
+            <AngledBox>
+              <span
+                className="text-white text-[1.5rem] cursor-pointer"
+                onClick={handleNavigateToLogin}
+              >
+                플레이하기
+              </span>
+            </AngledBox>
+
+            <div className="w-[50%] mx-auto">
+              <img
+                src="src/assets/images/prolog/skku-logo.png"
+                alt="SKKU Logo"
+              />
+            </div>
           </div>
         </div>
       </div>
