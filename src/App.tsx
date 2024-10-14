@@ -3,6 +3,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
+import Ranking from './pages/prolog/Ranking';
+import PrologStory from '@/pages/prolog/PrologStory';
+import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
 import Login from '@/pages/prolog/Login';
 import TestPage from '@/pages/test-page';
@@ -33,6 +36,18 @@ const router = createBrowserRouter([
   {
     path: '/login', // 로그인 페이지 추가
     element: <Login />,
+  },
+  {
+    path: '/prolog',
+    element: <PrologStory />,
+  },
+  {
+    path: '/play',
+    element: <Play />,
+  },
+  {
+    path: '/ranking',
+    element: <Ranking />,
   },
   {
     path: '/landing',

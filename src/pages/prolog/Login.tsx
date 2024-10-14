@@ -33,52 +33,53 @@ export default function Login() {
       />
 
       {/* 콘텐츠 */}
-      <div className="z-10 flex flex-1 flex-col items-center justify-between">
-        <div className="pt-[80px]">
+      <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
+        <div className="pt-16">
           <AngledBox>
             <span className="text-white text-[2.5rem]">로그인</span>
           </AngledBox>
         </div>
 
         {/* 입력 영역 */}
-        <div className="px-8 w-full flex-1 flex items-center justify-center">
+        <div className="content-wrapper w-full flex-1 flex items-center justify-center">
           <AngledBox>
-            <div className="flex flex-col mx-4 max-w-[300px] py-16 gap-8">
+            <div className="flex flex-col px-2 py-8 gap-4">
               <div>
                 <span className="text-white text-[1.5rem] text-left">
                   닉네임
                 </span>
-                <AngledInputBox>
-                  <input
-                    type="text"
-                    className="h-[40px] text-black text-[1.2rem] text-center bg-[#F0F0F0] text-white"
-                    placeholder="닉네임"
-                    value={nickname}
-                    onChange={handleNicknameChange}
-                  />
-                </AngledInputBox>
               </div>
+              <AngledInputBox>
+                <input
+                  type="text"
+                  className="h-[40px] text-black text-[1.2rem] text-center bg-[#F0F0F0]"
+                  placeholder="닉네임"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                />
+              </AngledInputBox>
+              <div className="pt-2" />
 
               <div>
                 <span className="text-white text-[1.5rem] text-left">
                   전화번호
                 </span>
-                <AngledInputBox>
-                  <input
-                    type="text"
-                    className="h-[40px] text-black text-[1.2rem] text-center bg-[#F0F0F0] text-white"
-                    placeholder="전화번호"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                </AngledInputBox>
               </div>
+              <AngledInputBox>
+                <input
+                  type="text"
+                  className="h-[40px] text-black text-[1.2rem] text-center bg-[#F0F0F0]"
+                  placeholder="전화번호"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </AngledInputBox>
             </div>
           </AngledBox>
         </div>
 
         {/* 하단 버튼 영역 */}
-        <div className="mb-8 text-center relative">
+        <div className="mb-8 text-center position-absolute bottom-0 ">
           <AngledBox>
             <span
               className="text-white text-[1.5rem] cursor-pointer"
@@ -91,14 +92,14 @@ export default function Login() {
             <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
           </div>
 
-          <div className="absolute -right-[10px] -top-[40px] bottom-0">
+          <div className="absolute -right-0 bottom-32">
             <img
               src="src/assets/images/prolog/character-myungwoong.png"
               alt="Character Myungwoong"
               className="w-[110px] h-auto"
             />
           </div>
-          <div className="absolute -left-[10px] bottom-0">
+          <div className="absolute -left-0 bottom-12">
             <img
               src="src/assets/images/prolog/character-yuloong.png"
               alt="Character Yuloong"

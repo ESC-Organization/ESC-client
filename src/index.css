@@ -12,6 +12,10 @@
   #root {
     width: 100%;
   }
+  .content-wrapper {
+    transform: scale(0.8); /* 콘텐츠만 축소 */
+    transform-origin: center;
+  }
 }
 body {
   background-color: white;
