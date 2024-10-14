@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
+import Bg2 from '../../images/bg/bg2.png';
+import Avatar5 from '../../images/avatar/5.png';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import WhiteBox from '@/component/chatbox/WhiteBox';
@@ -23,7 +25,9 @@ export default function QuizOne() {
       <span>방호복이 있는데..</span>
     </>,
     <>
-      <span>4층에 산다고</span>
+      <span>
+        <span className="text-[red]">4층</span>에 산다고
+      </span>
       <br />
       <span>했던 거 같은데..</span>
     </>,
@@ -80,7 +84,7 @@ export default function QuizOne() {
         </div>
       )}
       <div className="w-full max-w-[500px] absolute bottom-[250px]">
-        <img src="/images/bg/bg2.png" />
+        <img src={Bg2} />
       </div>
       <div className="w-full max-w-[500px] absolute bottom-0 h-[250px] z-30 bg-[#661AAF]">
         <div className="h-full w-full relative">
@@ -105,12 +109,12 @@ export default function QuizOne() {
         }`}
       >
         <div className="w-[40%]">
-          <img src="/images/avatar/5.png" />
+          <img src={Avatar5} />
         </div>
       </div>
       <div
         ref={scrollRef}
-        className="w-full h-[50%] overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"
+        className="w-full h-[50%] scrollbar-hide overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"
       >
         {dialogues.map((text, index) => (
           <div
