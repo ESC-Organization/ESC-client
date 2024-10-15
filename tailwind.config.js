@@ -6,6 +6,9 @@ export default {
       spacing: {
         40: '9rem',
       },
+      screens: {
+        '500px': '500px',
+      },
       keyframes: {
         'rotate-axis': {
           '0%': { transform: 'perspective(800px) rotateY(0deg)' },
