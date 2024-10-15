@@ -5,7 +5,7 @@ interface AvatarChatProps {
 }
 
 const AvatarChat: React.FC<AvatarChatProps> = ({ props }) => {
-  const imageSrc = `/images/avatar/${props}.png`;
+  const imageSrc = `../../images/avatar/${props}.png`;
 
   return (
     <div className="relative w-full justify-center">

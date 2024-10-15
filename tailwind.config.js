@@ -12,10 +12,19 @@ export default {
       boxShadow: {
         strong: '10px 60px 200px rgba(0, 0, 0, 0.9)',
       },
+      keyframes: {
+        'rotate-axis': {
+          '0%': { transform: 'perspective(800px) rotateY(0deg)' },
+          '100%': { transform: 'perspective(800px) rotateY(360deg)' },
+        },
+      },
+      animation: {
+        'rotate-axis': 'rotate-axis 1.8s linear infinite',
+      },
     },
     fontFamily: {
       sans: ['DNFBitBitv2', 'sans-serif'],
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
