@@ -29,7 +29,7 @@ export default function Ranking() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/login-bg.png')`,
+          backgroundImage: `url('/src/assets/images/prolog/login-page-bg.png')`,
         }}
       />
 
@@ -37,7 +37,7 @@ export default function Ranking() {
       <div className="z-10 flex flex-1 flex-col items-center justify-between relative overflow-hidden">
         <div className="pt-16">
           <AngledBox>
-            <span className="text-white text-[2.5rem]">실시간 랭킹</span>
+            <span className="text-white text-[2.5rem]">RANKING</span>
           </AngledBox>
         </div>
 
@@ -65,8 +65,24 @@ export default function Ranking() {
           </AngledMonkeyBox>
         </div>
 
-        {/* 하단 버튼 영역 */}
-        <BottomButton buttonText="돌아가기" onClickEvent={handleBackClick} />
+        {/* 하단 버튼 영역*/}
+        <div className="flex flex-col w-full text-center">
+          <div className="content-wrapper flex flex-col items-center gap-2 mb-4 relative">
+            <AngledBox>
+              <span
+                className="text-white text-[1.5rem] cursor-pointer"
+                onClick={handleBackClick}
+              >
+                뒤로가기
+              </span>
+            </AngledBox>
+          </div>
+
+          {/* 로고 */}
+          <div className="mb-8 w-[50%] mx-auto">
+            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+          </div>
+        </div>
       </div>
     </div>
   );
