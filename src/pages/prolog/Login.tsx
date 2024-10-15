@@ -96,9 +96,11 @@ export default function Login() {
               </span>
             </AngledBox>
           </div>
-          <div className="mt-8 w-[50%] mx-auto">
-            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
-          </div>
+        </div>
+
+        {/* 로고 */}
+        <div className="mb-8 w-[50%] mx-auto">
+          <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
         </div>
       </div>
     </div>

@@ -5,8 +5,13 @@ export default function Play() {
   const navigate = useNavigate();
 
   // 지금 플레이 클릭 -> prologStory로 이동
-  const handlePlayClick = () => {
-    navigate('/prolog');
+  const handlePrologClick = () => {
+    navigate('/landing-intro');
+  };
+
+  // 로그인 클릭 시
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   // 랭킹 확인 클릭 -> ranking으로 이동
@@ -19,7 +24,7 @@ export default function Play() {
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/login-bg.png')`,
+          backgroundImage: `url('/src/assets/images/prolog/play-bg.png')`,
         }}
       />
 
@@ -33,40 +38,51 @@ export default function Play() {
           </AngledBox>
         </div>
         {/* 하단 버튼 영역*/}
-        <div className="mb-8 text-center">
-          <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col w-full text-center">
+          <div className="content-wrapper flex flex-col items-center gap-2 500px:mb-8 relative">
             <AngledBox>
               <span
-                className="text-white text-[1.5rem] cursor-pointer"
-                onClick={handlePlayClick}
+                className="text-white text-[1rem] cursor-pointer"
+                onClick={handlePrologClick}
               >
-                지금 플레이
+                프롤로그
               </span>
             </AngledBox>
             <AngledBox>
               <span
-                className="text-white text-[1.5rem] cursor-pointer"
+                className="text-white text-[1rem] cursor-pointer"
+                onClick={handleLoginClick}
+              >
+                로그인
+              </span>
+            </AngledBox>
+            <AngledBox>
+              <span
+                className="text-white text-[1rem] cursor-pointer"
                 onClick={handleRankingClick}
               >
                 랭킹 확인
               </span>
             </AngledBox>
-            <div className="absolute -right-0 bottom-12">
+            <div className="absolute -right-0 bottom--4 500px:mr-12">
               <img
                 src="src/assets/images/prolog/character-myungwoong.png"
                 alt="Character Myungwoong"
-                className="w-[110px] h-auto"
+                className="w-[96px] h-auto"
               />
             </div>
-            <div className="absolute -left-0 bottom-24">
+            <div className="absolute -left-0 bottom-0 500px:ml-12 ">
               <img
                 src="src/assets/images/prolog/character-yuloong.png"
                 alt="Character Yuloong"
-                className="w-[100px] h-auto"
+                className="w-[96px] h-auto"
+                style={{ transform: 'scaleX(-1)' }}
               />
             </div>
           </div>
-          <div className="mt-12 w-[50%] mx-auto">
+
+          {/* 로고 */}
+          <div className="mb-8 w-[50%] mx-auto">
             <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
           </div>
         </div>
