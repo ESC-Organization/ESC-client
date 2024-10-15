@@ -4,11 +4,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
 import QuizTwo from './pages/quiz2/QuizTwo';
-import CharacterSelection from './pages/prolog/CharacterSelection';
-import Play from './pages/prolog/Play';
-import Login from './pages/prolog/Login';
-import PrologStory from './pages/prolog/PrologStory';
 import Ranking from './pages/prolog/Ranking';
+import LandingIntro from '@/pages/prolog/LandingIntro';
+import PrologStory from '@/pages/prolog/PrologStory';
+import Play from '@/pages/prolog/Play';
+import CharacterSelection from '@/pages/prolog/CharacterSelection';
+import Login from '@/pages/prolog/Login';
 import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
 import TestPage from '@/pages/test-page';
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/onboarding',
     element: <Onboarding />,
+  },
+  {
+    path: '/landing-intro',
+    element: <LandingIntro />,
   },
   {
     path: '/character-selection', // 캐릭터 선택 페이지 추가
