@@ -21,7 +21,7 @@ export default function CharacterSelection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/character-choose-bg.png')`,
+          backgroundImage: `url('/src/assets/images/prolog/login-page-bg.png')`,
         }}
       />
 

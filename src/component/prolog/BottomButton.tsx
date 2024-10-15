@@ -10,7 +10,7 @@ export default function BottomButton({
   onClickEvent,
 }: BottomButtonProps) {
   return (
-    <div className="mb-8 text-center">
+    <div className="mb-4 text-center">
       <AngledBox>
         <span
           className="text-white text-[1.5rem] cursor-pointer"
