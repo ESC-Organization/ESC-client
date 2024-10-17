@@ -7,7 +7,7 @@ interface BoxComponentProps {
 export default function AngledBox({ children }: BoxComponentProps) {
   return (
     <div className="flex flex-col items-center relative">
-      <div className="absolute top-[-32px] z-10">
+      <div className="absolute top-[-50px]">
         <img
           src="src/assets/images/prolog/monkey.png"
           alt="Monkey Character"

@@ -4,7 +4,7 @@ import AngledBox from '@/component/prolog/AngledBox';
 
 export default function CharacterSelection() {
   const navigate = useNavigate();
-  const [selectedCharacter, setSelectedCharacter] = useState<string>('boy');
+  const [selectedCharacter, setSelectedCharacter] = useState<string>('');
 
   const handleCharacterSelect = (character: string) => {
     setSelectedCharacter(character);
@@ -21,7 +21,7 @@ export default function CharacterSelection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/character-choose-bg.png')`,
+          backgroundImage: `url('/src/assets/images/prolog/login-page-bg.png')`,
         }}
       />
 
@@ -34,94 +34,104 @@ export default function CharacterSelection() {
         </div>
 
         {/* 캐릭터 선택 섹션 */}
-        <div className="content-wrapper flex flex-col mt-auto mb-auto mx-4">
-          <div className="flex ">
+        <div className="content-wrapper flex flex-col w-full mt-auto mb-auto mx-4">
+          <div className="mt-8 flex justify-center gap-12 relative">
+            {/* Character Boy */}
             <div
-              className={
-                'flex flex-col items-center cursor-pointer transition-all duration-300 mt-4'
-              }
-              style={
-                selectedCharacter === 'boy' ? { transform: 'scale(1.3)' } : {}
-              }
+              className="relative flex flex-col items-center cursor-pointer transition-all duration-300"
+              style={{
+                transform:
+                  selectedCharacter === 'boy' ? 'scale(1.3)' : 'scale(1)',
+                transformOrigin: 'center bottom',
+              }}
               onClick={() => handleCharacterSelect('boy')}
             >
               {selectedCharacter === 'boy' && (
-                <div className="relative w-[24px] h-[24px]">
+                <div className="absolute -top-8 w-[24px] h-[24px]">
                   <img src="/src/assets/images/prolog/character-pointer.png" />
                 </div>
               )}
               <img
-                src="src/assets/images/prolog/character-yuloong.png"
+                src="/src/assets/images/prolog/character-yuloong.png"
                 alt="Character Boy"
-                className={`w-[170px] h-auto mb-4 ${
-                  selectedCharacter === 'boy' ? 'w-[200px]' : ''
-                }`}
+                className="w-[96px] h-auto mb-4"
               />
             </div>
 
             {/* Character Girl */}
             <div
-              className={
-                'flex flex-col items-center cursor-pointer transition-all duration-300 '
-              }
-              style={
-                selectedCharacter === 'girl' ? { transform: 'scale(1.3)' } : {}
-              }
+              className="relative flex flex-col items-center cursor-pointer transition-all duration-300"
+              style={{
+                transform:
+                  selectedCharacter === 'girl' ? 'scale(1.3)' : 'scale(1)',
+                transformOrigin: 'center bottom',
+              }}
               onClick={() => handleCharacterSelect('girl')}
             >
               {selectedCharacter === 'girl' && (
-                <div className="relative w-[24px] h-[24px]">
+                <div className="absolute -top-8 w-[24px] h-[24px]">
                   <img src="/src/assets/images/prolog/character-pointer.png" />
                 </div>
               )}
               <img
-                src="src/assets/images/prolog/character-myungwoong.png"
+                src="/src/assets/images/prolog/character-myungwoong.png"
                 alt="Character Girl"
-                className={`w-[200px] h-auto mb-4 ${
-                  selectedCharacter === 'girl' ? 'w-[200px]' : ''
-                }`}
+                className="w-[96px] h-auto mb-4"
               />
             </div>
-          </div>
-          {/* 캐릭터 설명 텍스트 */}
-          <div className="mt-8 text-white text-center">
-            {selectedCharacter === 'boy' && (
-              <AngledBox>
-                <span>
-                  율웅이는 율전의 영웅입니다! <br />
-                  자연사회과학적 지식을 지니고 있습니다.
-                </span>
-              </AngledBox>
-            )}
-            {selectedCharacter === 'girl' && (
-              <AngledBox>
-                <span>
-                  명웅이는 명륜의 영웅입니다! <br />
-                  인문사회과학적 지식을 지니고 있습니다.
-                </span>
-              </AngledBox>
-            )}
+            {/* 캐릭터 설명 텍스트 */}
+            <div className="text-white absolute top-32 w-full 500px:px-12">
+              <div className="flex justify-start">
+                {selectedCharacter === '' && (
+                  <AngledBox
+                    background="bg-[#909090]"
+                    border="border-[#808080]"
+                    lineBackground="bg-[#E0E0E0] opacity-50"
+                    className="w-full"
+                  >
+                    <span>캐릭터를 선택해주세요</span>
+                  </AngledBox>
+                )}
+                {selectedCharacter === 'boy' && (
+                  <AngledBox
+                    background="bg-[#909090]"
+                    border="border-[#808080]"
+                    lineBackground="bg-[#E0E0E0] opacity-50"
+                    className="w-full"
+                    onClick={handleNavigateToLogin}
+                  >
+                    <span>
+                      '율웅이'는 율전의 영웅입니다! <br />
+                      자연과학적 지식을 지녔습니다.
+                    </span>
+                  </AngledBox>
+                )}
+                {selectedCharacter === 'girl' && (
+                  <AngledBox
+                    background="bg-[#909090]"
+                    border="border-[#808080]"
+                    lineBackground="bg-[#E0E0E0] opacity-50"
+                    className="w-full"
+                    onClick={handleNavigateToLogin}
+                  >
+                    <span>
+                      '명웅이'는 명륜의 영웅입니다! <br />
+                      인문사회과학적 지식을 지녔습니다.
+                    </span>
+                  </AngledBox>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
         {/* 하단 버튼 */}
         <div className="mb-8 text-center">
-          <div className="flex flex-col items-center gap-8">
-            <AngledBox>
-              <span
-                className="text-white text-[1.5rem] cursor-pointer"
-                onClick={handleNavigateToLogin}
-              >
-                플레이하기
-              </span>
-            </AngledBox>
-
-            <div className="w-[50%] mx-auto">
-              <img
-                src="src/assets/images/prolog/skku-logo.png"
-                alt="SKKU Logo"
-              />
-            </div>
+          <div className="w-[50%] mx-auto">
+            <img
+              src="/src/assets/images/prolog/skku-logo.png"
+              alt="SKKU Logo"
+            />
           </div>
         </div>
       </div>

@@ -9,6 +9,9 @@ export default {
       screens: {
         '500px': '500px',
       },
+      boxShadow: {
+        strong: '10px 60px 200px rgba(0, 0, 0, 0.9)',
+      },
       keyframes: {
         'rotate-axis': {
           '0%': { transform: 'perspective(800px) rotateY(0deg)' },

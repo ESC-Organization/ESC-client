@@ -101,6 +101,12 @@ export default function QuizTwo() {
       >
         문제풀기
       </div>
+      <div
+        onClick={showModal}
+        className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+      >
+        문제풀기
+      </div>
       <div className="w-full h-[50%] scrollbar-hide overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"></div>
     </div>
   );
