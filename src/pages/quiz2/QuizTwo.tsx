@@ -32,6 +32,7 @@ export default function QuizTwo() {
   );
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
+  const [isStart, setIsStart] = useState(false);
   const answers = ['성', '균', '관', '대'];
   const [idx, setIdx] = useState<number>(1); // Store idx
 
@@ -52,8 +53,12 @@ export default function QuizTwo() {
   };
   const handleNext = (nextIdx: number) => {
     nextIdx++;
-    setIdx(nextIdx); // Update the idx state
-    console.log('Next idx:', nextIdx); // Log the idx value
+    setIdx(nextIdx);
+    console.log('Next idx:', nextIdx);
+    if (nextIdx > dialogues.length) {
+      console.log('finish');
+      setIsStart(true);
+    }
   };
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
@@ -95,18 +100,15 @@ export default function QuizTwo() {
           <img src={Avatar2} />
         </div>
       </div>
-      <div
-        onClick={showModal}
-        className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
-      >
-        문제풀기
-      </div>
-      <div
-        onClick={showModal}
-        className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
-      >
-        문제풀기
-      </div>
+      {isStart && (
+        <div
+          onClick={showModal}
+          className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+        >
+          문제풀기
+        </div>
+      )}
+
       <div className="w-full h-[50%] scrollbar-hide overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"></div>
     </div>
   );
