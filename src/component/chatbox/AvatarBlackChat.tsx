@@ -2,6 +2,8 @@ import React from 'react';
 import avatar1 from '../../images/avatar/1.png';
 import avatar2 from '../../images/avatar/2.png';
 import avatar3 from '../../images/avatar/3.png';
+import avatar4 from '../../images/avatar/4.png';
+import avatar5 from '../../images/avatar/5.png';
 
 interface AvatarBlackChatProps {
   idx: number;
@@ -15,6 +17,8 @@ const avatars = {
   1: avatar1,
   2: avatar2,
   3: avatar3,
+  4: avatar4,
+  5: avatar5,
   // 필요에 따라 추가
 };
 
