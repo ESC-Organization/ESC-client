@@ -1,38 +1,54 @@
 import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import Message from '/src/assets/images/items/message.png';
-import Ncenter from '/src/assets/images/bg/ncenter.png';
+import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-
-export default function QuizTwo() {
+export default function QuizThree() {
   const dialogues = [
     {
       idx: 1,
-      props: 7,
-      name: '오타쿠',
-      text: '히사시부리~~',
+      props: 1,
+      name: '000',
+      text: '(숨을 헐떡이며) 교수님! 왜 아직 이 교실에 계세요!',
     },
     {
       idx: 2,
-      props: 7,
-      name: '오타쿠',
-      text: '00쿤,이런 상황에선 패기가 중요하네.',
+      props: 1,
+      name: '000',
+      text: '제가 구해드릴게요!.',
     },
     {
       idx: 3,
-      props: 0,
-      name: '오타쿠',
-      text: '00쿤의 답변 여하에 따라 내가 아이템을 주겠네',
+      props: 6,
+      name: '익명의 교수',
+      text: '(기침하며)콜록,,콜록,,,',
     },
     {
       idx: 4,
-      props: 0,
-      name: '오타쿠',
-      text: '내 지원서 내용을 맞춰보게나',
+      props: 6,
+      name: '익명의 교수',
+      text: '나는 아직 대피할 수 없네',
+    },
+    {
+      idx: 5,
+      props: 6,
+      name: '익명의 교수',
+      text: '나는 30년 평생 교수로 살아있다네..',
+    },
+    {
+      idx: 6,
+      props: 6,
+      name: '익명의 교수',
+      text: '아직 학생 한 명이 출석 체크를 안 한 것 같네..',
+    },
+    {
+      idx: 7,
+      props: 6,
+      name: '익명의 교수',
+      text: '-- 출첵했나요??',
     },
   ];
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
@@ -74,7 +90,7 @@ export default function QuizTwo() {
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
       {isModal && (
         <Subject
-          q="첫번째 빈칸에 들어갈 말은?"
+          q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"
           onSubject={handleSubjectAnswer}
         />
       )}
@@ -84,21 +100,11 @@ export default function QuizTwo() {
       <div className="w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />
       </div>
-      <div className="w-full max-w-[500px] absolute bottom-[318px]">
-        <div className="relative w-1/2 ml-auto">
-          <img src={Ncenter} />
+      <div className="w-full max-w-[500px] absolute bottom-[300px]">
+        <div className="relative w-2/3 ml-auto">
+          <img src={NcenterFire} />
         </div>
       </div>
-      {idx >= 3 && idx < 5 && (
-        <div className="absolute h-[60dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
-      {idx >= 5 && (
-        <div className="absolute p-4 h-[80dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
 
       <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
         {currentDialogue && (

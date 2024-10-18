@@ -4,6 +4,9 @@ import avatar2 from '/src/assets/images/avatar/2.png';
 import avatar3 from '/src/assets/images/avatar/3.png';
 import avatar4 from '/src/assets/images/avatar/4.png';
 import avatar5 from '/src/assets/images/avatar/5.png';
+import avatar6 from '/src/assets/images/avatar/6.png';
+import avatar7 from '/src/assets/images/avatar/7.png';
+import none from '/src/assets/images/avatar/0.png';
 
 interface AvatarBlackChatProps {
   idx: number;
@@ -14,11 +17,14 @@ interface AvatarBlackChatProps {
 }
 
 const avatars = {
+  0: none,
   1: avatar1,
   2: avatar2,
   3: avatar3,
   4: avatar4,
   5: avatar5,
+  6: avatar6,
+  7: avatar7,
   // 필요에 따라 추가
 };
 
@@ -42,7 +48,7 @@ export default function AvatarBlackChat({
         <div className="w-40 absolute h-[200px] -top-[125px]">
           <img src={imageSrc} alt={`Avatar Step ${props}`} />
         </div>
-        <div className="flex flex-col p-4 gap-2 w-full h-full transform relative z-[70] bg-[#404040] rounded-[5px] text-white border-4 border-[#606060]">
+        <div className="mt-4 flex flex-col p-4 gap-2 w-full h-full transform relative z-[70] bg-[#404040] rounded-[5px] text-white border-4 border-[#606060]">
           <div className="text-[1.2rem]">{name}</div>
           <div className="pl-2">{text}</div>
           <div onClick={goNext} className="absolute pb-4 pr-8 bottom-0 right-0">
