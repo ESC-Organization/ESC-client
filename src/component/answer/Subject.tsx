@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Monkey from '../../images/items/monkey.png';
+import Monkey from '/src/assets/images/items/monkey.png';
 interface ObjectProps {
   q: React.ReactNode;
   onSubject: (subject: string) => void;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import Bg2 from '../../images/bg/bg2.png';
-import Bg3 from '../../images/bg/bg3.png';
-import Ncenter from '../../images/bg/ncenter.png';
-import Avatar2 from '../../images/avatar/2.png';
+import Bg2 from '/src/assets/images/bg/bg2.png';
+import Bg3 from '/src/assets/images/bg/bg3.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
+import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';

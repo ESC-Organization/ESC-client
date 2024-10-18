@@ -1,9 +1,9 @@
 import React from 'react';
-import avatar1 from '../../images/avatar/1.png';
-import avatar2 from '../../images/avatar/2.png';
-import avatar3 from '../../images/avatar/3.png';
-import avatar4 from '../../images/avatar/4.png';
-import avatar5 from '../../images/avatar/5.png';
+import avatar1 from '/src/assets/images/avatar/1.png';
+import avatar2 from '/src/assets/images/avatar/2.png';
+import avatar3 from '/src/assets/images/avatar/3.png';
+import avatar4 from '/src/assets/images/avatar/4.png';
+import avatar5 from '/src/assets/images/avatar/5.png';
 
 interface AvatarBlackChatProps {
   idx: number;

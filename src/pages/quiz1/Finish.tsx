@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Bg2 from '../../images/bg/bg2.png';
-import Avatar2 from '../../images/avatar/2.png';
+import Bg2 from '/src/assets/images/bg/bg2.png';
+import Avatar2 from '/src/assets/images/avatar/2.png';
 export default function Finish() {
   const navigate = useNavigate();
   const goRank = () => {
