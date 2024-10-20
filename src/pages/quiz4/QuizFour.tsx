@@ -6,49 +6,43 @@ import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-export default function QuizThree() {
+export default function QuizFour() {
   const dialogues = [
     {
       idx: 1,
-      props: 1,
-      name: '000',
-      text: '(숨을 헐떡이며) 교수님! 왜 아직 이 교실에 계세요!',
+      props: 8,
+      name: '최강록',
+      text: '헤헴...미디어를 1년 간 끊었건만..기어코 나에게 왔구만',
     },
     {
       idx: 2,
       props: 1,
-      name: '000',
-      text: '제가 구해드릴게요!.',
+      name: '00',
+      text: '현재 굶주리고 있는 사람이 많아요. 저를 도와주세요!',
     },
     {
       idx: 3,
-      props: 6,
-      name: '익명의 교수',
-      text: '(기침하며)콜록,,콜록,,,',
+      props: 8,
+      name: '최강록',
+      text: '허허 나야 강록이...',
     },
     {
       idx: 4,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 아직 대피할 수 없네',
+      props: 1,
+      name: '00',
+      text: '네 그리너까 빨리 도와주세요!',
     },
     {
       idx: 5,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 30년 평생 교수로 살아있다네..',
+      props: 8,
+      name: '최강록',
+      text: '난 그 건물이 아니면 요리를 안 해.',
     },
     {
       idx: 6,
-      props: 6,
-      name: '익명의 교수',
-      text: '아직 학생 한 명이 출석 체크를 안 한 것 같네..',
-    },
-    {
-      idx: 7,
-      props: 6,
-      name: '익명의 교수',
-      text: '-- 출첵했나요??',
+      props: 1,
+      name: '00',
+      text: '탄소 6개, 근데 이제 수소를 6개 곁들인..건물 말씀하시는 거죠?',
     },
   ];
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
@@ -93,7 +87,7 @@ export default function QuizThree() {
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
       {isModal && (
         <Subject
-          q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"
+          q="지금 이들이 말하고 있는 건물 이름은?"
           onSubject={handleSubjectAnswer}
           onClose={handleCloseSubject}
         />

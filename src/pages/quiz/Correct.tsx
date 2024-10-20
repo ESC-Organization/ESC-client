@@ -1,4 +1,4 @@
-import Bg2 from '../../images/bg/bg2.png';
+import Bg2 from '/src/assets/images/bg/bg2.png';
 import Avatar5 from '/src/assets/images/avatar/5.png';
 import Finish from './Finish';
 import WhiteBox from '@/component/chatbox/WhiteBox';

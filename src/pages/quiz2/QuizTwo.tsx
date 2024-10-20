@@ -68,6 +68,9 @@ export default function QuizTwo() {
       setIsStart(true);
     }
   };
+  const handleCloseSubject = () => {
+    setIsModal(false); //안보임
+  };
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
@@ -76,6 +79,7 @@ export default function QuizTwo() {
         <Subject
           q="첫번째 빈칸에 들어갈 말은?"
           onSubject={handleSubjectAnswer}
+          onClose={handleCloseSubject}
         />
       )}
       <div className="absolute w-full h-full z-50">
@@ -121,7 +125,7 @@ export default function QuizTwo() {
       {isStart && (
         <div
           onClick={showModal}
-          className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+          className="cursor-pointer flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
         >
           문제풀기
         </div>

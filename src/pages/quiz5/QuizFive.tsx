@@ -6,49 +6,31 @@ import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-export default function QuizThree() {
+export default function QuizFive() {
   const dialogues = [
     {
       idx: 1,
-      props: 1,
-      name: '000',
-      text: '(숨을 헐떡이며) 교수님! 왜 아직 이 교실에 계세요!',
+      props: 9,
+      name: '행정실 직원',
+      text: '제가 그저께 입사해서...',
     },
     {
       idx: 2,
-      props: 1,
-      name: '000',
-      text: '제가 구해드릴게요!.',
+      props: 9,
+      name: '행정실 직원',
+      text: '이럴 때 연락해야 할 대학이 있다고 하셨는데..',
     },
     {
       idx: 3,
-      props: 6,
-      name: '익명의 교수',
-      text: '(기침하며)콜록,,콜록,,,',
+      props: 9,
+      name: '행정실 직원',
+      text: '저희와 비슷한 대학교 세 군데가 있다고 하시던데..',
     },
     {
       idx: 4,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 아직 대피할 수 없네',
-    },
-    {
-      idx: 5,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 30년 평생 교수로 살아있다네..',
-    },
-    {
-      idx: 6,
-      props: 6,
-      name: '익명의 교수',
-      text: '아직 학생 한 명이 출석 체크를 안 한 것 같네..',
-    },
-    {
-      idx: 7,
-      props: 6,
-      name: '익명의 교수',
-      text: '-- 출첵했나요??',
+      props: 9,
+      name: '행정실 직원',
+      text: '어느 대학들인지 알고 계신가요?',
     },
   ];
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
@@ -93,7 +75,7 @@ export default function QuizThree() {
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
       {isModal && (
         <Subject
-          q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"
+          q="성___빈칸에 들어갈 글자는?"
           onSubject={handleSubjectAnswer}
           onClose={handleCloseSubject}
         />

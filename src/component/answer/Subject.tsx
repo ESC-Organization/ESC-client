@@ -4,8 +4,9 @@ import Monkey from '/src/assets/images/items/monkey.png';
 interface ObjectProps {
   q: React.ReactNode;
   onSubject: (subject: string) => void;
+  onClose: () => void;
 }
-export default function Subject({ q, onSubject }: ObjectProps) {
+export default function Subject({ q, onSubject, onClose }: ObjectProps) {
   const [inputValue, setInputValue] = useState('');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -16,6 +17,9 @@ export default function Subject({ q, onSubject }: ObjectProps) {
   const handleSubmit = () => {
     console.log(inputValue);
     onSubject(inputValue); // 입력된 값 외부로 전달
+  };
+  const handleClose = () => {
+    onClose(); // 입력된 값 외부로 전달
   };
   const showHint = () => {
     if (isHint == true) {
@@ -48,7 +52,13 @@ export default function Subject({ q, onSubject }: ObjectProps) {
 
           <img src={Monkey} />
         </div>
-        <div className="mt-[15%]">{q}</div>
+        <div
+          className="text-right text-[1.1rem] pr-2 cursor-pointer -mt-[2%]"
+          onClick={handleClose}
+        >
+          x
+        </div>
+        <div className="mt-[2%]">{q}</div>
         <div className="p-2 mt-[5%] mb-[5%] flex flex-col w-full gap-4">
           <div className="p-2 rounded-[5px] bg-[#FFFFFF] w-full mx-auto  border-[4px] border-[#808080]">
             <input
