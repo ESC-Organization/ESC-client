@@ -3,9 +3,9 @@ import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
-// import Object from '@/component/answer/Object';
-import Subject from '@/component/answer/Subject';
+import Object from '@/component/answer/Object';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import TopBar from '@/component/bar/TopBar';
 export default function QuizOne() {
   const dialogues = [
     {
@@ -46,11 +46,7 @@ export default function QuizOne() {
     setSelectedAnswerIndex(null);
     setSubjectAnswer('0');
   };
-  const handleSubjectAnswer = (subject: string) => {
-    setIsModal(false); //안보임
-    setSubjectAnswer(subject);
-    console.log(subject);
-  };
+
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
@@ -60,14 +56,17 @@ export default function QuizOne() {
       setIsStart(true);
     }
   };
+
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
+      <TopBar />
       {isModal && (
-        <Subject
+        <Object
           q="다음 중, 애드워드 리의 본명은?"
-          onSubject={handleSubjectAnswer}
+          answer={answers}
+          onSelect={handleSelect}
         />
       )}
       <div className="absolute w-full h-full z-50">

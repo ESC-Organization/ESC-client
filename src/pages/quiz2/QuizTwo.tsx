@@ -7,7 +7,7 @@ import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-
+import TopBar from '@/component/bar/TopBar';
 export default function QuizTwo() {
   const dialogues = [
     {
@@ -71,10 +71,12 @@ export default function QuizTwo() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
+
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
+      <TopBar />
       {isModal && (
         <Subject
           q="첫번째 빈칸에 들어갈 말은?"

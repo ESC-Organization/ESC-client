@@ -26,7 +26,7 @@ export default function Object({ q, answer = [], onSelect }: ObjectProps) {
             <div
               key={index}
               onClick={() => handleSelect(index)}
-              className={`p-2 rounded-[5px] bg-[#FFFFFF] w-full mx-auto border-[4px] border-[#808080] ${selectedIndex === index ? 'bg-black text-white' : 'bg-[#FFFFFF]'}`}
+              className={`p-2 rounded-[5px] hover:bg-[#808080] bg-[#FFFFFF] w-full mx-auto border-[4px] border-[#808080] ${selectedIndex === index ? 'bg-black text-white' : 'bg-[#FFFFFF]'}`}
             >
               <span style={{ WebkitTextStroke: '1px #000' }}>{item}</span>
             </div>

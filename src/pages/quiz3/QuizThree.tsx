@@ -3,6 +3,7 @@ import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
+import TopBar from '@/component/bar/TopBar';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
@@ -91,6 +92,7 @@ export default function QuizThree() {
 
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
+      <TopBar />
       {isModal && (
         <Subject
           q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"

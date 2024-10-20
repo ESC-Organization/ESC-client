@@ -3,7 +3,7 @@ import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
-// import Object from '@/component/answer/Object';
+import TopBar from '@/component/bar/TopBar';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 export default function QuizFour() {
@@ -85,6 +85,7 @@ export default function QuizFour() {
 
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
+      <TopBar />
       {isModal && (
         <Subject
           q="지금 이들이 말하고 있는 건물 이름은?"
