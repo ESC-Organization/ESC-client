@@ -1,38 +1,48 @@
 import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import Message from '/src/assets/images/items/message.png';
-import Ncenter from '/src/assets/images/bg/ncenter.png';
+import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
-// import Object from '@/component/answer/Object';
+import TopBar from '@/component/bar/TopBar';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-import TopBar from '@/component/bar/TopBar';
-export default function QuizTwo() {
+export default function QuizFour() {
   const dialogues = [
     {
       idx: 1,
-      props: 7,
-      name: '오타쿠',
-      text: '히사시부리~~',
+      props: 8,
+      name: '최강록',
+      text: '헤헴...미디어를 1년 간 끊었건만..기어코 나에게 왔구만',
     },
     {
       idx: 2,
-      props: 7,
-      name: '오타쿠',
-      text: '00쿤,이런 상황에선 패기가 중요하네.',
+      props: 1,
+      name: '00',
+      text: '현재 굶주리고 있는 사람이 많아요. 저를 도와주세요!',
     },
     {
       idx: 3,
-      props: 0,
-      name: '오타쿠',
-      text: '00쿤의 답변 여하에 따라 내가 아이템을 주겠네',
+      props: 8,
+      name: '최강록',
+      text: '허허 나야 강록이...',
     },
     {
       idx: 4,
-      props: 0,
-      name: '오타쿠',
-      text: '내 지원서 내용을 맞춰보게나',
+      props: 1,
+      name: '00',
+      text: '네 그리너까 빨리 도와주세요!',
+    },
+    {
+      idx: 5,
+      props: 8,
+      name: '최강록',
+      text: '난 그 건물이 아니면 요리를 안 해.',
+    },
+    {
+      idx: 6,
+      props: 1,
+      name: '00',
+      text: '탄소 6개, 근데 이제 수소를 6개 곁들인..건물 말씀하시는 거죠?',
     },
   ];
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
@@ -71,7 +81,6 @@ export default function QuizTwo() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
@@ -79,7 +88,7 @@ export default function QuizTwo() {
       <TopBar />
       {isModal && (
         <Subject
-          q="첫번째 빈칸에 들어갈 말은?"
+          q="지금 이들이 말하고 있는 건물 이름은?"
           onSubject={handleSubjectAnswer}
           onClose={handleCloseSubject}
         />
@@ -90,21 +99,11 @@ export default function QuizTwo() {
       <div className="w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />
       </div>
-      <div className="w-full max-w-[500px] absolute bottom-[318px]">
-        <div className="relative w-1/2 ml-auto">
-          <img src={Ncenter} />
+      <div className="w-full max-w-[500px] absolute bottom-[300px]">
+        <div className="relative w-2/3 ml-auto">
+          <img src={NcenterFire} />
         </div>
       </div>
-      {idx >= 3 && idx < 5 && (
-        <div className="absolute h-[60dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
-      {idx >= 5 && (
-        <div className="absolute p-4 h-[80dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
 
       <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
         {currentDialogue && (
@@ -127,7 +126,7 @@ export default function QuizTwo() {
       {isStart && (
         <div
           onClick={showModal}
-          className="cursor-pointer flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+          className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
         >
           문제풀기
         </div>

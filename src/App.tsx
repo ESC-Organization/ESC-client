@@ -5,6 +5,9 @@ import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
 import QuizTwo from './pages/quiz2/QuizTwo';
 import Ranking from './pages/prolog/Ranking';
+import QuizThree from './pages/quiz3/QuizThree';
+import QuizFour from './pages/quiz4/QuizFour';
+import QuizFive from './pages/quiz5/QuizFive';
 import LandingIntro from '@/pages/prolog/LandingIntro';
 import PrologStory from '@/pages/prolog/PrologStory';
 import Play from '@/pages/prolog/Play';
@@ -66,6 +69,18 @@ const router = createBrowserRouter([
   {
     path: '/quiz2',
     element: <QuizTwo />,
+  },
+  {
+    path: '/quiz3',
+    element: <QuizThree />,
+  },
+  {
+    path: '/quiz4',
+    element: <QuizFour />,
+  },
+  {
+    path: '/quiz5',
+    element: <QuizFive />,
   },
   {
     path: '/test',

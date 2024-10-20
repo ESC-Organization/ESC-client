@@ -1,6 +1,6 @@
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Avatar5 from '/src/assets/images/avatar/5.png';
-import Finish2 from './Finish2';
+import Finish from './Finish';
 import WhiteBox from '@/component/chatbox/WhiteBox';
 export default function Correct() {
   // WhiteBox의 대사들
@@ -15,7 +15,7 @@ export default function Correct() {
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
       <div className="absolute w-full h-full z-50">
-        <Finish2 />
+        <Finish />
       </div>
       <div className="flex justify-center w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />

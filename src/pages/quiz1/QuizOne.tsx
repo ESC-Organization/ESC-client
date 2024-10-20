@@ -1,134 +1,114 @@
 import { useState, useEffect } from 'react';
-import { useRef } from 'react';
-import Bg2 from '../../images/bg/bg2.png';
-import Avatar5 from '../../images/avatar/5.png';
-import Correct from './Correct';
-import Wrong from './Wrong';
-import WhiteBox from '@/component/chatbox/WhiteBox';
+import Bg2 from '/src/assets/images/bg/bg2.png';
+import Bg3 from '/src/assets/images/bg/bg3.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
+import Avatar2 from '/src/assets/images/avatar/2.png';
+import Object from '@/component/answer/Object';
+import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import TopBar from '@/component/bar/TopBar';
 export default function QuizOne() {
-  const [visibleBox, setVisibleBox] = useState(0);
-  const [avatarVisible, setAvatarVisible] = useState(false);
-  const scrollRef = useRef(null); // 스크롤을 제어할 ref 생성
-  const [activeAnswer, setActiveAnswer] = useState<number | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Tracks if the answer is correct or wrong
-
-  // WhiteBox의 대사들
   const dialogues = [
-    <>
-      <span>내 연구생이 기숙사를 </span>
-      <br />
-      <span>가서 돌아오지 않는다</span>
-    </>,
-    <>
-      <span>거기 우리에게 꼭 필요한</span>
-      <br />
-      <span>방호복이 있는데..</span>
-    </>,
-    <>
-      <span>
-        <span className="text-[red]">4층</span>에 산다고
-      </span>
-      <br />
-      <span>했던 거 같은데..</span>
-    </>,
-    <>
-      <span>어디인지 아는가?</span>
-    </>,
+    {
+      idx: 1,
+      props: 6,
+      name: '교수님',
+      text: '내 연구생이 기숙사를 가서 돌아오지 않는다..',
+    },
+    {
+      idx: 2,
+      props: 6,
+      name: '교수님',
+      text: '거기 우리에게 꼭 필요한 방호복이 있는데...',
+    },
+    {
+      idx: 3,
+      props: 6,
+      name: '교수님',
+      text: '4층에 산다고 했던것 같은데..혹시 어디인지 아는가?',
+    },
   ];
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
+    0
+  );
+  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
+  const [isModal, setIsModal] = useState(false); // 처음엔 없음
+  const [isStart, setIsStart] = useState(false);
+  const answers = ['성', '균', '관', '대'];
+  const [idx, setIdx] = useState<number>(1); // Store idx
 
-  const answers = ['인관', '의관', '예관', '지관'];
-  const correctAnswerIndex = 3;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisibleBox((prev) =>
-        prev < dialogues.length - 1 ? prev + 1 : dialogues.length - 1
-      ); // 최대 배열 길이까지
-    }, 1200); // 3초 간격으로 다음 WhiteBox 표시
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 정리
-  }, [dialogues.length]);
+  const handleSelect = (index: number | null) => {
+    setIsModal(false); //안보임
+    setSelectedAnswerIndex(index);
+    console.log('Selected answer index:', index);
+  };
+  const showModal = () => {
+    setIsModal(true); //보임
+    setSelectedAnswerIndex(null);
+    setSubjectAnswer('0');
+  };
 
-  useEffect(() => {
-    if (visibleBox === 3) {
-      // 두 번째 박스가 보일 때
-      if (scrollRef.current) {
-        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-      }
+  const handleNext = (nextIdx: number) => {
+    nextIdx++;
+    setIdx(nextIdx);
+    console.log('Next idx:', nextIdx);
+    if (nextIdx > dialogues.length) {
+      console.log('finish');
+      setIsStart(true);
     }
-  }, [visibleBox]);
-
-  // 아바타 이미지 애니메이션
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAvatarVisible(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleAnswerClick = (index: number) => {
-    setActiveAnswer(index); // Set the active answer index
-    setIsCorrect(index === correctAnswerIndex);
   };
-  const resetQuiz = () => {
-    // Reset all states to start the quiz over
-    setVisibleBox(0);
-    setAvatarVisible(false);
-    setActiveAnswer(null);
-    setIsCorrect(null);
-    window.location.reload();
-  };
+
+  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
-      {isCorrect !== null && (
-        <div className="absolute w-full h-full z-50">
-          {isCorrect ? <Correct /> : <Wrong onRetry={resetQuiz} />}
-        </div>
+      <TopBar />
+      {isModal && (
+        <Object
+          q="다음 중, 애드워드 리의 본명은?"
+          answer={answers}
+          onSelect={handleSelect}
+        />
       )}
+      <div className="absolute w-full h-full z-50">
+        <img src={Bg3} />
+      </div>
       <div className="w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />
       </div>
-      <div className="w-full max-w-[500px] absolute bottom-0 h-[250px] z-30 bg-[#661AAF]">
-        <div className="h-full w-full relative">
-          <div className="w-full absolute bottom-0 z-50 h-full p-4 flex flex-col gap-4">
-            {answers.map((answer, index) => (
-              <div
-                key={index}
-                className={`flex items-center justify-center flex-grow text-white w-full text-center rounded-[15px] transition-colors duration-300 ${
-                  activeAnswer === index ? 'bg-[#000000]' : 'bg-[#0000007A]'
-                }`}
-                onClick={() => handleAnswerClick(index)}
-              >
-                {answer}
-              </div>
-            ))}
-          </div>
+      <div className="w-full max-w-[500px] absolute bottom-[318px]">
+        <div className="relative w-1/2 ml-auto">
+          <img src={Ncenter} />
         </div>
       </div>
+
+      <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
+        {currentDialogue && (
+          <AvatarBlackChat
+            idx={currentDialogue.idx}
+            props={currentDialogue.props}
+            name={currentDialogue.name}
+            text={currentDialogue.text}
+            handleNext={() => handleNext(idx)}
+          />
+        )}
+      </div>
       <div
-        className={`w-full max-w-[500px] absolute bottom-[250px] z-20 transition-transform duration-[2500ms] ${
-          avatarVisible ? 'translate-y-0' : 'translate-y-[300px]'
-        }`}
+        className={`w-full flex ml-20 max-w-[500px] absolute bottom-[300px] z-20 transition-transform duration-[2500ms]`}
       >
-        <div className="w-[40%]">
-          <img src={Avatar5} />
+        <div className="w-[20%]">
+          <img src={Avatar2} />
         </div>
       </div>
-      <div
-        ref={scrollRef}
-        className="w-full h-[50%] scrollbar-hide overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"
-      >
-        {dialogues.map((text, index) => (
-          <div
-            key={index}
-            className={`transform transition-transform duration-500 ${
-              visibleBox >= index
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-[100px] opacity-0'
-            }`}
-          >
-            <WhiteBox text={text} />
-          </div>
-        ))}
-      </div>
+      {isStart && (
+        <div
+          onClick={showModal}
+          className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+        >
+          문제풀기
+        </div>
+      )}
+
+      <div className="w-full h-[50%] scrollbar-hide overflow-y-scroll absolute top-[5%] p-4 max-w-[500px] space-y-4"></div>
     </div>
   );
 }

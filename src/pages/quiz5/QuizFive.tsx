@@ -1,38 +1,36 @@
 import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import Message from '/src/assets/images/items/message.png';
-import Ncenter from '/src/assets/images/bg/ncenter.png';
+import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-import TopBar from '@/component/bar/TopBar';
-export default function QuizTwo() {
+export default function QuizFive() {
   const dialogues = [
     {
       idx: 1,
-      props: 7,
-      name: '오타쿠',
-      text: '히사시부리~~',
+      props: 9,
+      name: '행정실 직원',
+      text: '제가 그저께 입사해서...',
     },
     {
       idx: 2,
-      props: 7,
-      name: '오타쿠',
-      text: '00쿤,이런 상황에선 패기가 중요하네.',
+      props: 9,
+      name: '행정실 직원',
+      text: '이럴 때 연락해야 할 대학이 있다고 하셨는데..',
     },
     {
       idx: 3,
-      props: 0,
-      name: '오타쿠',
-      text: '00쿤의 답변 여하에 따라 내가 아이템을 주겠네',
+      props: 9,
+      name: '행정실 직원',
+      text: '저희와 비슷한 대학교 세 군데가 있다고 하시던데..',
     },
     {
       idx: 4,
-      props: 0,
-      name: '오타쿠',
-      text: '내 지원서 내용을 맞춰보게나',
+      props: 9,
+      name: '행정실 직원',
+      text: '어느 대학들인지 알고 계신가요?',
     },
   ];
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
@@ -71,15 +69,13 @@ export default function QuizTwo() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
     <div className="flex justify-center w-full h-full bg-[#793A1C] relative">
-      <TopBar />
       {isModal && (
         <Subject
-          q="첫번째 빈칸에 들어갈 말은?"
+          q="성___빈칸에 들어갈 글자는?"
           onSubject={handleSubjectAnswer}
           onClose={handleCloseSubject}
         />
@@ -90,21 +86,11 @@ export default function QuizTwo() {
       <div className="w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />
       </div>
-      <div className="w-full max-w-[500px] absolute bottom-[318px]">
-        <div className="relative w-1/2 ml-auto">
-          <img src={Ncenter} />
+      <div className="w-full max-w-[500px] absolute bottom-[300px]">
+        <div className="relative w-2/3 ml-auto">
+          <img src={NcenterFire} />
         </div>
       </div>
-      {idx >= 3 && idx < 5 && (
-        <div className="absolute h-[60dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
-      {idx >= 5 && (
-        <div className="absolute p-4 h-[80dvh] mx-auto max-w-[500px] z-[60]">
-          <img src={Message} className="h-full object-cover" />
-        </div>
-      )}
 
       <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
         {currentDialogue && (
@@ -127,7 +113,7 @@ export default function QuizTwo() {
       {isStart && (
         <div
           onClick={showModal}
-          className="cursor-pointer flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
+          className="flex justify-center text-[1.2rem] w-full h-[10%] absolute bottom-0 text-white z-[90]"
         >
           문제풀기
         </div>

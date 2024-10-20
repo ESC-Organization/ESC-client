@@ -1,5 +1,5 @@
-import Bg1 from '../../images/bg/bg1.png';
-import Ncenter from '../../images/bg/ncenter.png';
+import Bg1 from '/src/assets/images/bg/bg1.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
 import AvatarChat from '@/component/chatbox/AvatarChat';
 export default function Landing() {
   return (
