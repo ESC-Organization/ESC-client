@@ -62,7 +62,7 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
         <div className="p-2 mt-[5%] mb-[5%] flex flex-col w-full gap-4">
           <div className="p-2 rounded-[5px] bg-[#FFFFFF] w-full mx-auto  border-[4px] border-[#808080]">
             <input
-              className="placeholder-white"
+              className="placeholder-white bg-none"
               style={{ WebkitTextStroke: '1px #000' }}
               placeholder="정답을 적어주세요"
               onChange={handleInputChange}
