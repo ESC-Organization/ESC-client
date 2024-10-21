@@ -1,9 +1,6 @@
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Avatar5 from '/src/assets/images/avatar/5.png';
-import Finish2 from './Finish2';
-import Bg2 from '/src/assets/images/bg/bg2.png';
-import Avatar5 from '/src/assets/images/avatar/5.png';
-import Finish2 from './Finish2';
+import Finish from './Finish';
 import WhiteBox from '@/component/chatbox/WhiteBox';
 import { useState } from 'react';
 export default function Correct() {
@@ -26,7 +23,7 @@ export default function Correct() {
       {/* Conditionally render Finish2 only when showFinish is true */}
       {showFinish && (
         <div className="absolute w-full h-full z-[80]">
-          <Finish2 />
+          <Finish />
         </div>
       )}
       <div className="flex justify-center w-full max-w-[500px] absolute bottom-[250px]">
