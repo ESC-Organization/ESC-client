@@ -23,7 +23,7 @@ export default function Finish2() {
           />
         </div>
       </div>
-      <div className="w-full flex justify-center h-[50%] absolute top-[5%] p-4 max-w-[500px] space-y-4">
+      <div className="w-full flex justify-center h-[50%] absolute top-[10%] p-4 max-w-[500px] space-y-4">
         <div className={`w-full transform transition-transform duration-500`}>
           <div className=" bg-[#D9D9D9] mx-auto my-0 p-8 rounded-[30px] w-[80%] text-center mb-3 text-[1.5rem]">
             방호복 획득!
