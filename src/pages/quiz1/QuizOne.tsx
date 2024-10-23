@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
-import { useNavigate } from 'react-router-dom';
+
 import Correct from './Correct';
 import Wrong from './Wrong';
 import Object from '@/component/answer/Object';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
+
+
 export default function QuizOne() {
   const navigate = useNavigate();
   const [isCorrect, setIsCorrect] = useState(0);
@@ -31,28 +35,12 @@ export default function QuizOne() {
       name: '교수님',
       text: '4층에 산다고 했던것 같은데..혹시 어디인지 아는가?',
     },
-    {
-      idx: 1,
-      props: 6,
-      name: '교수님',
-      text: '내 연구생이 기숙사를 가서 돌아오지 않는다..',
-    },
-    {
-      idx: 2,
-      props: 6,
-      name: '교수님',
-      text: '거기 우리에게 꼭 필요한 방호복이 있는데...',
-    },
-    {
-      idx: 3,
-      props: 6,
-      name: '교수님',
-      text: '4층에 산다고 했던것 같은데..혹시 어디인지 아는가?',
-    },
   ];
+
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
     0
   );
+  
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
@@ -60,16 +48,18 @@ export default function QuizOne() {
   const [idx, setIdx] = useState<number>(1); // Store idx
 
   const handleSelect = (index: number | null) => {
-    setIsModal(false); //안보임
+    setIsModal(false); // 모달 닫기
     setSelectedAnswerIndex(index);
     console.log('Selected answer index:', index);
-    if (index == 3) {
+    if (index == 4) {
       setIsCorrect(1);
     } else {
       setIsCorrect(2);
     }
   };
+
   const showModal = () => {
+    console.log('모달 열기 시도');
     setIsModal(true); //보임
     setSelectedAnswerIndex(null);
     setSubjectAnswer('0');
@@ -84,10 +74,12 @@ export default function QuizOne() {
       setIsStart(true);
     }
   };
+
   const handleRetry = () => {
     console.log('다시');
     window.location.reload();
   };
+
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (

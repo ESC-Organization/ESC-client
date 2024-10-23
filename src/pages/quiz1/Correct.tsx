@@ -1,9 +1,6 @@
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Avatar5 from '/src/assets/images/avatar/5.png';
 import Finish2 from './Finish2';
-import Bg2 from '/src/assets/images/bg/bg2.png';
-import Avatar5 from '/src/assets/images/avatar/5.png';
-import Finish2 from './Finish2';
 import WhiteBox from '@/component/chatbox/WhiteBox';
 import { useState } from 'react';
 export default function Correct() {

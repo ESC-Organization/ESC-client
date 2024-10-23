@@ -11,7 +11,6 @@ import Wrong from './Wrong';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
-import TopBar from '@/component/bar/TopBar';
 export default function QuizTwo() {
   const dialogues = [
     {
