@@ -18,37 +18,19 @@ export default function QuizOne() {
   const dialogues = [
     {
       idx: 1,
-      props: 6,
+      props: 5,
       name: '교수님',
       text: '내 연구생이 기숙사를 가서 돌아오지 않는다..',
     },
     {
       idx: 2,
-      props: 6,
+      props: 5,
       name: '교수님',
       text: '거기 우리에게 꼭 필요한 방호복이 있는데...',
     },
     {
       idx: 3,
-      props: 6,
-      name: '교수님',
-      text: '4층에 산다고 했던것 같은데..혹시 어디인지 아는가?',
-    },
-    {
-      idx: 1,
-      props: 6,
-      name: '교수님',
-      text: '내 연구생이 기숙사를 가서 돌아오지 않는다..',
-    },
-    {
-      idx: 2,
-      props: 6,
-      name: '교수님',
-      text: '거기 우리에게 꼭 필요한 방호복이 있는데...',
-    },
-    {
-      idx: 3,
-      props: 6,
+      props: 5,
       name: '교수님',
       text: '4층에 산다고 했던것 같은데..혹시 어디인지 아는가?',
     },

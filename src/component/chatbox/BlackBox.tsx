@@ -4,9 +4,8 @@ interface BlaxBoxProps {
 }
 export default function BlackBox({ text }: BlaxBoxProps) {
   return (
-    <div className="flex flex-col p-4 gap-2 w-full h-[70%] transform relative z-[70] bg-[#00000059] rounded-[5px] text-white border-4 border-[#808080]">
+    <div className="text-[1.2rem] text-center flex flex-col p-8 gap-2 w-full transform relative z-[70] bg-[#00000059] rounded-[5px] text-white border-4 border-[#808080]">
       <div>{text}</div>
-      <div className="absolute pb-4 pr-8 bottom-0 right-0">다음 {`>`}</div>
     </div>
   );
 }

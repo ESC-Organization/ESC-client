@@ -1,8 +1,10 @@
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Avatar5 from '/src/assets/images/avatar/5.png';
 import Finish from './Finish';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
 import WhiteBox from '@/component/chatbox/WhiteBox';
 import { useState } from 'react';
+import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 export default function Correct() {
   const [showFinish, setShowFinish] = useState(false);
 
@@ -30,19 +32,19 @@ export default function Correct() {
         <img src={Bg2} />
       </div>
       <div className="w-full p-8 max-w-[500px] absolute bottom-0 h-[250px] z-30 bg-[#661AAF]"></div>
-      <div
-        className={`flex justify-center w-full max-w-[500px] absolute bottom-[250px] z-[70] transition-transform duration-[2500ms]`}
-      >
-        <div className="w-[40%] ">
-          <img src={Avatar5} />
+      <div className="w-full max-w-[500px] absolute bottom-[300px]">
+        <div className="relative w-1/2 ml-auto">
+          <img src={Ncenter} />
         </div>
       </div>
-      <div className="w-full overflow-y-scroll absolute top-[70%] z-[70] flex justify-center max-w-[500px] space-y-4">
-        {dialogues.map((text, index) => (
-          <div key={index}>
-            <WhiteBox text={text} />
-          </div>
-        ))}
+      <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
+        <AvatarBlackChat
+          idx={1}
+          props={5}
+          name={'교수님'}
+          text={'그곳이 아닌것 같네'}
+          handleNext={() => setShowFinish(true)}
+        />
       </div>
     </div>
   );
