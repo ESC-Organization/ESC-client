@@ -1,6 +1,7 @@
 import Bg1 from '/src/assets/images/bg/bg1.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import AvatarChat from '@/component/chatbox/AvatarChat';
+
 export default function Landing() {
   return (
     <div className="flex justify-center w-full h-full bg-[#86C5E3]">

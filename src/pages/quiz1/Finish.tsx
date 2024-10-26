@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import Bg2 from '/src/assets/images/bg/bg2.png';
-import Avatar2 from '/src/assets/images/avatar/2.png';
 import Lv1 from '/src/assets/images/avatar/level/lv1.png';
 import BlackBox from '@/component/chatbox/BlackBox';
 export default function Finish() {

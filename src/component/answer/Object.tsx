@@ -1,17 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
 import Monkey from '/src/assets/images/items/monkey.png';
+
 interface ObjectProps {
   q: React.ReactNode;
   answer?: string[];
   onSelect: (index: number | null) => void;
 }
+
 export default function Object({ q, answer = [], onSelect }: ObjectProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
     onSelect(index + 1);
   };
+  
   return (
     <div className="flex flex-col p-2 gap-2 w-full h-full transform relative z-[80] bg-[#00000059] flex justify-center items-center">
       <div className="relative rounded-[8px] p-4 text-white border-4 border-[#606060] w-[90%]   bg-[#404040]">

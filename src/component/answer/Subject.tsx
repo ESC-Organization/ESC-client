@@ -26,29 +26,33 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
 
   const showHint = () => {
     setIsHint(!isHint);
+    setIsHint(!isHint);
   };
 
   return (
     <div className="flex flex-col p-2 gap-2 w-full h-full transform relative z-[80] bg-[#00000059] flex justify-center items-center">
       <div className="relative p-4 text-white border-4 border-[#606060] w-[90%] bg-[#404040]">
         <div
-          className="absolute -top-[25%] w-[30%] left-[35%] -z-[10]"
+          className="absolute -top-[25%] w-[30%] left-[35%] -z-[10] cursor-pointer"
           onClick={showHint}
         >
           {isHint && (
             <div className="fixed w-[57%] h-[12%] z-[100]">
               <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
-                <span
-                  style={{ WebkitTextStroke: '1px #000' }}
-                  className="text-white text-[0.9rem]"
-                >
-                  힌트
-                  <br />
-                  흑백요리사 마지막화를 봐봐
-                </span>
+                <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
+                  <span
+                    style={{ WebkitTextStroke: '1px #000' }}
+                    className="text-black text-[0.9rem]"
+                  >
+                    힌트
+                    <br />
+                    흑백요리사 마지막화를 봐봐
+                  </span>
+                </div>
               </div>
             </div>
           )}
+
           <img src={Monkey} alt="Monkey" />
         </div>
         <div
@@ -61,7 +65,7 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
         <div className="p-2 mt-[5%] mb-[5%] flex flex-col w-full gap-4">
           <div className="p-2 rounded-[5px] bg-[#FFFFFF] w-full mx-auto border-[4px] border-[#808080]">
             <input
-              className="placeholder-white bg-none"
+              className="placeholder-white bg-none w-full"
               style={{ WebkitTextStroke: '1px #000' }}
               placeholder="정답을 적어주세요"
               onChange={handleInputChange}
