@@ -15,17 +15,17 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
     setInputValue(e.target.value);
   };
 
-  // 제출 버튼을 클릭했을 때 호출되는 함수
   const handleSubmit = () => {
     console.log(inputValue);
     onSubject(inputValue); // 입력된 값 외부로 전달
   };
 
   const handleClose = () => {
-    onClose(); // 입력된 값 외부로 전달
+    onClose();
   };
 
   const showHint = () => {
+    setIsHint(!isHint);
     setIsHint(!isHint);
   };
 
@@ -39,20 +39,22 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
           {isHint && (
             <div className="fixed w-[57%] h-[12%] z-[100]">
               <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
-                <span
-                  style={{ WebkitTextStroke: '1px #000' }}
-                  className="text-black text-[0.9rem]"
-                >
-                  힌트
-                  <br />
-                  흑백요리사 마지막화를 봐봐
-                </span>
+                <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
+                  <span
+                    style={{ WebkitTextStroke: '1px #000' }}
+                    className="text-black text-[0.9rem]"
+                  >
+                    힌트
+                    <br />
+                    흑백요리사 마지막화를 봐봐
+                  </span>
+                </div>
               </div>
             </div>
           )}
+
           <img src={Monkey} alt="Monkey" />
         </div>
-
         <div
           className="text-right text-[1.1rem] pr-2 cursor-pointer -mt-[2%]"
           onClick={handleClose}
@@ -60,7 +62,6 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
           x
         </div>
         <div className="mt-[2%]">{q}</div>
-
         <div className="p-2 mt-[5%] mb-[5%] flex flex-col w-full gap-4">
           <div className="p-2 rounded-[5px] bg-[#FFFFFF] w-full mx-auto border-[4px] border-[#808080]">
             <input
@@ -73,10 +74,7 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
           </div>
         </div>
         <div className="mt-[5%] mb-[10%] text-right">
-          <span
-            style={{ WebkitTextStroke: '1px #000', cursor: 'pointer' }}
-            onClick={handleSubmit}
-          >
+          <span style={{ WebkitTextStroke: '1px #000' }} onClick={handleSubmit}>
             제출하기 {`>`}
           </span>
         </div>

@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Bg2 from '/src/assets/images/bg/bg2.png';
-import Avatar2 from '/src/assets/images/avatar/2.png';
-export default function Finish2() {
+import Lv1 from '/src/assets/images/avatar/level/lv1.png';
+import BlackBox from '@/component/chatbox/BlackBox';
+export default function Finish() {
   const navigate = useNavigate();
   const goRank = () => {
     navigate('/');
@@ -16,18 +17,13 @@ export default function Finish2() {
       <div
         className={`w-full flex justify-center max-w-[500px] absolute bottom-[250px] z-20 transition-transform duration-[2500ms]`}
       >
-        <div className="w-[40%]">
-          <img
-            src={Avatar2}
-            className="animate-rotate-axis transform-style-3d"
-          />
+        <div className="w-[59%]">
+          <img src={Lv1} className="animate-rotate-axis transform-style-3d" />
         </div>
       </div>
       <div className="w-full flex justify-center h-[50%] absolute top-[10%] p-4 max-w-[500px] space-y-4">
         <div className={`w-full transform transition-transform duration-500`}>
-          <div className=" bg-[#D9D9D9] mx-auto my-0 p-8 rounded-[30px] w-[80%] text-center mb-3 text-[1.5rem]">
-            방호복 획득!
-          </div>
+          <BlackBox text="완전한 방호복을 얻었다 !" />
         </div>
       </div>
 

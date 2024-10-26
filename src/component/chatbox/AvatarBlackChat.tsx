@@ -48,7 +48,7 @@ export default function AvatarBlackChat({
   return (
     <div className="relative w-full justify-center h-[70%] z-[70]">
       <div className="w-full max-w-[500px] h-full">
-        <div className="w-40 absolute h-[200px] -top-[125px]">
+        <div className="w-[45%] absolute h-[200px] -top-[135px]">
           <img src={imageSrc} alt={`Avatar Step ${props}`} />
         </div>
         <div className="cursor-pointer mt-4 flex flex-col p-4 gap-2 w-full h-full transform relative z-[70] bg-[#404040] rounded-[5px] text-white border-4 border-[#606060]">
