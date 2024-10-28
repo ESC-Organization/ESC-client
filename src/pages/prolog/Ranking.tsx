@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
-import BottomButton from '@/component/prolog/BottomButton';
 
 // 랭킹 더미 데이터: 닉네임, 스테이지, 시간
 const rankingData = [

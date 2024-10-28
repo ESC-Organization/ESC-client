@@ -1,15 +1,15 @@
 import AngledBox from '../prolog/AngledBox';
 
-export default function Landing11() {
+export default function Landing13() {
   return (
-    <div className="relative flex h-full bg-black overflow-hidden ">
+    <div className="relative flex h-full bg-[#F2F2F2] overflow-hidden ">
       {/* <div className="flex justify-center item-center flex-direction:column text-white w-full 500px:px-12">
        */}
-      <div className="flex justify-center flex-col text-white w-full 500px:px-12">
+      <div className="flex justify-center flex-col text-white w-full 500px:px-4 gap-8">
         <img
-          src="src/assets/images/avatar/5.png"
-          alt="Monkey"
-          className="w-[128px] h-auto mx-12 relative"
+          src="src/assets/images/prolog/sword.png"
+          alt="Map"
+          className="w-[60%] h-auto mx-auto relative"
         />
         <div className="flex justify-start mx-12">
           <AngledBox className="w-full">
@@ -17,9 +17,9 @@ export default function Landing11() {
             <br />
             <br />
             <span>
-              이봐 자네.. 혹시 <br />
-              <span className="text-[#14AE5C]">trIC ON treat</span>에 참여
-              중인가..?
+              퀴즈를 모두 해결한다면
+              <span className="text-[#14AE5C]"> ??????</span>를 얻어 이 사태를
+              해결할 수 있어!
             </span>
             <br />
             <br />
