@@ -9,7 +9,7 @@ import Wrong from './Wrong';
 import Object from '@/component/answer/Object';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
-import Radio from '/src/assets/sound/radio.mp3';
+
 export default function QuizOne() {
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
@@ -91,25 +91,10 @@ export default function QuizOne() {
     }
   };
 
-  // 첫 페이지 로드시 자동으로 소리를 재생
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5; // 볼륨 설정
-      const playAudio = async () => {
-        try {
-          await audioRef.current?.play();
-          console.log('자동 재생 성공');
-        } catch (error) {
-          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
-        }
-      };
-      playAudio();
-    }
-  }, []);
   return (
     <div className=" w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
-      <audio ref={audioRef} src={Radio} loop />
+
       {isModal && (
         <Object
           q="연구생이 살고 있는 기숙사 건물은?"
