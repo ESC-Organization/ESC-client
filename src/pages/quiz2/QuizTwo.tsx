@@ -56,6 +56,18 @@ export default function QuizTwo() {
     setSubjectAnswer(subject);
     if (subject == '원피스') {
       setIsCorrect(1);
+      if (audioRef.current) {
+        audioRef.current.volume = 0.5; // 볼륨 설정
+        const playAudio = async () => {
+          try {
+            await audioRef.current?.play();
+            console.log('자동 재생 성공');
+          } catch (error) {
+            console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+          }
+        };
+        playAudio();
+      }
     } else {
       setIsCorrect(2);
     }
