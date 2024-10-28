@@ -43,7 +43,7 @@ export default function QuizOne() {
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
-  const answers = ['성', '균', '관', '대'];
+  const answers = ['인관', '의관', '예관', '지관'];
   const [idx, setIdx] = useState<number>(1); // Store idx
 
   const handleSelect = (index: number | null) => {
@@ -112,7 +112,7 @@ export default function QuizOne() {
       <audio ref={audioRef} src={Radio} loop />
       {isModal && (
         <Object
-          q="다음 중, 애드워드 리의 본명은?"
+          q="연구생이 살고 있는 기숙사 건물은?"
           answer={answers}
           onSelect={handleSelect}
         />

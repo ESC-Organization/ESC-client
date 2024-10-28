@@ -3,6 +3,7 @@ import Finish from './Finish';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import { useState } from 'react';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+
 export default function Correct() {
   const [showFinish, setShowFinish] = useState(false);
 
@@ -40,7 +41,7 @@ export default function Correct() {
           idx={1}
           props={5}
           name={'교수님'}
-          text={'그곳이 아닌것 같네'}
+          text={'정말 고맙네. 우리 연구생이 지관에 있었고만!'}
           handleNext={() => setShowFinish(true)}
         />
       </div>

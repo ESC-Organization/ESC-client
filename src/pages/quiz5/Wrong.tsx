@@ -1,6 +1,6 @@
 import React from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
-import Avatar5 from '/src/assets/images/avatar/5.png';
+import Avatar9 from '/src/assets/images/avatar/9.png';
 import WhiteBox from '@/component/chatbox/WhiteBox';
 interface WrongProps {
   onRetry: () => void; // Define a prop for the retry function
@@ -9,11 +9,11 @@ interface WrongProps {
 const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
   const dialogues = [
     <>
-      <span>그 곳이 아닌 거 같네...</span>
+      <span>이 세 대학들은 성균관대처럼</span>
       <br />
-      <span>우리 지혜로운 연구생을</span>
+      <span>전 세계적으로 인지도 높은 곳들이고,</span>
       <br />
-      <span>빨리 찾아주게나!</span>
+      <span>특히 미국 동부에 위치해 있다고 하던데..</span>
     </>,
   ];
 
@@ -33,8 +33,8 @@ const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
       <div
         className={`flex justify-center w-full max-w-[500px] absolute bottom-[250px] z-[70] transition-transform duration-[2500ms]`}
       >
-        <div className="w-[40%] ">
-          <img src={Avatar5} />
+        <div className="w-[57%] ">
+          <img src={Avatar9} />
         </div>
       </div>
       <div className="w-full h-[50%] absolute z-[70] top-[10%] p-4 max-w-[500px] space-y-4">

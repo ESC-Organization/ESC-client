@@ -11,7 +11,9 @@ const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
     <>
       <span>그 곳이 아닌 거 같네...</span>
       <br />
-      <span>우리 지혜로운 연구생을</span>
+      <span>
+        우리 <span className="text-red">지혜</span>로운 연구생을
+      </span>
       <br />
       <span>빨리 찾아주게나!</span>
     </>,

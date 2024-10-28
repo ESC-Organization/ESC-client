@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import Correct from './Correct';
@@ -50,7 +50,7 @@ export default function QuizFive() {
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
     setSubjectAnswer(subject);
-    if (subject == '원피스') {
+    if (subject == '하예프' || subject == '성하예프') {
       setIsCorrect(1);
     } else {
       setIsCorrect(2);
@@ -96,7 +96,7 @@ export default function QuizFive() {
           </div>
           <div className="w-full max-w-[500px] absolute bottom-[300px]">
             <div className="relative w-2/3 ml-auto">
-              <img src={NcenterFire} />
+              <img src={Ncenter} />
             </div>
           </div>
 
