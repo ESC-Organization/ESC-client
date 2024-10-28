@@ -3,24 +3,49 @@ import AngledBox from '@/component/prolog/AngledBox';
 import AngledInputBox from '@/component/prolog/AngledInputBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
 import { useUserStore } from '@/store/useUserStore';
+import { useLoginUser } from '@/api/hooks';
 
 export default function Login() {
   const [nicknameState, setNicknameState] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [phoneError, setPhoneError] = useState<string | null>(null); // 전화번호 에러 상태
+
   const { setPhone, setNickname } = useUserStore();
 
-  // 로그인 버튼 클릭 - API 요청 및 Zustand 상태 업데이트
-  const handleLogin = async () => {
-    setPhone(phoneNumber);
-    setNickname(nicknameState);
+  const { mutate: loginUser } = useLoginUser({
+    onSuccess: () => {
+      setPhone(phoneNumber);
+      setNickname(nicknameState);
+      alert('로그인 성공!');
+      // TODO: 라우터 연결해주기
+    },
+    onError: () => {
+      alert(
+        '로그인에 실패했습니다. 닉네임, 전화번호가 중복되지 않았는지 확인해주세요.'
+      );
+    },
+  });
 
-    // 필요 시 다음 페이지로 이동
-    alert('로그인 성공!');
+  const handleLogin = () => {
+    if (!phoneNumber || !nicknameState) {
+      return alert('전화번호와 닉네임을 입력해 주세요.');
+    }
+    loginUser({ phone: phoneNumber, nickname: nicknameState });
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 8) {
       setNicknameState(e.target.value);
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    if (input.includes('-')) {
+      setPhoneError("'-'를 제외하고 입력해주세요. (ex>: 01012345678)");
+    } else {
+      setPhoneError(null); // 에러 메시지 초기화
+      setPhoneNumber(input);
     }
   };
 
@@ -69,9 +94,14 @@ export default function Login() {
                   className="h-[40px] text-black text-[1rem] text-center bg-[#F0F0F0]"
                   placeholder="전화번호"
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={handlePhoneChange}
                 />
               </AngledInputBox>
+              {phoneError && (
+                <div className="text-red-400 text-[0.8rem] mt-2 text-center">
+                  {phoneError}
+                </div>
+              )}
               <div className="text-white text-[0.6rem] text-center mt-4">
                 <span>• 닉네임은 입력 후 변경할 수 없습니다</span>
                 <br />

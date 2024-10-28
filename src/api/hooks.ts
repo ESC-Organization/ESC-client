@@ -1,9 +1,8 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import apiClient from '@/api/client';
 import { API_ENDPOINTS } from '@/api/endpoints';
 import {
   UserInfo,
-  Ranking,
   LoginCredentials,
   CoinUpdateParams,
   QuizSubmissionParams,
@@ -18,6 +17,9 @@ const loginUser = async (credentials: LoginCredentials) => {
 export const useLoginUser = (options = {}) => {
   return useMutation({
     mutationFn: loginUser,
+    onSuccess: (data) => {
+      console.log('Login successful:', data);
+    },
     onError: (error) => {
       console.warn('Login error:', error);
     },
