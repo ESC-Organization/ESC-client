@@ -31,7 +31,7 @@ export default function AvatarChat({
           {/* Use the dynamic image source */}
         </div>
 
-        <div className="h-48 p-4 flex flex-col gap-2 text-[20px] isolate *:drop-shadow text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B]">
+        <div className="h-48 p-4 flex flex-col gap-2 text-[20px] isolate *:drop-shadow text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B] whitespace-pre-line">
           <div className="text-[1.2rem]">{name}</div>
           <div className="pl-2">{text}</div>
           <div onClick={goNext} className="absolute p-4 bottom-4 right-4">
