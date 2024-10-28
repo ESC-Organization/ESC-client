@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
@@ -10,6 +10,9 @@ import TopBar from '@/component/bar/TopBar';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 export default function QuizThree() {
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
+  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
+
   const dialogues = [
     {
       idx: 1,
@@ -45,13 +48,13 @@ export default function QuizThree() {
       idx: 6,
       props: 6,
       name: '익명의 교수',
-      text: '아직 학생 한 명이 출석 체크를 안 한 것 같네..',
+      text: '아직 한 명이 출석 체크를 안 한 것 같네..',
     },
     {
       idx: 7,
       props: 6,
       name: '익명의 교수',
-      text: '-- 출첵했나요??',
+      text: `에타에도 올라와있군..  '@@@' 출첵했나요??`,
     },
   ];
 
@@ -68,7 +71,7 @@ export default function QuizThree() {
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
     setSubjectAnswer(subject);
-    if (subject == '원피스') {
+    if (subject == '길이만') {
       setIsCorrect(1);
     } else {
       setIsCorrect(2);
@@ -91,9 +94,21 @@ export default function QuizThree() {
     console.log('다시');
     window.location.reload();
   };
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
+
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
-      <TopBar />
+      <TopBar onSound={handleSound} />
+
       {isModal && (
         <Subject
           q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"
@@ -102,7 +117,7 @@ export default function QuizThree() {
         />
       )}
       <div className="top-0 absolute w-full h-full z-[50]">
-        <img src={Bg3} />
+        <img src={Bg3} className="h-full w-full" />
       </div>
       {isCorrect === 1 ? (
         <Correct />

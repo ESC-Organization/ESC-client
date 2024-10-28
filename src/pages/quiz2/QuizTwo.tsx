@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Message from '/src/assets/images/items/message.png';
@@ -12,6 +12,8 @@ import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
 export default function QuizTwo() {
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
+  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
   const dialogues = [
     {
       idx: 1,
@@ -54,6 +56,18 @@ export default function QuizTwo() {
     setSubjectAnswer(subject);
     if (subject == '원피스') {
       setIsCorrect(1);
+      if (audioRef.current) {
+        audioRef.current.volume = 0.5; // 볼륨 설정
+        const playAudio = async () => {
+          try {
+            await audioRef.current?.play();
+            console.log('자동 재생 성공');
+          } catch (error) {
+            console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+          }
+        };
+        playAudio();
+      }
     } else {
       setIsCorrect(2);
     }
@@ -75,10 +89,35 @@ export default function QuizTwo() {
     window.location.reload();
   };
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
 
+  // 첫 페이지 로드시 자동으로 소리를 재생
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5; // 볼륨 설정
+      const playAudio = async () => {
+        try {
+          await audioRef.current?.play();
+          console.log('자동 재생 성공');
+        } catch (error) {
+          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+        }
+      };
+      playAudio();
+    }
+  }, []);
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
-      <TopBar />
+      <TopBar onSound={handleSound} />
       {isModal && (
         <Subject
           q="첫번째 빈칸에 들어갈 말은?"
@@ -87,7 +126,7 @@ export default function QuizTwo() {
         />
       )}
       <div className="top-0 absolute w-full h-full z-[50]">
-        <img src={Bg3} />
+        <img src={Bg3} className="h-full w-full" />
       </div>
 
       {isCorrect == 1 ? (

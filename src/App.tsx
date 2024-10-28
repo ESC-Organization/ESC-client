@@ -17,6 +17,9 @@ import Login from '@/pages/prolog/Login';
 import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
 import TestPage from '@/pages/test-page';
+import Final from './pages/final/Final';
+import Ending from './pages/ending/Ending';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,7 +35,7 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: '/onboarding',
+    path: '/onboarding', // 삭제하기
     element: <Onboarding />,
   },
   {
@@ -84,9 +87,14 @@ const router = createBrowserRouter([
     element: <QuizFive />,
   },
   {
+    path: '/final',
+    element: <Final />,
+  },
+  {
     path: '/ending',
     element: <Ending />,
   },
+
   {
     path: '/test',
     element: <TestPage />,

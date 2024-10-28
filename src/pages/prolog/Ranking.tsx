@@ -1,28 +1,32 @@
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
-import BottomButton from '@/component/prolog/BottomButton';
-
-// 랭킹 더미 데이터: 닉네임, 스테이지, 시간
-const rankingData = [
-  { nickname: '테스트1', stage: 1, time: 30 },
-  { nickname: '테스트다섯', stage: 2, time: 40 },
-  { nickname: '긴이름긴이름긴이', stage: 3, time: 50 },
-  { nickname: '테스트4', stage: 4, time: 60 },
-  { nickname: '테스트5', stage: 5, time: 70 },
-  { nickname: '테스트6', stage: 6, time: 80 },
-  { nickname: '테스트7', stage: 7, time: 90 },
-  { nickname: '테스트8', stage: 8, time: 100 },
-  { nickname: '테스트9', stage: 9, time: 110 },
-  { nickname: '테스트10', stage: 10, time: 120 },
-];
+import { useRanking } from '@/api/hooks';
 
 export default function Ranking() {
   const navigate = useNavigate();
 
+  // 랭킹 조회
+  const { data: rankingData, isLoading, isError } = useRanking();
+  console.log('🚀 ~ file: main-page.tsx:37 ~ Main ~ rankingData:', rankingData);
+
   const handleBackClick = () => {
     navigate(-1);
   };
+
+  const formatTimeDifference = (initTime: string, recordTime: string) => {
+    const initDate = new Date(initTime).getTime();
+    const recordDate = new Date(recordTime).getTime();
+    const differenceInSeconds = Math.floor((recordDate - initDate) / 1000);
+
+    const minutes = Math.floor(differenceInSeconds / 60);
+    const seconds = differenceInSeconds % 60;
+
+    return `${String(minutes).padStart(2, '0')}분 ${String(seconds).padStart(2, '0')}초`;
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Failed to load ranking data.</div>;
 
   return (
     <div className="flex flex-col w-screen relative">
@@ -57,8 +61,10 @@ export default function Ranking() {
                   className="grid grid-cols-3 text-white text-[1.2rem] text-center align-middle"
                 >
                   <div>{data.nickname}</div>
-                  <div className="text-[#14AE5C]">{data.stage}</div>
-                  <div>{data.time}</div>
+                  <div className="text-[#14AE5C]">{data.stageStatus}</div>
+                  <div>
+                    {formatTimeDifference(data.initTime, data.recordTime)}
+                  </div>
                 </div>
               ))}
             </div>

@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
+import { useRef } from 'react';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import TopBar from '@/component/bar/TopBar';
 export default function QuizFive() {
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
+  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
   const dialogues = [
     {
       idx: 1,
@@ -50,7 +54,7 @@ export default function QuizFive() {
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
     setSubjectAnswer(subject);
-    if (subject == '원피스') {
+    if (subject == '하예프' || subject == '성하예프') {
       setIsCorrect(1);
     } else {
       setIsCorrect(2);
@@ -73,8 +77,20 @@ export default function QuizFive() {
     console.log('다시');
     window.location.reload();
   };
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
+
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
+      <TopBar onSound={handleSound} />
       {isModal && (
         <Subject
           q="성___빈칸에 들어갈 글자는?"
@@ -96,7 +112,7 @@ export default function QuizFive() {
           </div>
           <div className="w-full max-w-[500px] absolute bottom-[300px]">
             <div className="relative w-2/3 ml-auto">
-              <img src={NcenterFire} />
+              <img src={Ncenter} />
             </div>
           </div>
 
