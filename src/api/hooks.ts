@@ -26,7 +26,7 @@ export const useLoginUser = (options = {}) => {
 };
 
 // 랭킹 조회
-const getRanking = async (): Promise<Ranking[]> => {
+const getRanking = async (): Promise<UserInfo[]> => {
   const { data } = await apiClient.get(API_ENDPOINTS.RANKING);
   return data;
 };

@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledInputBox from '@/component/prolog/AngledInputBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
+import { useUserStore } from '@/store/useUserStore';
 
 export default function Login() {
-  const [nickname, setNickname] = useState<string>('');
+  const [nicknameState, setNicknameState] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const { setPhone, setNickname } = useUserStore();
 
-  // url에서 캐릭터 정보 가져오기
-  const character = new URLSearchParams(window.location.search).get(
-    'character'
-  );
+  // 로그인 버튼 클릭 - API 요청 및 Zustand 상태 업데이트
+  const handleLogin = async () => {
+    setPhone(phoneNumber);
+    setNickname(nicknameState);
 
-  // 로그인 버튼 클릭
-  // TODO: 로그인 처리 api 연동
-  const handleLogin = () => {
-    console.log('닉네임, 전화번호, 캐릭터:', nickname, phoneNumber, character);
+    // 필요 시 다음 페이지로 이동
+    alert('로그인 성공!');
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 8) {
-      setNickname(e.target.value);
+      setNicknameState(e.target.value);
     }
   };
 
@@ -53,7 +53,7 @@ export default function Login() {
                   type="text"
                   className="h-[40px] text-black text-[1rem] text-center bg-[#F0F0F0]"
                   placeholder="닉네임"
-                  value={nickname}
+                  value={nicknameState}
                   onChange={handleNicknameChange}
                 />
               </AngledInputBox>
