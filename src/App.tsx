@@ -16,6 +16,9 @@ import Login from '@/pages/prolog/Login';
 import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
 import TestPage from '@/pages/test-page';
+import Final from './pages/final/Final';
+import Ending from './pages/ending/Ending';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -82,6 +85,15 @@ const router = createBrowserRouter([
     path: '/quiz5',
     element: <QuizFive />,
   },
+  {
+    path: '/final',
+    element: <Final />,
+  },
+  {
+    path: '/ending',
+    element: <Ending />,
+  },
+
   {
     path: '/test',
     element: <TestPage />,

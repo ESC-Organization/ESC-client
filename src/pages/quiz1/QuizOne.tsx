@@ -16,6 +16,7 @@ import TopBar from '@/component/bar/TopBar';
 export default function QuizOne() {
   const navigate = useNavigate();
   const [isCorrect, setIsCorrect] = useState(0);
+
   const dialogues = [
     {
       idx: 1,
