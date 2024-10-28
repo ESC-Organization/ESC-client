@@ -11,6 +11,9 @@ import Landing8 from '@/component/landing/Landing8';
 import Landing9 from '@/component/landing/Landing9';
 import Landing10 from '@/component/landing/Landing10';
 import Landing11 from '@/component/landing/Landing11';
+import Landing12 from '@/component/landing/Landing12';
+import Landing13 from '@/component/landing/Landing13';
+import Landing14 from '@/component/landing/Landing14';
 
 export default function SlideShow() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,9 +29,10 @@ export default function SlideShow() {
     <Landing9 />,
     <Landing10 />,
     <Landing11 />,
+    <Landing12 />,
+    <Landing13 />,
+    <Landing14 />,
   ];
-
-  // 슬라이드가 넘어갈 때의 애니메이션 설정
 
   const slideVariants = {
     initial: { y: '100%', opacity: 0.3 },
@@ -37,7 +41,9 @@ export default function SlideShow() {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % components.length);
+    if (currentIndex < components.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
   return (
@@ -54,17 +60,18 @@ export default function SlideShow() {
           {components[currentIndex]}
         </motion.div>
 
-        {/* 화살표 버튼 */}
-        <button
-          onClick={handleNext}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-8"
-        >
-          <img
-            src="src/assets/images/prolog/arrow.png"
-            alt="Monkey"
-            className="w-[20px] h-auto"
-          />
-        </button>
+        {currentIndex < components.length - 1 && (
+          <button
+            onClick={handleNext}
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-8"
+          >
+            <img
+              src="src/assets/images/prolog/arrow.png"
+              alt="Monkey"
+              className="w-[20px] h-auto"
+            />
+          </button>
+        )}
       </AnimatePresence>
     </div>
   );
