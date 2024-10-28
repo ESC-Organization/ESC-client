@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
-import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
+import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 import Correct from './Correct';
 import Wrong from './Wrong';
@@ -9,6 +9,8 @@ import TopBar from '@/component/bar/TopBar';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 export default function QuizFour() {
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
+  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
   const dialogues = [
     {
       idx: 1,
@@ -61,7 +63,7 @@ export default function QuizFour() {
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
     setSubjectAnswer(subject);
-    if (subject == '원피스') {
+    if (subject == '벤젠고리관' || subject == '벤젠고리') {
       setIsCorrect(1);
     } else {
       setIsCorrect(2);
@@ -84,9 +86,35 @@ export default function QuizFour() {
     console.log('다시');
     window.location.reload();
   };
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
+
+  // 첫 페이지 로드시 자동으로 소리를 재생
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5; // 볼륨 설정
+      const playAudio = async () => {
+        try {
+          await audioRef.current?.play();
+          console.log('자동 재생 성공');
+        } catch (error) {
+          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+        }
+      };
+      playAudio();
+    }
+  }, []);
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
-      <TopBar />
+      <TopBar onSound={handleSound} />
       {isModal && (
         <Subject
           q="지금 이들이 말하고 있는 건물 이름은?"
@@ -108,7 +136,7 @@ export default function QuizFour() {
           </div>
           <div className="w-full max-w-[500px] absolute bottom-[300px]">
             <div className="relative w-2/3 ml-auto">
-              <img src={NcenterFire} />
+              <img src={Ncenter} />
             </div>
           </div>
           <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
