@@ -12,6 +12,7 @@ import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 export default function QuizThree() {
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
+
   const dialogues = [
     {
       idx: 1,
@@ -107,6 +108,7 @@ export default function QuizThree() {
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
+
       {isModal && (
         <Subject
           q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"

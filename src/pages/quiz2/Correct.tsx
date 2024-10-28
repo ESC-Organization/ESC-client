@@ -52,6 +52,7 @@ export default function Correct() {
           <img src={Ncenter} />
         </div>
       </div>
+
       <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
         <AvatarBlackChat
           idx={1}

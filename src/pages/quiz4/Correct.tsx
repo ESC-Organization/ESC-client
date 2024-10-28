@@ -47,11 +47,13 @@ export default function Correct() {
         <img src={Bg2} />
       </div>
       <div className="w-full p-8 max-w-[500px] absolute bottom-0 h-[250px] z-30 bg-[#661AAF]"></div>
+
       <div className="w-full max-w-[500px] absolute bottom-[300px]">
         <div className="relative w-2/3 ml-auto">
           <img src={Ven} />
         </div>
       </div>
+
       <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]">
         <AvatarBlackChat
           idx={1}

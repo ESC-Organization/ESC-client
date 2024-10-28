@@ -100,6 +100,21 @@ export default function QuizTwo() {
     }
   };
 
+  // 첫 페이지 로드시 자동으로 소리를 재생
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5; // 볼륨 설정
+      const playAudio = async () => {
+        try {
+          await audioRef.current?.play();
+          console.log('자동 재생 성공');
+        } catch (error) {
+          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+        }
+      };
+      playAudio();
+    }
+  }, []);
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
