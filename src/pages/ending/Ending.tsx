@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
-import Bg1 from 'src/assets/images/bg/bg1.png';
+import { useState, useEffect, useRef } from 'react';
 import MonkeySrc from '/src/assets/images/avatar/3.png';
 import Avatar5Src from '/src/assets/images/avatar/5.png';
-import CertificateSrc from '/src/assets/images/items/certificate.png';
-import ShareSrc from '/src/assets/images/items/share.png';
 import HeartSrc from '/src/assets/images/items/heart.png';
 import CampfireSrc from '/src/assets/images/items/campfire.gif';
-import TypoGameClear from '/src/assets/images/items/typo-GAMECLEAR.png';
 import TypoLetsParty from '/src/assets/images/items/typo-LETSPARTY.png';
+import CertModal from './CertModal';
 import AvatarChat from '@/component/chatbox/AvatarChat';
 import TopBar from '@/component/bar/TopBar';
 
 export default function Ending() {
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
+  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
   const [nickname, setNickname] = useState('미르미');
   const dialogues = [
     {
@@ -79,15 +78,30 @@ export default function Ending() {
   const [isModalCredit, setIsModalCredit] = useState(false);
 
   const handleSound = (soundStatus: number) => {
-    // setIsPlaying(soundStatus);
-    // if (audioRef.current) {
-    //   if (soundStatus === 1) {
-    //     audioRef.current.play(); // 소리 재생
-    //   } else {
-    //     audioRef.current.pause(); // 소리 일시정지
-    //   }
-    // }
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
   };
+  // 첫 페이지 로드시 자동으로 소리를 재생
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5; // 볼륨 설정
+      const playAudio = async () => {
+        try {
+          await audioRef.current?.play();
+          console.log('자동 재생 성공');
+        } catch (error) {
+          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
+        }
+      };
+      playAudio();
+    }
+  }, []);
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
@@ -116,59 +130,16 @@ export default function Ending() {
       />
 
       {isModalCert ? (
-        <div className="absolute h-full w-full">
-          <div className=" p-6 my-auto h-[70%] max-h-[600px] w-full max-w-[500px] absolute bottom-[15%]">
-            <div className="w-[95%] absolute z-[70] left-[50%] -translate-x-1/2 drop-shadow-xl top-10">
-              <img src={TypoGameClear} alt="Game Clear" />
-            </div>
-            <div className="w-16 absolute h-[50px] -top-[40px] left-[50%] -translate-x-1/2">
-              <img src={Avatar5Src} />
-            </div>
-            {/* 인증서 박스 */}
-            <div className="my-auto h-full p-4 flex flex-col items-center justify-between text-xl isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B] whitespace-pre-line">
-              <div className="w-[60%] mt-20 !drop-shadow-xl">
-                <img src={CertificateSrc} alt="인증서" />
-              </div>
-              <div className="text-3xl mt-4">용사 인증서</div>
-              <div className="text-center">
-                ‘{nickname}’ 당신을
-                <br />
-                <span className="text-[#14AE5C]">율전의 영웅</span>으로
-                임명합니다.
-              </div>
-              <div className="flex flex-col gap-1 text-base w-[60%]">
-                <div className="flex place-content-between">
-                  <div>닉네임</div>
-                  <div>{nickname}</div>
-                </div>
-                <div className="flex place-content-between">
-                  <div>클리어시간</div>
-                  <div>{'00:00'}</div>
-                </div>
-                <div className="flex place-content-between">
-                  <div>랭킹</div>
-                  <div>{'00'}위</div>
-                </div>
-              </div>
-              <div className="w-full px-4 text-sm flex place-content-between">
-                <div>9oormthonuniv.skku</div>
-                <div>2024.10.29.</div>
-              </div>
-            </div>
-            {/* 공유버튼 */}
-            <div
-              onClick={handleShare}
-              className="absolute p-4 -bottom-10 left-[52%] -translate-x-1/2 flex items-center gap-2 "
-            >
-              <span className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)]">
-                공유하기
-              </span>
-              <span>
-                <img src={ShareSrc} alt="공유" className="h-8" />
-              </span>
-            </div>
-          </div>
-        </div>
+        <CertModal
+          onShare={() => {
+            handleShare();
+          }}
+          clearInfo={{
+            nickname: '미르미',
+            cleartime: '00:00',
+            ranking: 0,
+          }}
+        />
       ) : (
         currentDialogue && (
           <>
