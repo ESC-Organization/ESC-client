@@ -20,7 +20,6 @@ export default {
       },
       animation: {
         'rotate-axis': 'rotate-axis 1.8s linear infinite',
-        sparkle: 'sparkle 1s ease-in-out infinite', 
       },
     },
     fontFamily: {
