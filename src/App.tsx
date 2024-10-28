@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: '/onboarding',
+    path: '/onboarding', // 삭제하기
     element: <Onboarding />,
   },
   {

@@ -3,6 +3,7 @@ import Finish from './Finish';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import { useState } from 'react';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+
 export default function Correct() {
   const [showFinish, setShowFinish] = useState(false);
 
