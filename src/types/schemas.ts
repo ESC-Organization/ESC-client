@@ -22,6 +22,7 @@ export interface Ranking {
 export interface LoginCredentials {
   nickname: string;
   phone: string;
+  character: string;
 }
 
 export interface CoinUpdateParams {

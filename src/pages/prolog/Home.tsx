@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 
-export default function Play() {
+export default function Home() {
   const navigate = useNavigate();
 
   // 지금 플레이 클릭 -> prologStory로 이동
@@ -34,7 +34,7 @@ export default function Play() {
           <AngledBox>
             <span className="text-white">지금 우리 </span>
             <span className="text-[#14AE5C]">율전</span>
-            <span className="text-white">은 - 플레이</span>
+            <span className="text-white">은</span>
           </AngledBox>
         </div>
         {/* 하단 버튼 영역*/}

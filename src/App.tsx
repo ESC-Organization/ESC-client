@@ -10,8 +10,8 @@ import QuizFour from './pages/quiz4/QuizFour';
 import QuizFive from './pages/quiz5/QuizFive';
 import Final from './pages/final/Final';
 import Ending from './pages/ending/Ending';
-import LandingIntro from '@/pages/prolog/LandingIntro';
-import PrologStory from '@/pages/prolog/PrologStory';
+import Home from './pages/prolog/home';
+import Prolog from '@/pages/prolog/Prolog';
 import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
 import Login from '@/pages/prolog/Login';
@@ -30,16 +30,16 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/', // 삭제 필요
     element: <Main />,
   },
   {
-    path: '/onboarding', // 삭제하기
+    path: '/onboarding', // 삭제 필요
     element: <Onboarding />,
   },
   {
-    path: '/landing-intro',
-    element: <LandingIntro />,
+    path: '/prolog',
+    element: <Prolog />,
   },
   {
     path: '/character-selection', // 캐릭터 선택 페이지 추가
@@ -50,11 +50,11 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/prolog',
-    element: <PrologStory />,
+    path: '/home', // home -> 로그인 x
+    element: <Home />,
   },
   {
-    path: '/play',
+    path: '/play', // play -> 로그인 O
     element: <Play />,
   },
   {

@@ -15,7 +15,7 @@ import Landing12 from '@/component/landing/Landing12';
 import Landing13 from '@/component/landing/Landing13';
 import Landing14 from '@/component/landing/Landing14';
 
-export default function SlideShow() {
+export default function Prolog() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const components = [
     <Landing1 />,
