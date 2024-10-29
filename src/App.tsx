@@ -8,6 +8,8 @@ import Ranking from './pages/prolog/Ranking';
 import QuizThree from './pages/quiz3/QuizThree';
 import QuizFour from './pages/quiz4/QuizFour';
 import QuizFive from './pages/quiz5/QuizFive';
+import Final from './pages/final/Final';
+import Ending from './pages/ending/Ending';
 import LandingIntro from '@/pages/prolog/LandingIntro';
 import PrologStory from '@/pages/prolog/PrologStory';
 import Play from '@/pages/prolog/Play';
@@ -16,8 +18,6 @@ import Login from '@/pages/prolog/Login';
 import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
 import TestPage from '@/pages/test-page';
-import Final from './pages/final/Final';
-import Ending from './pages/ending/Ending';
 
 const queryClient = new QueryClient({
   defaultOptions: {
