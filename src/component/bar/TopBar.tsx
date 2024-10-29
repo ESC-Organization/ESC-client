@@ -6,6 +6,7 @@ import { useCoinInfo } from '@/api/hooks';
 
 interface BarComponent {
   onSound?: (number: number) => void;
+  isPlaying?: number; // 추가된 prop
 }
 
 export default function TopBar({ onSound }: BarComponent) {
