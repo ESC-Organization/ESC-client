@@ -6,40 +6,39 @@ import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import { sub } from 'framer-motion/client';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
+import { useCoinInfo, useSubmitQuiz } from '@/api/hooks';
+import { useUserStore } from '@/store/useUserStore';
+import { dialog2 } from '@/constant/dialogs';
+
 export default function QuizTwo() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+  });
+
+  const coin = useCoinInfo();
+
+  useEffect(() => {
+    if (coin === 0) {
+      navigate('/play');
+    }
+  }, [coin, navigate]);
+
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-  const dialogues = [
-    {
-      idx: 1,
-      props: 7,
-      name: '오타쿠',
-      text: '히사시부리~~',
-    },
-    {
-      idx: 2,
-      props: 7,
-      name: '오타쿠',
-      text: '00쿤,이런 상황에선 패기가 중요하네.',
-    },
-    {
-      idx: 3,
-      props: 0,
-      name: '오타쿠',
-      text: '00쿤의 답변 여하에 따라 내가 아이템을 주겠네',
-    },
-    {
-      idx: 4,
-      props: 0,
-      name: '오타쿠',
-      text: '내 지원서 내용을 맞춰보게나',
-    },
-  ];
+
   const [isCorrect, setIsCorrect] = useState(0);
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
@@ -56,6 +55,7 @@ export default function QuizTwo() {
     setSubjectAnswer(subject);
     if (subject == '원피스') {
       setIsCorrect(1);
+      submitQuiz({ phone, correct: 'true' });
       if (audioRef.current) {
         audioRef.current.volume = 0.5; // 볼륨 설정
         const playAudio = async () => {
@@ -70,13 +70,14 @@ export default function QuizTwo() {
       }
     } else {
       setIsCorrect(2);
+      submitQuiz({ phone, correct: 'false' });
     }
   };
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
     console.log('Next idx:', nextIdx);
-    if (nextIdx > dialogues.length) {
+    if (nextIdx > dialog2.length) {
       console.log('finish');
       setIsStart(true);
     }
@@ -88,7 +89,7 @@ export default function QuizTwo() {
     console.log('다시');
     window.location.reload();
   };
-  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  const currentDialogue = dialog2.find((dialogue) => dialogue.idx === idx);
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
     if (audioRef.current) {

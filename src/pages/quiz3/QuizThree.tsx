@@ -3,60 +3,38 @@ import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import TopBar from '@/component/bar/TopBar';
 // import Object from '@/component/answer/Object';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import { dialog3 } from '@/constant/dialogs';
+import { useUserStore } from '@/store/useUserStore';
+import { useCoinInfo, useSubmitQuiz } from '@/api/hooks';
+
 export default function QuizThree() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+  });
+
+  const coin = useCoinInfo();
+
+  useEffect(() => {
+    if (coin === 0) {
+      navigate('/play');
+    }
+  }, [coin, navigate]);
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-
-  const dialogues = [
-    {
-      idx: 1,
-      props: 1,
-      name: '000',
-      text: '(숨을 헐떡이며) 교수님! 왜 아직 이 교실에 계세요!',
-    },
-    {
-      idx: 2,
-      props: 1,
-      name: '000',
-      text: '제가 구해드릴게요!.',
-    },
-    {
-      idx: 3,
-      props: 6,
-      name: '익명의 교수',
-      text: '(기침하며)콜록,,콜록,,,',
-    },
-    {
-      idx: 4,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 아직 대피할 수 없네',
-    },
-    {
-      idx: 5,
-      props: 6,
-      name: '익명의 교수',
-      text: '나는 30년 평생 교수로 살아있다네..',
-    },
-    {
-      idx: 6,
-      props: 6,
-      name: '익명의 교수',
-      text: '아직 한 명이 출석 체크를 안 한 것 같네..',
-    },
-    {
-      idx: 7,
-      props: 6,
-      name: '익명의 교수',
-      text: `에타에도 올라와있군..  '@@@' 출첵했나요??`,
-    },
-  ];
 
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
@@ -73,15 +51,17 @@ export default function QuizThree() {
     setSubjectAnswer(subject);
     if (subject == '길이만') {
       setIsCorrect(1);
+      submitQuiz({ phone, correct: 'true' });
     } else {
       setIsCorrect(2);
+      submitQuiz({ phone, correct: 'false' });
     }
   };
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
     console.log('Next idx:', nextIdx);
-    if (nextIdx > dialogues.length) {
+    if (nextIdx > dialog3.length) {
       console.log('finish');
       setIsStart(true);
     }
@@ -89,7 +69,7 @@ export default function QuizThree() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  const currentDialogue = dialog3.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
     console.log('다시');
     window.location.reload();

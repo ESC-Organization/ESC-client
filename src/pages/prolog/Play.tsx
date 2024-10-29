@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import { useUserInfo } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
+import TopBar from '@/component/bar/TopBar';
 
 export default function Play() {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ export default function Play() {
   console.log('🚀 ~ file: Play.tsx:12 ~ Play ~ userInfo:', userInfo);
   const stage = userInfo?.stageStatus;
   const coin = userInfo?.coin;
-  console.log('🚀 ~ file: Play.tsx:15 ~ Play ~ coin:', coin);
 
   // 프롤로그 클릭 -> /prolog로 이동
   const handlePrologClick = () => {
@@ -67,6 +67,7 @@ export default function Play() {
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
+        <TopBar />
         <div />
         {/* 하단 버튼 영역*/}
         <div className="flex flex-col w-full text-center">

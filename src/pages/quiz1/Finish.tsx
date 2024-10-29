@@ -9,7 +9,7 @@ export default function Finish() {
   const [isClick, setIsClick] = useState(false);
   const navigate = useNavigate();
   const goRank = () => {
-    navigate('/');
+    navigate('/play');
   };
   const handleClick = () => {
     setIsClick(true);
@@ -49,7 +49,7 @@ export default function Finish() {
             className="absolute bottom-[5%] text-white text-[1.2rem] cursor-pointer"
             onClick={goRank}
           >
-            랭킹보기
+            홈으로
           </div>
         </div>
       )}
