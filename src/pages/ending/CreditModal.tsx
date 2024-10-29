@@ -90,14 +90,14 @@ export default function CreditModal({ onClose }: CreditModalProps) {
         {/* 크레딧 박스 */}
         <div className="my-auto h-full p-4 text-xl overflow-scroll isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#00000060] rounded-[8px] border-4 border-[#808080]">
           <div className="h-[400%] flex flex-col items-center justify-around whitespace-pre-line text-center">
-            {credits.map((credit) => (
+            {credits.map((credit, i) => (
               <>
-                <div>
+                <div key={i}>
                   <span className="text-[#14AE5C]">{credit.category}</span>
                 </div>
-                {credit.contents.map((content) => (
+                {credit.contents.map((content, j) => (
                   <>
-                    <div>
+                    <div key={`${i}-${j}`}>
                       {'role' in content && (
                         <span className="text-gray-300">
                           {content.role}
