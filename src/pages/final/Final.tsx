@@ -9,14 +9,38 @@ import Dido_mon from '/src/assets/images/items/dido_mon.png';
 import Monkey_dark1 from '/src/assets/images/items/monkey_dark1.png';
 import Monkey_dark2 from '/src/assets/images/items/monkey_dark2.png';
 import Monkey_light from '/src/assets/images/items/monkey_light.png';
-import TopBar from '@/component/bar/TopBar';
-import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import { useQueryClient } from '@tanstack/react-query';
 import GameOverlay from './GameOverlay';
 import Game from './Game';
+import TopBar from '@/component/bar/TopBar';
+import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import bgMusic from '/src/assets/sound/bg_sound.mp3'; // 배경 음악 파일 추가
+import { dialog6 } from '@/constant/dialogs';
+import { useUserStore } from '@/store/useUserStore';
+import { useSubmitQuiz } from '@/api/hooks';
 
 export default function Final() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+    onError: (error: any) => {
+      if (error.response && error.response.data) {
+        const { code, message } = error.response.data;
+        if (code === 2002 || code === 2005) {
+          alert(message);
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      }
+      navigate('/play');
+    },
+  });
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [idx, setIdx] = useState<number>(1);
@@ -27,45 +51,7 @@ export default function Final() {
   const [gameOver, setGameOver] = useState(false);
   const [isPlaying, setIsPlaying] = useState(1);
 
-  const dialogues = [
-    {
-      idx: 1,
-      props: 0,
-      name: ' ',
-      text: "어라..?\n'미르미'의 아이템들이 반응하기 시작했다..!",
-    },
-    {
-      idx: 2,
-      props: 0,
-      name: ' ',
-      text: '미르미는 정보처리기사로 전직했다!',
-    },
-    {
-      idx: 3,
-      props: 0,
-      name: '[미션]',
-      text: '기사님! \n율전을 점령하려는 버그 원숭이를 모두 디버깅하고 \n 영웅이 되어주세요!',
-    },
-    {
-      idx: 4,
-      props: 0,
-      name: '[미션]',
-      text: '무작위로 움직이는 버그 원숭이들을 모두 터치해주세요! \n\n단, 귀여운 숭이는 공격해서는 안됩니다.',
-    },
-  ];
-
-  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
-  
-  const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
-    if (audioRef.current) {
-      if (soundStatus === 1) {
-        audioRef.current.play(); // 소리 재생
-      } else {
-        audioRef.current.pause(); // 소리 일시정지
-      }
-    }
-  };
+  const currentDialogue = dialog6.find((dialogue) => dialogue.idx === idx);
 
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
@@ -93,6 +79,7 @@ export default function Final() {
   };
 
   const handleGameClear = () => {
+    submitQuiz({ phone, correct: 'true', stage: '6' });
     setGameClear(true);
     setOverlayStatus('clear');
   };
@@ -151,7 +138,7 @@ export default function Final() {
       )}
 
       <TopBar onSound={handleSound} isPlaying={isPlaying} />
-      
+
       {!overlayStatus && (
         <div className="z-10 w-full h-full">
           <img src={Bg3} className="object-cover" />

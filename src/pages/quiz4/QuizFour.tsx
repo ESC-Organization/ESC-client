@@ -3,52 +3,42 @@ import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import TopBar from '@/component/bar/TopBar';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
+import { dialog4 } from '@/constant/dialogs';
+import { useUserStore } from '@/store/useUserStore';
+import { useSubmitQuiz } from '@/api/hooks';
+
 export default function QuizFour() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+    onError: (error: any) => {
+      if (error.response && error.response.data) {
+        const { code, message } = error.response.data;
+
+        if (code === 2002 || code === 2005) {
+          alert(message);
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      }
+      navigate('/play');
+    },
+  });
+
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-  const dialogues = [
-    {
-      idx: 1,
-      props: 8,
-      name: '최강록',
-      text: '헤헴...미디어를 1년 간 끊었건만..기어코 나에게 왔구만',
-    },
-    {
-      idx: 2,
-      props: 1,
-      name: '00',
-      text: '현재 굶주리고 있는 사람이 많아요. 저를 도와주세요!',
-    },
-    {
-      idx: 3,
-      props: 8,
-      name: '최강록',
-      text: '허허 나야 강록이...',
-    },
-    {
-      idx: 4,
-      props: 1,
-      name: '00',
-      text: '네 그리너까 빨리 도와주세요!',
-    },
-    {
-      idx: 5,
-      props: 8,
-      name: '최강록',
-      text: '난 그 건물이 아니면 요리를 안 해.',
-    },
-    {
-      idx: 6,
-      props: 1,
-      name: '00',
-      text: '탄소 6개, 근데 이제 수소를 6개 곁들인..건물 말씀하시는 거죠?',
-    },
-  ];
 
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
@@ -65,15 +55,17 @@ export default function QuizFour() {
     setSubjectAnswer(subject);
     if (subject == '벤젠고리관' || subject == '벤젠고리') {
       setIsCorrect(1);
+      submitQuiz({ phone, correct: 'true', stage: '4' });
     } else {
       setIsCorrect(2);
+      submitQuiz({ phone, correct: 'false', stage: '4' });
     }
   };
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
     console.log('Next idx:', nextIdx);
-    if (nextIdx > dialogues.length) {
+    if (nextIdx > dialog4.length) {
       console.log('finish');
       setIsStart(true);
     }
@@ -81,7 +73,7 @@ export default function QuizFour() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  const currentDialogue = dialog4.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
     console.log('다시');
     window.location.reload();

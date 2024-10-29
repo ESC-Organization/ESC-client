@@ -22,7 +22,6 @@ export default function Login() {
     onSuccess: () => {
       setPhone(phoneNumber);
       setNickname(nicknameState);
-      alert('로그인 완료!');
       navigate(`/prolog`);
     },
     onError: () => {

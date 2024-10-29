@@ -1,11 +1,28 @@
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import AngledBox from '../prolog/AngledBox';
+import { useSubmitQuiz } from '@/api/hooks';
+import { useUserStore } from '@/store/useUserStore';
 
 export default function Landing14() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+  });
+
   const navigate = useNavigate();
   // 지금 플레이 클릭
   const onClickPlay = () => {
-    navigate('/play');
+    if (!phone) {
+      navigate('/home');
+    } else {
+      submitQuiz({ phone, correct: 'true', stage: '0' });
+      navigate('/play');
+    }
   };
 
   return (

@@ -7,6 +7,7 @@ import {
   CoinUpdateParams,
   QuizSubmissionParams,
 } from '@/types/schemas';
+import { useUserStore } from '@/store/useUserStore';
 
 // 로그인
 const loginUser = async (credentials: LoginCredentials) => {
@@ -57,6 +58,13 @@ export const useUserInfo = (phone: string, options = {}) => {
   });
 };
 
+// 코인 정보 가져오기 -> 유저정보 data.coin
+export const useCoinInfo = () => {
+  const phone = useUserStore((state) => state.phone);
+  const { data: userInfo } = useUserInfo(phone);
+  return userInfo?.coin;
+};
+
 // 코인 업데이트
 const putCoin = async ({ phone, code }: CoinUpdateParams) => {
   const endpoint = API_ENDPOINTS.PUT_COIN.replace(':phone', phone).replace(
@@ -78,11 +86,10 @@ export const usePutCoin = (options = {}) => {
 };
 
 // 퀴즈 제출
-const submitQuiz = async ({ phone, answer }: QuizSubmissionParams) => {
-  const endpoint = API_ENDPOINTS.PUT_QUIZ.replace(':phone', phone).replace(
-    ':answer',
-    answer
-  );
+const submitQuiz = async ({ phone, correct, stage }: QuizSubmissionParams) => {
+  const endpoint = API_ENDPOINTS.PUT_QUIZ.replace(':phone', phone)
+    .replace(':correct', correct)
+    .replace(':stage', stage);
   const { data } = await apiClient.put(endpoint);
   return data;
 };
