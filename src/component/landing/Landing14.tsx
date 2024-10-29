@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import AngledBox from '../prolog/AngledBox';
 
 export default function Landing14() {
+  const navigate = useNavigate();
   // 지금 플레이 클릭
   const onClickPlay = () => {
-    alert('지금 플레이');
+    navigate('/play');
   };
 
   return (

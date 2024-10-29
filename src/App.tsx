@@ -1,16 +1,16 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
 import QuizTwo from './pages/quiz2/QuizTwo';
-import Ranking from './pages/prolog/Ranking';
 import QuizThree from './pages/quiz3/QuizThree';
 import QuizFour from './pages/quiz4/QuizFour';
 import QuizFive from './pages/quiz5/QuizFive';
 import Final from './pages/final/Final';
 import Ending from './pages/ending/Ending';
-import Home from './pages/prolog/home';
+import Ranking from './pages/prolog/Ranking';
+import ProtectedRoute from './component/route/ProtectRouter';
+import Home from './pages/prolog/Home';
 import Prolog from '@/pages/prolog/Prolog';
 import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
@@ -30,11 +30,11 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/', // 삭제 필요
+    path: '/',
     element: <Main />,
   },
   {
-    path: '/onboarding', // 삭제 필요
+    path: '/onboarding',
     element: <Onboarding />,
   },
   {
@@ -42,61 +42,34 @@ const router = createBrowserRouter([
     element: <Prolog />,
   },
   {
-    path: '/character-selection', // 캐릭터 선택 페이지 추가
+    path: '/character-selection',
     element: <CharacterSelection />,
   },
   {
-    path: '/login', // 로그인 페이지 추가
+    path: '/login',
     element: <Login />,
   },
   {
-    path: '/home', // home -> 로그인 x
+    path: '/home',
     element: <Home />,
   },
   {
-    path: '/play', // play -> 로그인 O
-    element: <Play />,
-  },
-  {
-    path: '/ranking',
-    element: <Ranking />,
-  },
-  {
-    path: '/landing',
-    element: <Landing />,
-  },
-  {
-    path: '/quiz1',
-    element: <QuizOne />,
-  },
-  {
-    path: '/quiz2',
-    element: <QuizTwo />,
-  },
-  {
-    path: '/quiz3',
-    element: <QuizThree />,
-  },
-  {
-    path: '/quiz4',
-    element: <QuizFour />,
-  },
-  {
-    path: '/quiz5',
-    element: <QuizFive />,
-  },
-  {
-    path: '/final',
-    element: <Final />,
-  },
-  {
-    path: '/ending',
-    element: <Ending />,
-  },
-
-  {
     path: '/test',
     element: <TestPage />,
+  },
+  {
+    element: <ProtectedRoute />, // 로그인 해야만 들어올 수 있는 페이지
+    children: [
+      { path: '/play', element: <Play /> },
+      { path: '/ranking', element: <Ranking /> },
+      { path: '/quiz1', element: <QuizOne /> },
+      { path: '/quiz2', element: <QuizTwo /> },
+      { path: '/quiz3', element: <QuizThree /> },
+      { path: '/quiz4', element: <QuizFour /> },
+      { path: '/quiz5', element: <QuizFive /> },
+      { path: '/final', element: <Final /> },
+      { path: '/ending', element: <Ending /> },
+    ],
   },
 ]);
 

@@ -6,7 +6,7 @@ export default function Home() {
 
   // 지금 플레이 클릭 -> prologStory로 이동
   const handlePrologClick = () => {
-    navigate('/landing-intro');
+    navigate('/prolog');
   };
 
   // 로그인 클릭 시
