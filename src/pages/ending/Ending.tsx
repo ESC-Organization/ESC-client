@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import MonkeySrc from '/src/assets/images/avatar/3.png';
@@ -8,18 +9,17 @@ import MonkeyDanceSrc from '/src/assets/images/ending/monkey-dance.gif';
 import MyungwoongDanceSrc from '/src/assets/images/ending/myungwoong-dance.gif';
 import YuloongDanceSrc from '/src/assets/images/ending/yuloong-dance.gif';
 import TypoLetsParty from '/src/assets/images/items/typo-LETSPARTY.png';
-import { Link } from 'react-router-dom';
 import CertModal from './CertModal';
 import CreditModal from './CreditModal';
 import AvatarChat from '@/component/chatbox/AvatarChat';
 import TopBar from '@/component/bar/TopBar';
 import { useUserStore } from '@/store/useUserStore';
+import { useUserInfo, useRanking } from '@/api/hooks';
 
 const dataURLtoFile = (dataurl: string, filename: string) => {
   let arr = dataurl.split(',');
   if (arr[0] === null) return;
-  let mimeType = arr[0].match(/:(.*?);/)?.at(1),
-    decodedData = atob(arr[1]),
+  let decodedData = atob(arr[1]),
     lengthOfDecodedData = decodedData.length,
     u8array = new Uint8Array(lengthOfDecodedData);
   while (lengthOfDecodedData--) {
@@ -32,7 +32,16 @@ export default function Ending() {
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const divRef = useRef<HTMLDivElement>(null); // 스크린샷 대상 객체
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-  const [nickname, setNickname] = useState('미르미');
+  const [myrank, setMyrank] = useState(0);
+  // const [nickname, setNickname] = useState('미르미');
+
+  // 유저 정보 조회
+  const { nickname, phone } = useUserStore();
+  const { data: userInfo, refetch: fetchUserInfo } = useUserInfo(phone, {
+    enabled: false,
+  });
+  const { data: rankingData, refetch: fetchRanking } = useRanking();
+
   const dialogues = [
     {
       idx: 1,
@@ -138,12 +147,21 @@ export default function Ending() {
     setIdx(nextIdx);
     if (nextIdx === 6) {
       console.log('show modal');
-      setIsModalCert(true);
+      handleShowCert();
     }
     if (nextIdx > dialogues.length) {
       console.log('finish');
       setIsParty(true);
     }
+  };
+  const handleShowCert = () => {
+    if (!phone) return alert('Phone number is required');
+    fetchUserInfo();
+    fetchRanking();
+    setIsModalCert(true);
+    const rank = rankingData.find((rank) => rank.nickname === nickname);
+    if (!rank) return alert('랭크 정보가 없습니다.');
+    setMyrank(rank.rank); // hooks.ts getRanking 타입 수정하기
   };
   const handleShare = async () => {
     if (!divRef.current) return;
@@ -205,9 +223,9 @@ export default function Ending() {
             handleShare();
           }}
           clearInfo={{
-            nickname: '미르미',
-            cleartime: '00:00',
-            ranking: 0,
+            nickname: nickname,
+            cleartime: userInfo?.recordTime ?? '00:00', //시간계산 로직 추가?
+            ranking: myrank,
           }}
         />
       ) : (
@@ -295,19 +313,6 @@ export default function Ending() {
             </div>
           </div>
         </div>
-      )}
-
-      {isModalCredit && (
-        <CreditModal
-          onClose={() => {
-            handleToggleCredit();
-          }}
-        />
-      )}
-    </div>
-  );
-}
-
       )}
 
       {isModalCredit && (
