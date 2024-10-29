@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Knight from '/src/assets/images/avatar/12.png';
 import Monkey_dark1 from '/src/assets/images/items/monkey_dark1.png';
 import Monkey_dark2 from '/src/assets/images/items/monkey_dark2.png';
 import Monkey_light from '/src/assets/images/items/monkey_light.png';
 import AttackGif from '/src/assets/images/attack/slash.gif';
+
+import EffectSound from '/src/assets/sound/3.mp3'; // 효과음 파일 추가
 
 interface GameProps {
   onGameOver: () => void;
@@ -11,7 +13,7 @@ interface GameProps {
 }
 
 interface MonkeyState {
-  type: 'dark1' | 'dark2' | 'light';  // type을 세 가지로 확장
+  type: 'dark1' | 'dark2' | 'light';
   x: string;
   y: string;
   active: boolean;
@@ -21,9 +23,11 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
   const [attackEffect, setAttackEffect] = useState<{ left: string; top: string } | null>(null);
   const [monkeyStatus, setMonkeyStatus] = useState<MonkeyState[]>([
     { type: 'dark1', x: '10%', y: '50%', active: true },
-    { type: 'dark2', x: '50%', y: '20%', active: true },  // dark2로 변경
+    { type: 'dark2', x: '50%', y: '20%', active: true },
     { type: 'light', x: '90%', y: '50%', active: true },
   ]);
+
+  const effectSoundRef = useRef<HTMLAudioElement | null>(null); // 효과음 레퍼런스 생성
 
   // 원숭이 위치를 무작위로 설정
   const randomizeMonkeyPositions = () => {
@@ -41,25 +45,28 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
 
     setAttackEffect({ left: clickedMonkey.x, top: clickedMonkey.y });
 
-    if (clickedMonkey.type === 'light') {        
-        setTimeout(() => {
-            onGameOver();
-        }, 600); // 1초 지연 후 클리어 화면으로 전환
+    if (effectSoundRef.current) {
+      effectSoundRef.current.currentTime = 0; // 매 클릭 시 효과음 시작 지점으로 설정
+      effectSoundRef.current.play(); // 효과음 재생
+    }
 
+    if (clickedMonkey.type === 'light') {
+      setTimeout(() => {
+        onGameOver();
+      }, 600);
     } else {
       setMonkeyStatus((prevStatus) =>
         prevStatus.map((monkey, i) => (i === index ? { ...monkey, active: false } : monkey))
       );
-      
-      // 어두운 원숭이들이 모두 비활성화되었는지 확인
+
       const remainingDarkMonkeys = monkeyStatus.filter(
         monkey => monkey.active && (monkey.type === 'dark1' || monkey.type === 'dark2')
       ).length;
-      
+
       if (remainingDarkMonkeys === 1) {
         setTimeout(() => {
           onGameClear();
-        }, 600); // 1초 지연 후 클리어 화면으로 전환
+        }, 600);
       }
       setTimeout(() => setAttackEffect(null), 1000);
     }
@@ -93,6 +100,8 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
 
   return (
     <div className="absolute w-full h-full z-50">
+      <audio ref={effectSoundRef} src={EffectSound} /> {/* 효과음 오디오 태그 */}
+
       <div className="absolute bottom-5 left-5 z-50 w-[200px] h-[200px] sm:w-[150px] sm:h-[150px]">
         <img src={Knight} className="object-contain scale-x-[-1]" alt="Knight" />
       </div>

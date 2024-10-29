@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Bg2 from '/src/assets/images/bg/bg2.png';
@@ -16,6 +16,8 @@ import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import GameOverlay from '@/component/final/GameOverlay';
 import Game from '@/component/final/Game';
 
+import bgMusic from '/src/assets/sound/bg_sound.mp3'; // 배경 음악 파일 추가
+
 export default function Final() {
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -24,6 +26,7 @@ export default function Final() {
   const [overlayStatus, setOverlayStatus] = useState<'start' | 'clear' | 'over' | null>(null);
   const [gameClear, setGameClear] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(1);
 
   const dialogues = [
     {
@@ -53,6 +56,17 @@ export default function Final() {
   ];
 
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
 
   const handleNext = (nextIdx: number) => {
     nextIdx++;
@@ -84,8 +98,17 @@ export default function Final() {
     navigate('/ending');
   };
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
+
   return (
     <div className="relative flex justify-center w-full h-full bg-[#793A1C]">
+      <audio ref={audioRef} src={bgMusic} />
+
       {overlayStatus && (
         <div className="relative flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 py-10 z-50">
           <img src={Bg3} className="absolute inset-0 object-cover w-full h-full z-0"/>
@@ -111,7 +134,7 @@ export default function Final() {
         </div>
       )}
       
-      <TopBar />
+      <TopBar onSound={handleSound} />
       {!overlayStatus && (
         <div className="z-10 w-full h-full">
           <img src={Bg3} className="object-cover" />
