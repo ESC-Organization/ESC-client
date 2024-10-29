@@ -9,6 +9,10 @@ export interface UserInfo {
   qr4Used: boolean;
   qr5Used: boolean;
   qr6Used: boolean;
+  qr7Used: boolean;
+  qr8Used: boolean;
+  qr9Used: boolean;
+  qr10Used: boolean;
   initTime: string;
   recordTime: string;
 }
@@ -32,5 +36,5 @@ export interface CoinUpdateParams {
 
 export interface QuizSubmissionParams {
   phone: string;
-  answer: string;
+  correct: string;
 }

@@ -11,6 +11,7 @@ import Ending from './pages/ending/Ending';
 import Ranking from './pages/prolog/Ranking';
 import ProtectedRoute from './component/route/ProtectRouter';
 import Home from './pages/prolog/Home';
+import QRPage from './pages/qr/QRPage';
 import Prolog from '@/pages/prolog/Prolog';
 import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
       { path: '/quiz5', element: <QuizFive /> },
       { path: '/final', element: <Final /> },
       { path: '/ending', element: <Ending /> },
+      { path: '/qr', element: <QRPage /> },
     ],
   },
 ]);
