@@ -11,6 +11,7 @@ interface ObjectProps {
 export default function Object({ q, answer = [], onSelect }: ObjectProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isHint, setIsHint] = useState(false);
+
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
     onSelect(index + 1);
@@ -33,9 +34,8 @@ export default function Object({ q, answer = [], onSelect }: ObjectProps) {
                     style={{ WebkitTextStroke: '1px black' }}
                     className="text-white text-[0.9rem]"
                   >
-                    힌트
-                    <br />
-                    흑백요리사 마지막화를 봐봐
+                    나랑 퀴즈풀러 <br />
+                    룸카페 갈뤠?
                   </span>
                 </div>
               </div>
