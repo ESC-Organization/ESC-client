@@ -31,11 +31,11 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/', // 삭제 예정
     element: <Main />,
   },
   {
-    path: '/onboarding',
+    path: '/onboarding', // 삭제 예정
     element: <Onboarding />,
   },
   {
@@ -55,14 +55,14 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: '/test',
+    path: '/test', // 삭제 예정
     element: <TestPage />,
   },
+  { path: '/ranking', element: <Ranking /> },
   {
     element: <ProtectedRoute />, // 로그인 해야만 들어올 수 있는 페이지
     children: [
       { path: '/play', element: <Play /> },
-      { path: '/ranking', element: <Ranking /> },
       { path: '/quiz1', element: <QuizOne /> },
       { path: '/quiz2', element: <QuizTwo /> },
       { path: '/quiz3', element: <QuizThree /> },

@@ -13,7 +13,7 @@ import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import { dialog3 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
-import { useCoinInfo, useSubmitQuiz } from '@/api/hooks';
+import { useSubmitQuiz } from '@/api/hooks';
 
 export default function QuizThree() {
   const phone = useUserStore((state) => state.phone);
@@ -24,15 +24,20 @@ export default function QuizThree() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
     },
+    onError: (error: any) => {
+      if (error.response && error.response.data) {
+        const { code, message } = error.response.data;
+
+        if (code === 2002 || code === 2005) {
+          alert(message);
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      }
+      navigate('/play');
+    },
   });
 
-  const coin = useCoinInfo();
-
-  useEffect(() => {
-    if (coin === 0) {
-      navigate('/play');
-    }
-  }, [coin, navigate]);
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
 
@@ -51,10 +56,10 @@ export default function QuizThree() {
     setSubjectAnswer(subject);
     if (subject == '길이만') {
       setIsCorrect(1);
-      submitQuiz({ phone, correct: 'true' });
+      submitQuiz({ phone, correct: 'true', stage: '3' });
     } else {
       setIsCorrect(2);
-      submitQuiz({ phone, correct: 'false' });
+      submitQuiz({ phone, correct: 'false', stage: '3' });
     }
   };
   const handleNext = (nextIdx: number) => {

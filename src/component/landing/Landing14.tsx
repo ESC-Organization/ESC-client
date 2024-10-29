@@ -6,7 +6,6 @@ import { useUserStore } from '@/store/useUserStore';
 
 export default function Landing14() {
   const phone = useUserStore((state) => state.phone);
-  console.log('🚀 ~ file: Landing14.tsx:9 ~ Landing14 ~ phone:', phone);
   const queryClient = useQueryClient();
 
   const { mutate: submitQuiz } = useSubmitQuiz({
@@ -21,7 +20,7 @@ export default function Landing14() {
     if (!phone) {
       navigate('/home');
     } else {
-      submitQuiz({ phone, correct: 'true' });
+      submitQuiz({ phone, correct: 'true', stage: '0' });
       navigate('/play');
     }
   };

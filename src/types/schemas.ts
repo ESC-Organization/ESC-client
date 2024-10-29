@@ -37,4 +37,5 @@ export interface CoinUpdateParams {
 export interface QuizSubmissionParams {
   phone: string;
   correct: string;
+  stage: string;
 }

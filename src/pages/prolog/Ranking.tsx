@@ -2,14 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
 import { useRanking } from '@/api/hooks';
-import TopBar from '@/component/bar/TopBar';
 
 export default function Ranking() {
   const navigate = useNavigate();
 
   // 랭킹 조회
   const { data: rankingData, isLoading, isError } = useRanking();
-  console.log('🚀 ~ file: main-page.tsx:37 ~ Main ~ rankingData:', rankingData);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -40,7 +38,6 @@ export default function Ranking() {
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center justify-between relative overflow-hidden">
-        <TopBar />
         <div className="pt-16">
           <AngledBox>
             <span className="text-white text-[2.5rem]">RANKING</span>

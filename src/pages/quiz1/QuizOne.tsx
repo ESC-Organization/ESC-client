@@ -10,7 +10,7 @@ import Wrong from './Wrong';
 import Object from '@/component/answer/Object';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
-import { useCoinInfo, useSubmitQuiz } from '@/api/hooks';
+import { useSubmitQuiz } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
 import { dialog1 } from '@/constant/dialogs';
 
@@ -23,15 +23,19 @@ export default function QuizOne() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
     },
-  });
+    onError: (error: any) => {
+      if (error.response && error.response.data) {
+        const { code, message } = error.response.data;
 
-  const coin = useCoinInfo();
-
-  useEffect(() => {
-    if (coin === 0) {
+        if (code === 2002 || code === 2005) {
+          alert(message);
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      }
       navigate('/play');
-    }
-  }, [coin, navigate]);
+    },
+  });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
@@ -54,10 +58,10 @@ export default function QuizOne() {
     console.log('Selected answer index:', index);
     if (index == 4) {
       setIsCorrect(1);
-      submitQuiz({ phone, correct: 'true' });
+      submitQuiz({ phone, correct: 'true', stage: '1' });
     } else {
       setIsCorrect(2);
-      submitQuiz({ phone, correct: 'false' });
+      submitQuiz({ phone, correct: 'false', stage: '1' });
     }
   };
 
