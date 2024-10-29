@@ -55,6 +55,17 @@ export default function Final() {
   ];
 
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  
+  const handleSound = (soundStatus: number) => {
+    setIsPlaying(soundStatus);
+    if (audioRef.current) {
+      if (soundStatus === 1) {
+        audioRef.current.play(); // 소리 재생
+      } else {
+        audioRef.current.pause(); // 소리 일시정지
+      }
+    }
+  };
 
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
@@ -140,7 +151,7 @@ export default function Final() {
       )}
 
       <TopBar onSound={handleSound} isPlaying={isPlaying} />
-
+      
       {!overlayStatus && (
         <div className="z-10 w-full h-full">
           <img src={Bg3} className="object-cover" />

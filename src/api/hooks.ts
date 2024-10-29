@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import apiClient from '@/api/client';
 import { API_ENDPOINTS } from '@/api/endpoints';
 import {
@@ -78,10 +78,7 @@ export const usePutCoin = (options = {}) => {
 };
 
 // 퀴즈 제출
-const submitQuiz = async ({
-  phone,
-  answer,
-}: QuizSubmissionParams): Promise<any> => {
+const submitQuiz = async ({ phone, answer }: QuizSubmissionParams) => {
   const endpoint = API_ENDPOINTS.PUT_QUIZ.replace(':phone', phone).replace(
     ':answer',
     answer
