@@ -2,9 +2,12 @@ import Coin from '/src/assets/images/items/coin.png';
 import Sound from '/src/assets/images/items/sound.png';
 import SoundOff from '/src/assets/images/items/sound-off.png';
 import { useState } from 'react';
+
 interface BarComponent {
   onSound: (number: number) => void;
+  isPlaying: number; // 추가된 prop
 }
+
 export default function TopBar({ onSound }: BarComponent) {
   const [isSound, setIsSound] = useState(1);
   const toggleSound = () => {
