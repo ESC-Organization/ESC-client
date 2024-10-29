@@ -26,7 +26,6 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
 
   const showHint = () => {
     setIsHint(!isHint);
-    setIsHint(!isHint);
   };
 
   return (
@@ -38,11 +37,11 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
         >
           {isHint && (
             <div className="fixed w-[57%] h-[12%] z-[100]">
-              <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
-                <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
+              <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 ">
+                <div className="absolute right-[25%] -top-[20%] text-center w-full p-2 bg-white border-2 border-[#808080] rounded-[5px]">
                   <span
-                    style={{ WebkitTextStroke: '1px #000' }}
-                    className="text-black text-[0.9rem]"
+                    style={{ WebkitTextStroke: '1px black' }}
+                    className="text-white text-[0.9rem]"
                   >
                     힌트
                     <br />

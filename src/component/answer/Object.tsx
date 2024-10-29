@@ -10,21 +10,43 @@ interface ObjectProps {
 
 export default function Object({ q, answer = [], onSelect }: ObjectProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isHint, setIsHint] = useState(false);
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
     onSelect(index + 1);
   };
-  
+  const showHint = () => {
+    setIsHint(!isHint);
+  };
   return (
     <div className="flex flex-col p-2 gap-2 w-full h-full transform relative z-[80] bg-[#00000059] flex justify-center items-center">
-      <div className="relative rounded-[8px] p-4 text-white border-4 border-[#606060] w-[90%]   bg-[#404040]">
-        <div className="absolute -top-[15%] w-[30%] left-[35%] -z-[10]">
+      <div className="mt-[12%] relative rounded-[8px] p-4 text-white border-4 border-[#606060] w-[90%]   bg-[#404040]">
+        <div
+          onClick={showHint}
+          className="absolute -top-[17%] w-[30%] left-[35%] -z-[10]"
+        >
+          {isHint && (
+            <div className="fixed w-[57%] h-[12%] z-[100]">
+              <div className="absolute right-[29%] -top-[110%] text-center w-full ">
+                <div className="absolute right-[25%] -top-[10%] text-center w-full p-2 bg-white border-2 border-[#808080] rounded-[5px]">
+                  <span
+                    style={{ WebkitTextStroke: '1px black' }}
+                    className="text-white text-[0.9rem]"
+                  >
+                    힌트
+                    <br />
+                    흑백요리사 마지막화를 봐봐
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
           <img src={Monkey} />
         </div>
-        <div className="mt-[15%] text-[1.1rem]">
+        <div className="mt-[10%] text-[1.1rem]">
           <span style={{ WebkitTextStroke: '1px #000' }}>{q}</span>
         </div>
-        <div className="p-2 mt-[5%] mb-[5%] flex flex-col w-full gap-4">
+        <div className="p-1 mt-[5%] mb-[5%] flex flex-col w-full gap-2">
           {answer.map((item, index) => (
             <div
               key={index}
