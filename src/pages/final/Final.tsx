@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Fullitem from '/src/assets/images/avatar/11.png';
@@ -10,12 +9,10 @@ import Dido_mon from '/src/assets/images/items/dido_mon.png';
 import Monkey_dark1 from '/src/assets/images/items/monkey_dark1.png';
 import Monkey_dark2 from '/src/assets/images/items/monkey_dark2.png';
 import Monkey_light from '/src/assets/images/items/monkey_light.png';
-
 import TopBar from '@/component/bar/TopBar';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-import GameOverlay from '@/component/final/GameOverlay';
-import Game from '@/component/final/Game';
-
+import GameOverlay from './GameOverlay';
+import Game from './Game';
 import bgMusic from '/src/assets/sound/bg_sound.mp3'; // 배경 음악 파일 추가
 
 export default function Final() {
@@ -23,7 +20,9 @@ export default function Final() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [idx, setIdx] = useState<number>(1);
-  const [overlayStatus, setOverlayStatus] = useState<'start' | 'clear' | 'over' | null>(null);
+  const [overlayStatus, setOverlayStatus] = useState<
+    'start' | 'clear' | 'over' | null
+  >(null);
   const [gameClear, setGameClear] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [isPlaying, setIsPlaying] = useState(1);
@@ -56,7 +55,7 @@ export default function Final() {
   ];
 
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
-  
+
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
     if (audioRef.current) {
@@ -71,7 +70,7 @@ export default function Final() {
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
-    
+
     if (nextIdx === 5) {
       setOverlayStatus('start');
     }
@@ -111,8 +110,14 @@ export default function Final() {
 
       {overlayStatus && (
         <div className="relative flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 py-10 z-50">
-          <img src={Bg3} className="absolute inset-0 object-cover w-full h-full z-0"/>
-          <GameOverlay status={overlayStatus} onFinish={() => setOverlayStatus(null)} />
+          <img
+            src={Bg3}
+            className="absolute inset-0 object-cover w-full h-full z-0"
+          />
+          <GameOverlay
+            status={overlayStatus}
+            onFinish={() => setOverlayStatus(null)}
+          />
           <div className="flex flex-col items-center mt-10 z-10">
             {overlayStatus === 'over' && (
               <button
@@ -133,31 +138,38 @@ export default function Final() {
           </div>
         </div>
       )}
-      
-      <TopBar onSound={handleSound} />
+
+      <TopBar onSound={handleSound} isPlaying={isPlaying} />
+
       {!overlayStatus && (
         <div className="z-10 w-full h-full">
           <img src={Bg3} className="object-cover" />
         </div>
       )}
-      
+
       <div className="flex justify-center w-full max-w-[500px] absolute bottom-[250px]">
         <img src={Bg2} />
       </div>
       <div className="w-full p-8 max-w-[500px] absolute bottom-0 h-[250px] bg-[#661AAF]"></div>
-      
+
       {idx < 5 && (
         <>
           <div className="w-full flex justify-center max-w-[500px] absolute bottom-[360px] z-50">
             <div className="w-[50%]">
               {idx === 1 ? (
-                <img src={Fullitem} className="animate-rotate-axis transition-transform duration-[2500ms] transform-style-3d"/>
+                <img
+                  src={Fullitem}
+                  className="animate-rotate-axis transition-transform duration-[2500ms] transform-style-3d"
+                />
               ) : idx === 2 ? (
-                <img src={Knight} className="animate-sparkle transform-style-3d"/>
+                <img
+                  src={Knight}
+                  className="animate-sparkle transform-style-3d"
+                />
               ) : idx === 3 ? (
-                <img src={Dido_mon} className=""/>
+                <img src={Dido_mon} className="" />
               ) : (
-                <img src={Dido} className=""/>
+                <img src={Dido} className="" />
               )}
             </div>
           </div>
@@ -181,9 +193,11 @@ export default function Final() {
               />
             </div>
           )}
-          
-          <div className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]"
-              style={{ whiteSpace: 'pre-line' }}>
+
+          <div
+            className="p-4 w-full max-w-[500px] absolute bottom-0 h-[300px] bg-[#661AAF]"
+            style={{ whiteSpace: 'pre-line' }}
+          >
             {currentDialogue && (
               <AvatarBlackChat
                 idx={currentDialogue.idx}
@@ -196,12 +210,9 @@ export default function Final() {
           </div>
         </>
       )}
-      
+
       {idx === 5 && !overlayStatus && !gameOver && !gameClear && (
-        <Game 
-          onGameOver={handleGameOver}
-          onGameClear={handleGameClear}
-        />
+        <Game onGameOver={handleGameOver} onGameClear={handleGameClear} />
       )}
     </div>
   );
