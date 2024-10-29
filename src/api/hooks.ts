@@ -78,10 +78,10 @@ export const usePutCoin = (options = {}) => {
 };
 
 // 퀴즈 제출
-const submitQuiz = async ({ phone, answer }: QuizSubmissionParams) => {
+const submitQuiz = async ({ phone, correct }: QuizSubmissionParams) => {
   const endpoint = API_ENDPOINTS.PUT_QUIZ.replace(':phone', phone).replace(
-    ':answer',
-    answer
+    ':correct',
+    correct
   );
   const { data } = await apiClient.put(endpoint);
   return data;

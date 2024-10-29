@@ -4,7 +4,7 @@ interface BoxComponentProps {
   children: React.ReactNode;
 }
 
-export default function AngledBox({ children }: BoxComponentProps) {
+export default function AngledMonkeyBox({ children }: BoxComponentProps) {
   return (
     <div className="flex flex-col items-center relative">
       <div className="absolute top-[-50px]">
