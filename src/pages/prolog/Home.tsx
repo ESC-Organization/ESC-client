@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 
-export default function Play() {
+export default function Home() {
   const navigate = useNavigate();
 
   // 지금 플레이 클릭 -> prologStory로 이동
@@ -10,8 +10,8 @@ export default function Play() {
   };
 
   // 로그인 클릭 시
-  const handlePlayClick = () => {
-    alert('지금 플레이');
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   // 랭킹 확인 클릭 -> ranking으로 이동
@@ -24,21 +24,23 @@ export default function Play() {
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/play-bg2.png')`,
+          backgroundImage: `url('/src/assets/images/prolog/play-bg.png')`,
         }}
       />
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
-        <div />
+        <div className="pt-16 text-[2.5rem]">
+          <AngledBox>
+            <span className="text-white">지금 우리 </span>
+            <span className="text-[#14AE5C]">율전</span>
+            <span className="text-white">은</span>
+          </AngledBox>
+        </div>
         {/* 하단 버튼 영역*/}
         <div className="flex flex-col w-full text-center">
           <div className="content-wrapper flex flex-col items-center gap-2 500px:mb-8 relative">
-            <AngledBox
-              background="bg-[#404040]"
-              border="border-[#606060]"
-              lineBackground="bg-[#808080]"
-            >
+            <AngledBox>
               <span
                 className="text-white text-[1rem] cursor-pointer"
                 onClick={handlePrologClick}
@@ -46,23 +48,15 @@ export default function Play() {
                 프롤로그
               </span>
             </AngledBox>
-            <AngledBox
-              background="bg-[#404040]"
-              border="border-[#606060]"
-              lineBackground="bg-[#808080]"
-            >
+            <AngledBox>
               <span
                 className="text-white text-[1rem] cursor-pointer"
-                onClick={handlePlayClick}
+                onClick={handleLoginClick}
               >
-                지금 플레이
+                로그인
               </span>
             </AngledBox>
-            <AngledBox
-              background="bg-[#404040]"
-              border="border-[#606060]"
-              lineBackground="bg-[#808080]"
-            >
+            <AngledBox>
               <span
                 className="text-white text-[1rem] cursor-pointer"
                 onClick={handleRankingClick}

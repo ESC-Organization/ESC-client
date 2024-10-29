@@ -7,6 +7,7 @@ interface UserStore {
   setPhone: (phone: string) => void;
   setNickname: (nickname: string) => void;
   clearUserInfo: () => void;
+  isLoggedIn: () => boolean;
 }
 
 const localStoragePersist = {
@@ -24,12 +25,17 @@ const localStoragePersist = {
 
 export const useUserStore = create<UserStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       phone: '',
       nickname: '',
       setPhone: (phone: string) => set(() => ({ phone })),
       setNickname: (nickname: string) => set(() => ({ nickname })),
       clearUserInfo: () => set({ phone: '', nickname: '' }),
+
+      isLoggedIn: () => {
+        const { phone } = get();
+        return !!phone;
+      },
     }),
     {
       name: 'user-storage',
