@@ -1,4 +1,3 @@
-import React from 'react';
 import TypoGameClear from '/src/assets/images/items/typo-GAMECLEAR.png';
 import Avatar5Src from '/src/assets/images/avatar/5.png';
 import CertificateSrc from '/src/assets/images/items/certificate.png';

@@ -5,6 +5,7 @@ import HeartSrc from '/src/assets/images/items/heart.png';
 import CampfireSrc from '/src/assets/images/items/campfire.gif';
 import TypoLetsParty from '/src/assets/images/items/typo-LETSPARTY.png';
 import CertModal from './CertModal';
+import CreditModal from './CreditModal';
 import AvatarChat from '@/component/chatbox/AvatarChat';
 import TopBar from '@/component/bar/TopBar';
 
@@ -117,6 +118,9 @@ export default function Ending() {
   const handleShare = () => {
     setIsModalCert(false);
   };
+  const handleToggleCredit = () => {
+    setIsModalCredit(!isModalCredit);
+  };
   const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
 
   return (
@@ -176,17 +180,19 @@ export default function Ending() {
 
       {isParty && (
         <div className="absolute h-full w-full">
-          <div className=" p-6 my-auto max-h-[600px] w-full max-w-[500px] absolute top-[15%]">
-            <div className="w-[95%] absolute z-[70] left-[50%] -translate-x-1/2 drop-shadow-xl top-10">
-              <img src={TypoLetsParty} alt="Let's Party" />
+          {isModalCredit === false && (
+            <div className=" p-6 my-auto max-h-[600px] w-full max-w-[500px] absolute top-[15%]">
+              <div className="w-[95%] absolute z-[70] left-[50%] -translate-x-1/2 drop-shadow-xl top-10">
+                <img src={TypoLetsParty} alt="Let's Party" />
+              </div>
+              <div className="w-16 absolute h-[50px] -top-[40px] left-[50%] -translate-x-1/2">
+                <img src={Avatar5Src} />
+              </div>
+              <div className="my-auto p-4 flex flex-col items-center justify-between text-xl isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B] whitespace-pre-line">
+                <div className="text-2xl mt-20">플레이해주셔서 감사합니다</div>
+              </div>
             </div>
-            <div className="w-16 absolute h-[50px] -top-[40px] left-[50%] -translate-x-1/2">
-              <img src={Avatar5Src} />
-            </div>
-            <div className="my-auto p-4 flex flex-col items-center justify-between text-xl isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B] whitespace-pre-line">
-              <div className="text-2xl mt-20">플레이해주셔서 감사합니다</div>
-            </div>
-          </div>
+          )}
           <div className="h-[40%] p-6 w-full max-w-[500px] absolute bottom-0 flex flex-col justify-around">
             <div className="flex justify-around">
               <img src={MonkeySrc} className="w-[64px]" />
@@ -199,8 +205,11 @@ export default function Ending() {
               <img src={MonkeySrc} className="w-[64px]" />
             </div>
             <div
-              onClick={handleShare}
-              className="p-4 flex justify-center gap-2"
+              onClick={handleToggleCredit}
+              className={
+                'p-4 flex justify-center gap-2' +
+                (isModalCredit ? ' opacity-0' : '')
+              }
             >
               <span className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)]">
                 크레딧 보기
@@ -208,6 +217,14 @@ export default function Ending() {
             </div>
           </div>
         </div>
+      )}
+
+      {isModalCredit && (
+        <CreditModal
+          onClose={() => {
+            handleToggleCredit();
+          }}
+        />
       )}
     </div>
   );
