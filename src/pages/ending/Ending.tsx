@@ -307,3 +307,16 @@ export default function Ending() {
     </div>
   );
 }
+
+      )}
+
+      {isModalCredit && (
+        <CreditModal
+          onClose={() => {
+            handleToggleCredit();
+          }}
+        />
+      )}
+    </div>
+  );
+}
