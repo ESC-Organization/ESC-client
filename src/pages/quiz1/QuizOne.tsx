@@ -15,6 +15,7 @@ export default function QuizOne() {
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
   const navigate = useNavigate();
   const [isCorrect, setIsCorrect] = useState(0);
+
   const dialogues = [
     {
       idx: 1,
