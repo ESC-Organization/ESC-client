@@ -110,6 +110,10 @@ export default function CreditModal({ onClose }: CreditModalProps) {
                 ))}
               </>
             ))}
+            <div className="text-base">
+              「지금 우리 율전은」에 등장하는 모든 원숭이들은 안전하게
+              섭외되었습니다.
+            </div>
             <div className="w-full px-4 text-sm flex place-content-between">
               <div>9oormthonuniv.skku</div>
               <div>2024.10.</div>

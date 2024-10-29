@@ -3,6 +3,9 @@ import MonkeySrc from '/src/assets/images/avatar/3.png';
 import Avatar5Src from '/src/assets/images/avatar/5.png';
 import HeartSrc from '/src/assets/images/items/heart.png';
 import CampfireSrc from '/src/assets/images/items/campfire.gif';
+import MonkeyDanceSrc from '/src/assets/images/ending/monkey-dance.gif';
+import MyungwoongDanceSrc from '/src/assets/images/ending/myungwoong-dance.gif';
+import YuloongDanceSrc from '/src/assets/images/ending/yuloong-dance.gif';
 import TypoLetsParty from '/src/assets/images/items/typo-LETSPARTY.png';
 import CertModal from './CertModal';
 import CreditModal from './CreditModal';
@@ -185,24 +188,36 @@ export default function Ending() {
               <div className="w-[95%] absolute z-[70] left-[50%] -translate-x-1/2 drop-shadow-xl top-10">
                 <img src={TypoLetsParty} alt="Let's Party" />
               </div>
-              <div className="w-16 absolute h-[50px] -top-[40px] left-[50%] -translate-x-1/2">
-                <img src={Avatar5Src} />
-              </div>
               <div className="my-auto p-4 flex flex-col items-center justify-between text-xl isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#D9A066] rounded-[8px] border-4 border-[#8F563B] whitespace-pre-line">
                 <div className="text-2xl mt-20">플레이해주셔서 감사합니다</div>
               </div>
             </div>
           )}
           <div className="h-[40%] p-6 w-full max-w-[500px] absolute bottom-0 flex flex-col justify-around">
-            <div className="flex justify-around">
-              <img src={MonkeySrc} className="w-[64px]" />
-              <img src={CampfireSrc} className="w-[64px]" />
-              <img src={MonkeySrc} className="w-[64px]" />
+            <div className="flex justify-around *:relative">
+              <img
+                src={MonkeyDanceSrc}
+                className="w-[64px] h-[64px] left-[10px]"
+              />
+              <img
+                src={CampfireSrc}
+                className="w-[64px] h-[64px] top-[40px] left-[10px]"
+              />
+              <img
+                src={MyungwoongDanceSrc}
+                className="w-[96px] h-[96px] bottom-[15px]"
+              />
             </div>
-            <div className="flex justify-around">
-              <img src={MonkeySrc} className="w-[64px]" />
-              <img src={MonkeySrc} className="w-[64px]" />
-              <img src={MonkeySrc} className="w-[64px]" />
+            <div className="flex justify-around *:relative">
+              <img
+                src={YuloongDanceSrc}
+                className="w-[96px] h-[96px] right-[20px]"
+              />
+              <img
+                src={MonkeyDanceSrc}
+                className="w-[64px] h-[64px] top-[40px] right-[10px]"
+              />
+              <img src={MonkeyDanceSrc} className="w-[64px] h-[64px]" />
             </div>
             <div
               onClick={handleToggleCredit}
