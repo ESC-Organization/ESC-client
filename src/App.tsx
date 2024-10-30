@@ -64,6 +64,10 @@ const router = createBrowserRouter([
       { path: '/qr', element: <QRPage /> },
     ],
   },
+  {
+    path: '/*',
+    element: <Main />,
+  },
 ]);
 
 export default function App() {
