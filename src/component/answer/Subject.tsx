@@ -10,7 +10,7 @@ interface ObjectProps {
 export default function Subject({ q, onSubject, onClose }: ObjectProps) {
   const [inputValue, setInputValue] = useState('');
   const [isHint, setIsHint] = useState(false);
-
+  const [hintIndex, setHintIndex] = useState(0);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -25,10 +25,46 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
   };
 
   const showHint = () => {
-    setIsHint(!isHint);
+    setHintIndex(Math.floor(Math.random() * hints.length));
     setIsHint(!isHint);
   };
-
+  const hints = [
+    <>
+      <span>저는 정답의 익힘 정도를</span>
+      <br />
+      <span>중요하게 여기더겅요</span>
+    </>,
+    <>
+      <span>이것도 모른다고?</span>
+      <br />
+      <span>너 누군데</span>
+    </>,
+    <>
+      <span>이 정도면 틀리는 것도</span>
+      <br />
+      <span>재능인데, 기네스북 신청해볼래?</span>
+    </>,
+    <>
+      <span>정답이 이븐하지 않네요</span>
+      <br />
+      <span>탈락입니다.</span>
+    </>,
+    <>
+      <span>본인이 알고있는 지식은</span>
+      <br />
+      <span>조금 모자란 것 같아요</span>
+    </>,
+    <>
+      <span>이것도 못풀어?</span>
+      <br />
+      <span>쫄? 긁?긁?</span>
+    </>,
+    <>
+      <span>아 비켜봐</span>
+      <br />
+      <span>내가 해볼게</span>
+    </>,
+  ];
   return (
     <div className="flex flex-col p-2 gap-2 w-full h-full transform relative z-[80] bg-[#00000059] flex justify-center items-center">
       <div className="relative p-4 text-white border-4 border-[#606060] w-[90%] bg-[#404040]">
@@ -38,15 +74,13 @@ export default function Subject({ q, onSubject, onClose }: ObjectProps) {
         >
           {isHint && (
             <div className="fixed w-[57%] h-[12%] z-[100]">
-              <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
-                <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 bg-white border-4 border-[#808080] rounded-[5px]">
+              <div className="absolute right-[29%] -top-[110%] text-center w-full p-2 ">
+                <div className="absolute right-[25%] -top-[20%] text-center w-full p-2 bg-white border-2 border-[#808080] rounded-[5px]">
                   <span
-                    style={{ WebkitTextStroke: '1px #000' }}
-                    className="text-black text-[0.9rem]"
+                    style={{ WebkitTextStroke: '1px black' }}
+                    className="text-white text-[0.9rem]"
                   >
-                    힌트
-                    <br />
-                    흑백요리사 마지막화를 봐봐
+                    {hints[hintIndex]}
                   </span>
                 </div>
               </div>

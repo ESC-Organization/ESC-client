@@ -4,7 +4,6 @@ import Monkey_dark1 from '/src/assets/images/items/monkey_dark1.png';
 import Monkey_dark2 from '/src/assets/images/items/monkey_dark2.png';
 import Monkey_light from '/src/assets/images/items/monkey_light.png';
 import AttackGif from '/src/assets/images/attack/slash.gif';
-
 import EffectSound from '/src/assets/sound/3.mp3'; // 효과음 파일 추가
 
 interface GameProps {
@@ -20,7 +19,10 @@ interface MonkeyState {
 }
 
 export default function Game({ onGameOver, onGameClear }: GameProps) {
-  const [attackEffect, setAttackEffect] = useState<{ left: string; top: string } | null>(null);
+  const [attackEffect, setAttackEffect] = useState<{
+    left: string;
+    top: string;
+  } | null>(null);
   const [monkeyStatus, setMonkeyStatus] = useState<MonkeyState[]>([
     { type: 'dark1', x: '10%', y: '50%', active: true },
     { type: 'dark2', x: '50%', y: '20%', active: true },
@@ -56,11 +58,14 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
       }, 600);
     } else {
       setMonkeyStatus((prevStatus) =>
-        prevStatus.map((monkey, i) => (i === index ? { ...monkey, active: false } : monkey))
+        prevStatus.map((monkey, i) =>
+          i === index ? { ...monkey, active: false } : monkey
+        )
       );
 
       const remainingDarkMonkeys = monkeyStatus.filter(
-        monkey => monkey.active && (monkey.type === 'dark1' || monkey.type === 'dark2')
+        (monkey) =>
+          monkey.active && (monkey.type === 'dark1' || monkey.type === 'dark2')
       ).length;
 
       if (remainingDarkMonkeys === 1) {
@@ -100,12 +105,15 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
 
   return (
     <div className="absolute w-full h-full z-50">
-      <audio ref={effectSoundRef} src={EffectSound} /> {/* 효과음 오디오 태그 */}
-
+      <audio ref={effectSoundRef} src={EffectSound} />{' '}
+      {/* 효과음 오디오 태그 */}
       <div className="absolute bottom-5 left-5 z-50 w-[200px] h-[200px] sm:w-[150px] sm:h-[150px]">
-        <img src={Knight} className="object-contain scale-x-[-1]" alt="Knight" />
+        <img
+          src={Knight}
+          className="object-contain scale-x-[-1]"
+          alt="Knight"
+        />
       </div>
-      
       {monkeyStatus.map(
         (monkey, index) =>
           monkey.active && (
@@ -119,7 +127,6 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
             />
           )
       )}
-      
       {attackEffect && (
         <img
           src={AttackGif}

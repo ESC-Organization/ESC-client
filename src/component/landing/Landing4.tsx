@@ -1,4 +1,6 @@
 import ShadowBox from '../prolog/ShadowBox';
+import landingThirdBg from '@/assets/images/prolog/landing-third-bg.png';
+import ladybugImage from '@/assets/images/prolog/ladybug.png';
 
 export default function Landing4() {
   return (
@@ -6,16 +8,13 @@ export default function Landing4() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-third-bg.png')`,
+          backgroundImage: `url(${landingThirdBg})`,
         }}
       />
 
-      {/* 콘텐츠 */}
-      {/* //가로세로 중앙정렬 */}
-
       <div className="content-wrapper pt-28 text-center text-white text-[1.8rem]">
         <img
-          src="src/assets/images/prolog/ladybug.png"
+          src={ladybugImage}
           alt="Ladybug"
           className="w-[300px] h-auto mx-auto relative"
         />
