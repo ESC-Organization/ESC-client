@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
@@ -13,12 +13,17 @@ import TopBar from '@/component/bar/TopBar';
 import { useSubmitQuiz } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
 import { dialog1 } from '@/constant/dialogs';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizOne() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -90,7 +95,7 @@ export default function QuizOne() {
   return (
     <div className=" w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
-
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Object
           q="연구생이 살고 있는 기숙사 건물은?"

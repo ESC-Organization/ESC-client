@@ -199,6 +199,7 @@ export default function Ending() {
         canvas.toBlob((blob) => {
           if (blob !== null) {
             saveAs(blob, 'certificate.png');
+            setIsModalCert(false);
           }
         });
       } catch (error) {

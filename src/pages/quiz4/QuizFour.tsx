@@ -13,13 +13,18 @@ import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import { dialog4 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizFour() {
   const phone = useUserStore((state) => state.phone);
   const nickname = useUserStore((state) => state.nickname);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -110,6 +115,7 @@ export default function QuizFour() {
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Subject
           q="지금 이들이 말하고 있는 건물 이름은?"
