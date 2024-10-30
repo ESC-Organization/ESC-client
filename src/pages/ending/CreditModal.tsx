@@ -96,17 +96,15 @@ export default function CreditModal({ onClose }: CreditModalProps) {
                   <span className="text-[#14AE5C]">{credit.category}</span>
                 </div>
                 {credit.contents.map((content, j) => (
-                  <>
-                    <div key={`${i}-${j}`}>
-                      {'role' in content && (
-                        <span className="text-gray-300">
-                          {content.role}
-                          <br />
-                        </span>
-                      )}
-                      {content.name}
-                    </div>
-                  </>
+                  <div key={`${i}-${j}`}>
+                    {'role' in content && (
+                      <span className="text-gray-300">
+                        {content.role}
+                        <br />
+                      </span>
+                    )}
+                    {content.name}
+                  </div>
                 ))}
               </>
             ))}
@@ -123,7 +121,7 @@ export default function CreditModal({ onClose }: CreditModalProps) {
         {/* 닫기버튼 */}
         <div
           onClick={onClose}
-          className="absolute p-4 absolute bottom-8 right-8 flex items-center gap-2 "
+          className="p-4 absolute bottom-8 right-8 flex items-center gap-2 "
         >
           <span className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)]">
             Skip {'>'}
