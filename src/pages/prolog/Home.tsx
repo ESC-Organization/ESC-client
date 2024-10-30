@@ -11,7 +11,7 @@ export default function Home() {
 
   // 로그인 클릭 시
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/character-selection');
   };
 
   // 랭킹 확인 클릭 -> ranking으로 이동

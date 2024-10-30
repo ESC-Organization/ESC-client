@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledInputBox from '@/component/prolog/AngledInputBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
-import { useUserStore } from '@/store/useUserStore';
 import { useLoginUser } from '@/api/hooks';
+import loginPageBg from '@/assets/images/prolog/login-page-bg.png';
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
+import { useUserStore } from '@/store/useUserStore';
 
 export default function Login() {
   const { setPhone, setNickname } = useUserStore();
@@ -63,7 +65,7 @@ export default function Login() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/login-page-bg.png')`,
+          backgroundImage: `url(${loginPageBg})`, // import된 이미지 사용
         }}
       />
 
@@ -139,7 +141,8 @@ export default function Login() {
 
         {/* 로고 */}
         <div className="mb-8 w-[50%] mx-auto">
-          <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+          <img src={skkuLogo} alt="SKKU Logo" />{' '}
+          {/* import된 로고 이미지 사용 */}
         </div>
       </div>
     </div>
