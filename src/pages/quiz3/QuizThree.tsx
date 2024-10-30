@@ -76,8 +76,7 @@ export default function QuizThree() {
   };
   const currentDialogue = dialog3.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
-    console.log('다시');
-    window.location.reload();
+    navigate('/play');
   };
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);

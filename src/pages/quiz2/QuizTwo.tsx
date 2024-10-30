@@ -90,8 +90,7 @@ export default function QuizTwo() {
     setIsModal(false); //안보임
   };
   const handleRetry = () => {
-    console.log('다시');
-    window.location.reload();
+    navigate('/play');
   };
   const currentDialogue = dialog2.find((dialogue) => dialogue.idx === idx);
   const handleSound = (soundStatus: number) => {
