@@ -1,3 +1,5 @@
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
+
 interface CreditModalProps {
   onClose: () => void;
 }
@@ -160,9 +162,8 @@ export default function CreditModal({ onClose }: CreditModalProps) {
               저희 구름톤 유니브 성균관대의
               다음 활동도 기대해주세요`}
             </div>
-            <div className="w-full px-4 text-sm flex place-content-between">
-              <div>9oormthonuniv.skku</div>
-              <div>2024.10.</div>
+            <div className="mb-8 w-[50%] mx-auto">
+              <img src={skkuLogo} alt="SKKU Logo" />{' '}
             </div>
           </div>
         </div>
