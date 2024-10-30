@@ -75,8 +75,7 @@ export default function QuizFour() {
   };
   const currentDialogue = dialog4.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
-    console.log('다시');
-    window.location.reload();
+    navigate('/play');
   };
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);

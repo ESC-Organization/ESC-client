@@ -83,8 +83,7 @@ export default function QuizOne() {
   };
 
   const handleRetry = () => {
-    console.log('다시');
-    window.location.reload();
+    navigate('/play');
   };
 
   const currentDialogue = dialog1.find((dialogue) => dialogue.idx === idx);

@@ -78,8 +78,7 @@ export default function QuizFive() {
   };
   const currentDialogue = dialog5.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
-    console.log('다시');
-    window.location.reload();
+    navigate('/play');
   };
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
