@@ -268,7 +268,10 @@ export default function Ending() {
             {idx === 6 && (
               <div className="absolute top-[25%] left-[50%] -translate-x-1/2">
                 <div className="mx-auto w-[75%]">
-                  <img src={HeartSrc} />
+                  <img
+                    src={HeartSrc}
+                    className="animate-rotate-axis transform-style-3d"
+                  />
                 </div>
               </div>
             )}
@@ -335,13 +338,13 @@ export default function Ending() {
             </div>
             <div
               className={
-                'mt-2 p-4 flex justify-center gap-2' +
+                'mt-2 p-2 flex justify-center gap-2' +
                 (isModalCredit ? ' opacity-0' : '')
               }
             >
               <span
                 onClick={onClickHome}
-                className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] cursor-pointer"
+                className="text-lg text-gray-300 drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] cursor-pointer"
               >
                 홈으로
               </span>
