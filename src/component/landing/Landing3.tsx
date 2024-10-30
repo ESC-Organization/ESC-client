@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import ShadowBox from '@/component/prolog/ShadowBox';
+import landingSecondBg from '@/assets/images/prolog/landing-second-bg.png';
+import monkeyImage from '@/assets/images/prolog/monkey.png';
 
 export default function Landing3() {
   const growVariants = {
@@ -12,11 +14,10 @@ export default function Landing3() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-second-bg.png')`,
+          backgroundImage: `url(${landingSecondBg})`,
         }}
       />
 
-      {/* 콘텐츠 */}
       <motion.div
         className="items-center"
         initial="hidden"
@@ -33,7 +34,7 @@ export default function Landing3() {
           </ShadowBox>
           <motion.div className="flex relative mt-12">
             <img
-              src="src/assets/images/prolog/monkey.png"
+              src={monkeyImage}
               alt="Monkey"
               className="w-[128px] h-auto mx-auto relative"
             />

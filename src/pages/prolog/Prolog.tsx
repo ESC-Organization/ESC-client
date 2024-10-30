@@ -14,6 +14,7 @@ import Landing11 from '@/component/landing/Landing11';
 import Landing12 from '@/component/landing/Landing12';
 import Landing13 from '@/component/landing/Landing13';
 import Landing14 from '@/component/landing/Landing14';
+import arrowImage from '@/assets/images/prolog/arrow.png';
 
 export default function Prolog() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,11 +66,7 @@ export default function Prolog() {
             onClick={handleNext}
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-8"
           >
-            <img
-              src="src/assets/images/prolog/arrow.png"
-              alt="Monkey"
-              className="w-[20px] h-auto"
-            />
+            <img src={arrowImage} alt="Arrow" className="w-[20px] h-auto" />
           </button>
         )}
       </AnimatePresence>

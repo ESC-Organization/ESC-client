@@ -1,13 +1,12 @@
 import AngledBox from '../prolog/AngledBox';
+import avatarImage from '@/assets/images/avatar/5.png';
 
 export default function Landing11() {
   return (
-    <div className="relative flex h-full bg-black overflow-hidden ">
-      {/* <div className="flex justify-center item-center flex-direction:column text-white w-full 500px:px-12">
-       */}
+    <div className="relative flex h-full bg-black overflow-hidden">
       <div className="flex justify-center flex-col text-white w-full 500px:px-12">
         <img
-          src="src/assets/images/avatar/5.png"
+          src={avatarImage}
           alt="Monkey"
           className="w-[128px] h-auto mx-12 relative"
         />

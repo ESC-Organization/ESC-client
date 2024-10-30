@@ -1,4 +1,5 @@
 import ShadowBox from '@/component/prolog/ShadowBox';
+import landingThirdBg from '@/assets/images/prolog/landing-third-bg.png';
 
 export default function Landing5() {
   return (
@@ -6,7 +7,7 @@ export default function Landing5() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-third-bg.png')`,
+          backgroundImage: `url(${landingThirdBg})`,
         }}
       />
 
