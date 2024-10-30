@@ -9,6 +9,7 @@ import MonkeyDanceSrc from '/src/assets/images/ending/monkey-dance.gif';
 import MyungwoongDanceSrc from '/src/assets/images/ending/myungwoong-dance.gif';
 import YuloongDanceSrc from '/src/assets/images/ending/yuloong-dance.gif';
 import TypoLetsParty from '/src/assets/images/items/typo-LETSPARTY.png';
+import { useNavigate } from 'react-router-dom';
 import CertModal from './CertModal';
 import CreditModal from './CreditModal';
 import AvatarChat from '@/component/chatbox/AvatarChat';
@@ -34,7 +35,7 @@ export default function Ending() {
   const divRef = useRef<HTMLDivElement>(null); // 스크린샷 대상 객체
   const [, setIsPlaying] = useState(1); // 음악 재생 상태
   const [myrank, setMyrank] = useState(0);
-  // const [nickname, setNickname] = useState('미르미');
+  const navigate = useNavigate();
 
   // 유저 정보 조회
   const { nickname, phone } = useUserStore();
@@ -197,6 +198,7 @@ export default function Ending() {
         canvas.toBlob((blob) => {
           if (blob !== null) {
             saveAs(blob, 'certificate.png');
+            setIsModalCert(false);
           }
         });
       } catch (error) {
@@ -205,6 +207,10 @@ export default function Ending() {
         setIsModalCert(false);
       }
     }
+  };
+  // 홈으로 클릭
+  const onClickHome = () => {
+    navigate('/play');
   };
   const handleToggleCredit = () => {
     setIsModalCredit(!isModalCredit);
@@ -279,7 +285,7 @@ export default function Ending() {
               </div>
             </div>
           )}
-          <div className="h-[40%] p-6 w-full max-w-[500px] absolute bottom-0 flex flex-col justify-around">
+          <div className="h-[45%] p-6 w-full max-w-[500px] absolute bottom-0 flex flex-col justify-around">
             <div className="flex justify-around *:relative">
               <img
                 src={MonkeyDanceSrc}
@@ -308,12 +314,25 @@ export default function Ending() {
             <div
               onClick={handleToggleCredit}
               className={
-                'p-4 flex justify-center gap-2' +
+                'p-4 flex justify-center gap-2 cursor-pointer' +
                 (isModalCredit ? ' opacity-0' : '')
               }
             >
               <span className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)]">
                 크레딧 보기
+              </span>
+            </div>
+            <div
+              className={
+                'mt-2 p-4 flex justify-center gap-2' +
+                (isModalCredit ? ' opacity-0' : '')
+              }
+            >
+              <span
+                onClick={onClickHome}
+                className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] cursor-pointer"
+              >
+                홈으로
               </span>
             </div>
           </div>

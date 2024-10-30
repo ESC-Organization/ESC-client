@@ -2,7 +2,6 @@ import TypoGameClear from '/src/assets/images/items/typo-GAMECLEAR.png';
 import Avatar5Src from '/src/assets/images/avatar/5.png';
 import CertificateSrc from '/src/assets/images/items/certificate.png';
 import ShareSrc from '/src/assets/images/items/share.png';
-import { useNavigate } from 'react-router-dom';
 
 interface CertModalProps {
   onShare: () => void;
@@ -15,7 +14,6 @@ interface CertModalProps {
 }
 
 export default function CertModal({ onShare, clearInfo }: CertModalProps) {
-  const navigate = useNavigate();
   const formatTimeDifference = (initTime: string, recordTime: string) => {
     const initDate = new Date(initTime).getTime();
     const recordDate = new Date(recordTime).getTime();
@@ -27,14 +25,9 @@ export default function CertModal({ onShare, clearInfo }: CertModalProps) {
     return `${String(minutes).padStart(2, '0')}분 ${String(seconds).padStart(2, '0')}초`;
   };
 
-  // 홈으로 클릭
-  const onClickHome = () => {
-    navigate('/play');
-  };
-
   return (
     <div className="absolute h-full w-full">
-      <div className="content-wrapper p-6 my-auto h-[70%] max-h-[600px] w-full max-w-[500px] absolute bottom-[15%]">
+      <div className="p-6 my-auto h-[75%] max-h-[600px] w-full max-w-[500px] absolute top-[15%]">
         <div className="w-[95%] absolute z-[70] left-[50%] -translate-x-1/2 drop-shadow-xl top-10">
           <img src={TypoGameClear} alt="Game Clear" />
         </div>
@@ -85,15 +78,6 @@ export default function CertModal({ onShare, clearInfo }: CertModalProps) {
             <img src={ShareSrc} alt="공유" className="h-8" />
           </span>
         </div>
-      </div>
-      {/* 홈으로 버튼을 화면의 맨 아래에 고정 */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 mx-auto flex items-center gap-2 cursor-pointer"
-        onClick={onClickHome}
-      >
-        <span className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)]">
-          홈으로
-        </span>
       </div>
     </div>
   );
