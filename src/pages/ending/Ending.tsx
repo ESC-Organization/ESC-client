@@ -31,7 +31,7 @@ const dataURLtoFile = (dataurl: string, filename: string) => {
 export default function Ending() {
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const divRef = useRef<HTMLDivElement>(null); // 스크린샷 대상 객체
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
+  const [, setIsPlaying] = useState(1); // 음악 재생 상태
   const [myrank, setMyrank] = useState(0);
   // const [nickname, setNickname] = useState('미르미');
 
@@ -85,8 +85,9 @@ export default function Ending() {
       name: '',
       text: (
         <>
-          {/* eslint-disable-next-line prettier/prettier */}
-          율전은 ‘<span className="text-[#14AE5C]">{nickname}</span>’ 당신 덕분에 다시 평화를 되찾았습니다.
+          {}
+          율전은 ‘<span className="text-[#14AE5C]">{nickname}</span>’ 당신
+          덕분에 다시 평화를 되찾았습니다.
         </>
       ),
     },
@@ -96,8 +97,9 @@ export default function Ending() {
       name: '',
       text: (
         <>
-          {/* eslint-disable-next-line prettier/prettier */}
-          저희 SNS에서 스토리 인증 이벤트를 진행 중이오니 많은 참여 부탁드립니다!<br/>
+          저희 SNS에서 스토리 인증 이벤트를 진행 중이오니 많은 참여
+          부탁드립니다!
+          <br />
           <Link
             to="https://www.instagram.com/9oormthonuniv.skku/"
             target="_blank"

@@ -16,9 +16,7 @@ import Prolog from '@/pages/prolog/Prolog';
 import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
 import Login from '@/pages/prolog/Login';
-import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
-import TestPage from '@/pages/test-page';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,13 +29,10 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/', // 삭제 예정
+    path: '/',
     element: <Main />,
   },
-  {
-    path: '/onboarding', // 삭제 예정
-    element: <Onboarding />,
-  },
+
   {
     path: '/prolog',
     element: <Prolog />,
@@ -53,10 +48,6 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />,
-  },
-  {
-    path: '/test', // 삭제 예정
-    element: <TestPage />,
   },
   { path: '/ranking', element: <Ranking /> },
   {

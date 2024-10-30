@@ -72,7 +72,7 @@ export default function QuizFive() {
   };
   const currentDialogue = dialog5.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
-    navigate('/play');
+    window.location.reload();
   };
   const handleSound = (soundStatus: number) => {
     if (audioRef.current) {

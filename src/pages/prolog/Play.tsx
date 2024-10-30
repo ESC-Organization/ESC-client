@@ -35,6 +35,9 @@ export default function Play() {
       navigate(`/quiz${stage}`);
     } else if (stage === 6) {
       navigate('/final');
+    } else if (stage === 7) {
+      alert('모든 스테이지를 클리어했습니다!!');
+      return;
     } else {
       alert('잘못된 스테이지 상태입니다.');
     }
