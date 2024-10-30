@@ -9,7 +9,7 @@ interface WrongProps {
 const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
   const dialogues = [
     <>
-      <span>6각형 고리 모양이고, 탄소와 수소가 절묘하게</span>
+      <span>6각형 고리 모양,,탄소와 수소가 절묘하게</span>
       <br />
       <span>배열된 곳이지..새내기들은 이곳에 가서</span>
       <br />
