@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
@@ -17,6 +17,7 @@ import { useSubmitQuiz } from '@/api/hooks';
 
 export default function QuizThree() {
   const phone = useUserStore((state) => state.phone);
+  const nickname = useUserStore((state) => state.nickname);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -39,9 +40,7 @@ export default function QuizThree() {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
 
-  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const [isCorrect, setIsCorrect] = useState(0);
@@ -49,11 +48,9 @@ export default function QuizThree() {
 
   const showModal = () => {
     setIsModal(true); //보임
-    setSubjectAnswer('0');
   };
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
-    setSubjectAnswer(subject);
     if (subject == '길이만') {
       setIsCorrect(1);
       submitQuiz({ phone, correct: 'true', stage: '3' });
@@ -74,12 +71,20 @@ export default function QuizThree() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-  const currentDialogue = dialog3.find((dialogue) => dialogue.idx === idx);
+  const updatedDialog2 = dialog3.map((dialogue) => ({
+    ...dialogue,
+    name: dialogue.name.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+    text: dialogue.text.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+  }));
+
+  // Usage with currentDialogue
+  const currentDialogue = updatedDialog2.find(
+    (dialogue) => dialogue.idx === idx
+  );
   const handleRetry = () => {
     navigate('/play');
   };
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생

@@ -5,7 +5,6 @@ import Message from '/src/assets/images/items/message.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
-import { sub } from 'framer-motion/client';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import Correct from './Correct';
@@ -21,7 +20,7 @@ export default function QuizTwo() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  const nickname = useUserStore((state) => state.nickname);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -41,22 +40,17 @@ export default function QuizTwo() {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-
   const [isCorrect, setIsCorrect] = useState(0);
-  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
+
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const [idx, setIdx] = useState<number>(1); // Store idx
 
   const showModal = () => {
     setIsModal(true); //보임
-
-    setSubjectAnswer('0');
   };
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
-    setSubjectAnswer(subject);
     if (subject == '원피스') {
       setIsCorrect(1);
       submitQuiz({ phone, correct: 'true', stage: '2' });
@@ -92,9 +86,17 @@ export default function QuizTwo() {
   const handleRetry = () => {
     navigate('/play');
   };
-  const currentDialogue = dialog2.find((dialogue) => dialogue.idx === idx);
+  const updatedDialog2 = dialog2.map((dialogue) => ({
+    ...dialogue,
+    text: dialogue.text.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+  }));
+
+  // Usage with currentDialogue
+  const currentDialogue = updatedDialog2.find(
+    (dialogue) => dialogue.idx === idx
+  );
+
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생
