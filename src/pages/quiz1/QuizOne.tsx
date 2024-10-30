@@ -73,7 +73,7 @@ export default function QuizOne() {
   };
 
   const handleRetry = () => {
-    navigate('/play');
+    window.location.reload();
   };
 
   const currentDialogue = dialog1.find((dialogue) => dialogue.idx === idx);

@@ -10,7 +10,7 @@ const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
   const dialogues = [
     <>
       <span>
-        @@@쿤,
+        자네,
         <br /> 루피가 보물을 찾기 위해 여행을
       </span>
       <br />
@@ -35,7 +35,7 @@ const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
           다시 코인을 모아서 재시도해보도록!
           <br />
           <br />
-          <span className="text-[1.5rem]">홈으로</span>
+          <span className="text-[1.5rem]">다시</span>
         </div>
       </div>
       <div

@@ -84,7 +84,7 @@ export default function QuizTwo() {
     setIsModal(false); //안보임
   };
   const handleRetry = () => {
-    navigate('/play');
+    window.location.reload();
   };
   const updatedDialog2 = dialog2.map((dialogue) => ({
     ...dialogue,
