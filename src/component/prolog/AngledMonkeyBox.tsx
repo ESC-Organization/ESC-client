@@ -1,4 +1,5 @@
 import React from 'react';
+import monkeyImage from '@/assets/images/prolog/monkey.png';
 
 interface BoxComponentProps {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ export default function AngledMonkeyBox({ children }: BoxComponentProps) {
     <div className="flex flex-col items-center relative">
       <div className="absolute top-[-50px]">
         <img
-          src="src/assets/images/prolog/monkey.png"
+          src={monkeyImage}
           alt="Monkey Character"
           className="w-[64px] h-[64px]"
         />

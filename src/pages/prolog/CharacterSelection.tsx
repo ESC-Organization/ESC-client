@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
+import loginPageBg from '@/assets/images/prolog/login-page-bg.png';
+import characterPointer from '@/assets/images/prolog/character-pointer.png';
+import characterYuloong from '@/assets/images/prolog/character-yuloong.png';
+import characterMyungwoong from '@/assets/images/prolog/character-myungwoong.png';
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
 
 export default function CharacterSelection() {
   const navigate = useNavigate();
@@ -21,11 +26,10 @@ export default function CharacterSelection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/login-page-bg.png')`,
+          backgroundImage: `url(${loginPageBg})`,
         }}
       />
 
-      {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center overflow-hidden">
         <div className="pt-16">
           <AngledBox>
@@ -33,10 +37,8 @@ export default function CharacterSelection() {
           </AngledBox>
         </div>
 
-        {/* 캐릭터 선택 섹션 */}
         <div className="content-wrapper flex flex-col w-full mt-auto mb-auto mx-4">
           <div className="mt-8 flex justify-center gap-12 relative">
-            {/* Character Boy */}
             <div
               className="relative flex flex-col items-center cursor-pointer transition-all duration-300"
               style={{
@@ -48,17 +50,16 @@ export default function CharacterSelection() {
             >
               {selectedCharacter === 'boy' && (
                 <div className="absolute -top-8 w-[24px] h-[24px]">
-                  <img src="/src/assets/images/prolog/character-pointer.png" />
+                  <img src={characterPointer} alt="Pointer" />
                 </div>
               )}
               <img
-                src="/src/assets/images/prolog/character-yuloong.png"
+                src={characterYuloong}
                 alt="Character Boy"
                 className="w-[96px] h-auto mb-4"
               />
             </div>
 
-            {/* Character Girl */}
             <div
               className="relative flex flex-col items-center cursor-pointer transition-all duration-300"
               style={{
@@ -70,16 +71,15 @@ export default function CharacterSelection() {
             >
               {selectedCharacter === 'girl' && (
                 <div className="absolute -top-8 w-[24px] h-[24px]">
-                  <img src="/src/assets/images/prolog/character-pointer.png" />
+                  <img src={characterPointer} alt="Pointer" />
                 </div>
               )}
               <img
-                src="/src/assets/images/prolog/character-myungwoong.png"
+                src={characterMyungwoong}
                 alt="Character Girl"
                 className="w-[96px] h-auto mb-4"
               />
             </div>
-            {/* 캐릭터 설명 텍스트 */}
             <div className="text-white absolute top-32 w-full 500px:px-12">
               <div className="flex justify-start">
                 {selectedCharacter === '' && (
@@ -125,13 +125,9 @@ export default function CharacterSelection() {
           </div>
         </div>
 
-        {/* 하단 버튼 */}
         <div className="mb-8 text-center">
           <div className="w-[50%] mx-auto">
-            <img
-              src="/src/assets/images/prolog/skku-logo.png"
-              alt="SKKU Logo"
-            />
+            <img src={skkuLogo} alt="SKKU Logo" />
           </div>
         </div>
       </div>

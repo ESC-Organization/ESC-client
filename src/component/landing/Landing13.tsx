@@ -1,13 +1,12 @@
 import AngledBox from '../prolog/AngledBox';
+import swordImage from '@/assets/images/prolog/sword.png';
 
 export default function Landing13() {
   return (
     <div className="relative flex h-full bg-[#F2F2F2] overflow-hidden ">
-      {/* <div className="flex justify-center item-center flex-direction:column text-white w-full 500px:px-12">
-       */}
       <div className="flex justify-center flex-col text-white w-full 500px:px-4 gap-8">
         <img
-          src="src/assets/images/prolog/sword.png"
+          src={swordImage}
           alt="Map"
           className="w-[60%] h-auto mx-auto relative"
         />
