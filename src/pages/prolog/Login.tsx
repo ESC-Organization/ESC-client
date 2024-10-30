@@ -24,6 +24,9 @@ export default function Login() {
     onSuccess: () => {
       setPhone(phoneNumber);
       setNickname(nicknameState);
+      alert(
+        '로그인에 성공했습니다. 이제 프롤로그를 시작합니다. 화면을 넘기면 프롤로그가 시작됩니다.'
+      );
       navigate(`/prolog`);
     },
     onError: () => {
