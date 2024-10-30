@@ -46,7 +46,7 @@ export default function Ranking() {
 
         <div className="content-wrapper w-full flex-1 flex items-center justify-center">
           <AngledMonkeyBox>
-            <div className="flex flex-col py-8 gap-4 w-full max-w-[340px] max-h-[350px] 500px:max-h-[500px] overflow-y-scroll">
+            <div className="flex flex-col py-8 gap-4 w-full max-w-[340px] max-h-[350px] 500px:max-h-[500px] overflow-y-scroll overflow-y-scroll scrollbar-hide">
               <div className="grid grid-cols-3 text-white text-[1.5rem] text-center">
                 <div>닉네임</div>
                 <div>스테이지</div>
