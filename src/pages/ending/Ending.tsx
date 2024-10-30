@@ -15,6 +15,7 @@ import AvatarChat from '@/component/chatbox/AvatarChat';
 import TopBar from '@/component/bar/TopBar';
 import { useUserStore } from '@/store/useUserStore';
 import { useUserInfo, useRanking } from '@/api/hooks';
+import BgLibrary from '/src/assets/images/bg/bg-library.png';
 
 const dataURLtoFile = (dataurl: string, filename: string) => {
   let arr = dataurl.split(',');
@@ -216,7 +217,7 @@ export default function Ending() {
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full -z-10"
         style={{
-          backgroundImage: `url('/src/assets/images/bg/bg-library.png')`,
+          backgroundImage: `url(${BgLibrary})`,
         }}
       />
 

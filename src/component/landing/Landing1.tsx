@@ -1,4 +1,5 @@
 import AngledBox from '@/component/prolog/AngledBox';
+import landingFirstBg from '@/assets/images/prolog/landing-first-bg.png';
 
 export default function Landing1() {
   return (
@@ -6,7 +7,7 @@ export default function Landing1() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-first-bg.png')`,
+          backgroundImage: `url(${landingFirstBg})`,
         }}
       />
 
