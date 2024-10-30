@@ -14,7 +14,7 @@ import GameOverlay from './GameOverlay';
 import Game from './Game';
 import TopBar from '@/component/bar/TopBar';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-import bgMusic from '/src/assets/sound/bg_sound.mp3'; // 배경 음악 파일 추가
+import bgMusic from '/src/assets/sound/bg_monkey.mp3'; // 배경 음악 파일 추가
 import { dialog6 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';

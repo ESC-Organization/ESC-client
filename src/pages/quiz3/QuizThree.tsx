@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import NcenterFire from '/src/assets/images/bg/ncenter-fire.png';
@@ -14,13 +14,18 @@ import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import { dialog3 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizThree() {
   const phone = useUserStore((state) => state.phone);
   const nickname = useUserStore((state) => state.nickname);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -97,7 +102,7 @@ export default function QuizThree() {
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
-
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Subject
           q="이 인물의 이름을 맞춰야 출석 체크를 마치고 교수님을 대피시킬 수 있습니다. 이 인물의 이름은?"

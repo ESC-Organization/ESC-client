@@ -15,7 +15,7 @@ import TopBar from '@/component/bar/TopBar';
 import { useSubmitQuiz } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
 import { dialog2 } from '@/constant/dialogs';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizTwo() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
@@ -45,7 +45,12 @@ export default function QuizTwo() {
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const [idx, setIdx] = useState<number>(1); // Store idx
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const showModal = () => {
     setIsModal(true); //보임
   };
@@ -106,24 +111,10 @@ export default function QuizTwo() {
     }
   };
 
-  // 첫 페이지 로드시 자동으로 소리를 재생
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5; // 볼륨 설정
-      const playAudio = async () => {
-        try {
-          await audioRef.current?.play();
-          console.log('자동 재생 성공');
-        } catch (error) {
-          console.log('자동 재생 실패, 사용자가 상호작용해야 함:', error);
-        }
-      };
-      playAudio();
-    }
-  }, []);
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Subject
           q="첫번째 빈칸에 들어갈 말은?"

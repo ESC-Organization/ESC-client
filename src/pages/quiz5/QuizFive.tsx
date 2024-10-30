@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
 import Ncenter from '/src/assets/images/bg/ncenter.png';
@@ -15,12 +15,17 @@ import TopBar from '@/component/bar/TopBar';
 import { dialog5 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizFive() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -87,6 +92,7 @@ export default function QuizFive() {
   return (
     <div className="w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Subject
           q="성___빈칸에 들어갈 글자는?"
