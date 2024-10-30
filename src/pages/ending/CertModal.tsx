@@ -6,12 +6,24 @@ interface CertModalProps {
   onShare: () => void;
   clearInfo: {
     nickname: string;
-    cleartime: string;
+    initTime: string;
+    recordTime: string;
     ranking: number;
   };
 }
 
 export default function CertModal({ onShare, clearInfo }: CertModalProps) {
+  const formatTimeDifference = (initTime: string, recordTime: string) => {
+    const initDate = new Date(initTime).getTime();
+    const recordDate = new Date(recordTime).getTime();
+    const differenceInSeconds = Math.floor((recordDate - initDate) / 1000);
+
+    const minutes = Math.floor(differenceInSeconds / 60);
+    const seconds = differenceInSeconds % 60;
+
+    return `${String(minutes).padStart(2, '0')}분 ${String(seconds).padStart(2, '0')}초`;
+  };
+
   return (
     <div className="absolute h-full w-full">
       <div className=" p-6 my-auto h-[70%] max-h-[600px] w-full max-w-[500px] absolute bottom-[15%]">
@@ -39,7 +51,9 @@ export default function CertModal({ onShare, clearInfo }: CertModalProps) {
             </div>
             <div className="flex place-content-between">
               <div>클리어시간</div>
-              <div>{clearInfo.cleartime}</div>
+              <div>
+                {formatTimeDifference(clearInfo.initTime, clearInfo.recordTime)}
+              </div>
             </div>
             <div className="flex place-content-between">
               <div>랭킹</div>

@@ -155,13 +155,14 @@ export default function Ending() {
     }
   };
   const handleShowCert = () => {
-    if (!phone) return alert('Phone number is required');
+    if (!phone) return alert('유저 정보가 없습니다');
     fetchUserInfo();
+    console.log(userInfo);
     fetchRanking();
     setIsModalCert(true);
-    const rank = rankingData.find((rank) => rank.nickname === nickname);
-    if (!rank) return alert('랭크 정보가 없습니다.');
-    setMyrank(rank.rank); // hooks.ts getRanking 타입 수정하기
+    const rank = rankingData.findIndex((rank) => rank.nickname === nickname);
+    if (rank === -1) return alert('랭크 정보가 없습니다.');
+    setMyrank(rank);
   };
   const handleShare = async () => {
     if (!divRef.current) return;
@@ -224,7 +225,8 @@ export default function Ending() {
           }}
           clearInfo={{
             nickname: nickname,
-            cleartime: userInfo?.recordTime ?? '00:00', //시간계산 로직 추가?
+            initTime: userInfo?.initTime ?? '0',
+            recordTime: userInfo?.recordTime ?? '0',
             ranking: myrank,
           }}
         />
