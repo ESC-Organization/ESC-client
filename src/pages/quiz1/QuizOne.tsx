@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Bg2 from '/src/assets/images/bg/bg2.png';
 import Bg3 from '/src/assets/images/bg/bg3.png';
@@ -38,15 +38,7 @@ export default function QuizOne() {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-
   const [isCorrect, setIsCorrect] = useState(0);
-
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
-    0
-  );
-
-  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const answers = ['인관', '의관', '예관', '지관'];
@@ -54,7 +46,7 @@ export default function QuizOne() {
 
   const handleSelect = (index: number | null) => {
     setIsModal(false); // 모달 닫기
-    setSelectedAnswerIndex(index);
+
     console.log('Selected answer index:', index);
     if (index == 4) {
       setIsCorrect(1);
@@ -68,8 +60,6 @@ export default function QuizOne() {
   const showModal = () => {
     console.log('모달 열기 시도');
     setIsModal(true); //보임
-    setSelectedAnswerIndex(null);
-    setSubjectAnswer('0');
   };
 
   const handleNext = (nextIdx: number) => {
@@ -88,7 +78,6 @@ export default function QuizOne() {
 
   const currentDialogue = dialog1.find((dialogue) => dialogue.idx === idx);
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생

@@ -39,9 +39,6 @@ export default function QuizFour() {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-
-  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const [isCorrect, setIsCorrect] = useState(0);
@@ -49,11 +46,9 @@ export default function QuizFour() {
 
   const showModal = () => {
     setIsModal(true); //보임
-    setSubjectAnswer('0');
   };
   const handleSubjectAnswer = (subject: string) => {
     setIsModal(false); //안보임
-    setSubjectAnswer(subject);
     if (subject == '벤젠고리관' || subject == '벤젠고리') {
       setIsCorrect(1);
       submitQuiz({ phone, correct: 'true', stage: '4' });
@@ -88,7 +83,6 @@ export default function QuizFour() {
     navigate('/play');
   };
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생
