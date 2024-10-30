@@ -1,23 +1,24 @@
 import React from 'react';
-import avatar1 from '/src/assets/images/avatar/1.png';
-import avatar2 from '/src/assets/images/avatar/2.png';
-import avatar3 from '/src/assets/images/avatar/3.png';
-import avatar4 from '/src/assets/images/avatar/4.png';
-import avatar5 from '/src/assets/images/avatar/5.png';
-import avatar6 from '/src/assets/images/avatar/6.png';
-import avatar7 from '/src/assets/images/avatar/7.png';
-import none from '/src/assets/images/avatar/0.png';
-import avatar8 from '/src/assets/images/avatar/8.png';
-import avatar9 from '/src/assets/images/avatar/9.png';
+import avatar1 from '@/assets/images/avatar/1.png';
+import avatar2 from '@/assets/images/avatar/2.png';
+import avatar3 from '@/assets/images/avatar/3.png';
+import avatar4 from '@/assets/images/avatar/4.png';
+import avatar5 from '@/assets/images/avatar/5.png';
+import avatar6 from '@/assets/images/avatar/6.png';
+import avatar7 from '@/assets/images/avatar/7.png';
+import none from '@/assets/images/avatar/0.png';
+import avatar8 from '@/assets/images/avatar/8.png';
+import avatar9 from '@/assets/images/avatar/9.png';
+
 interface AvatarBlackChatProps {
   idx: number;
   props: number;
   name: React.ReactNode;
   text: React.ReactNode;
-  handleNext: (idx: number | null) => void; // Pass idx or true
+  handleNext: (idx: number | null) => void;
 }
 
-const avatars: any = {
+const avatars: Record<number, string> = {
   0: none,
   1: avatar1,
   2: avatar2,
@@ -28,7 +29,6 @@ const avatars: any = {
   7: avatar7,
   8: avatar8,
   9: avatar9,
-  // 필요에 따라 추가
 };
 
 export default function AvatarBlackChat({
@@ -38,11 +38,10 @@ export default function AvatarBlackChat({
   text,
   handleNext,
 }: AvatarBlackChatProps) {
-  const imageSrc = avatars[props]; // 객체에서 이미지 선택
+  const imageSrc = avatars[props];
 
-  // Function to handle the '다음' click event
   const goNext = () => {
-    handleNext(idx); // Send the current idx to the parent component
+    handleNext(idx);
   };
 
   return (
