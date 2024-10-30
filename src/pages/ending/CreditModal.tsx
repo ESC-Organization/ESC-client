@@ -57,29 +57,60 @@ export default function CreditModal({ onClose }: CreditModalProps) {
       contents: [
         {
           role: '김민서',
-          name: '',
+          name: `
+            소소한 밈과 킹받음을 플레이하시면서 
+            알아채셨다면,, 당신도 밈 마스터!
+
+            프로젝트 진행하면서
+            정말 행복하고 재미있었어요!
+
+            마지막으로 모든 도트를 손수 찍어준 
+            동건오빠에게 샤라웃을 보냅니다 !!
+          `,
         },
         {
           role: '이송목',
-          name: `구름톤 유니브 덕분에 좋은 사람들과 재미있는 프로젝트를 해보게 되었네요..ㅎㅎ
+          name: `
+            구름톤 유니브 덕분에 좋은 사람들과 재미있는 프로젝트를 해보게 되었네요..ㅎㅎ
 
-          본인의 파트가 아님에도 열심히 기여해 준 민서와 동건이에게 감사를 표합니다.`,
+            본인의 파트가 아님에도 열심히 기여해 준 민서와 동건이에게 감사를 표합니다.
+          `,
         },
         {
           role: '김동건',
-          name: '',
+          name: `
+            처음 기획부터 기발한 아이디어들에 어디로 튈 지 몰랐던 프로젝트였는데요, 완성까지 잘 이끌어준 팀원들에게 큰 사랑을 보냅니다...S2
+
+            처음 도전해 본 픽셀아트 많이들 좋아해주셔서 감사합니다:>
+          `,
         },
         {
           role: '김태건',
-          name: '',
+          name: `
+            여러분이 모은 코인 하나하나, 퀴즈 하나하나가 제 코드 수십줄의 피땀눈물이였습니다,,,
+
+            제 피땀눈물을 함께해준 모든 팀원들 너무 고맙고, 피땀눈물의 결과물을 재밌게 즐겨주신 여러분들도 모두 감사드려요!!
+
+            재밌게 즐겨주셔서 감사합니다 :)
+          `,
         },
         {
           role: '이재림',
-          name: '',
+          name: `
+            소소한 선물도 받아보면서 직접 제작한
+            귀여운 픽셀 율전명륜 캐릭터들도 구경해보는 재미!
+
+            힘들었을텐데  내색없이 
+            함께 고생해준 우리팀 친구들 너무 감사합니다!!
+            덕분에 재밌게 즐기면서 플젝했슴다!
+          `,
         },
         {
           role: '오진석',
-          name: '',
+          name: `
+            팀원 중 한 명이라도 없었다면 시작하지도 못했을 프젝... 
+            첫 프로젝트를 너무 좋은 사람들과 함께해 즐거운 경험이었습니다!
+          `,
         },
       ],
     },
@@ -88,12 +119,14 @@ export default function CreditModal({ onClose }: CreditModalProps) {
     <div className="absolute h-full w-full">
       <div className=" p-6 my-auto h-[90%] max-h-[800px] w-full max-w-[500px] absolute bottom-[5%]">
         {/* 크레딧 박스 */}
-        <div className="my-auto h-full p-4 text-xl overflow-scroll isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#00000060] rounded-[8px] border-4 border-[#808080]">
-          <div className="h-[400%] flex flex-col items-center justify-around whitespace-pre-line text-center">
+        <div className="my-auto h-full p-4 text-xl overflow-y-scroll scrollbar-hide isolate *:drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] text-[#F0F0F0] bg-[#00000060] rounded-[8px] border-4 border-[#808080]">
+          <div className="h-[260rem] flex flex-col items-center justify-evenly whitespace-pre-line break-keep text-center">
             {credits.map((credit, i) => (
               <>
                 <div key={i}>
-                  <span className="text-[#14AE5C]">{credit.category}</span>
+                  <span className="text-2xl text-[#14AE5C]">
+                    {credit.category}
+                  </span>
                 </div>
                 {credit.contents.map((content, j) => (
                   <div key={`${i}-${j}`}>
@@ -108,9 +141,24 @@ export default function CreditModal({ onClose }: CreditModalProps) {
                 ))}
               </>
             ))}
-            <div className="text-base">
-              「지금 우리 율전은」에 등장하는 모든 원숭이들은 안전하게
+            <div className="text-base text-gray-300">
+              {`
+              
+              - 본 스토리는 모두 픽션입니다 -
+
+              「ESC: 지금 우리 율전은」에 등장하는 모든 원숭이들은 안전하게
               섭외되었습니다.
+              
+              `}
+            </div>
+            <div className="">
+              지금까지 「
+              <span className="text-[#14AE5C]">ESC: 지금 우리 율전은</span>
+              {`」을
+              플레이해주셔서 감사합니다
+              
+              저희 구름톤 유니브 성균관대의
+              다음 활동도 기대해주세요`}
             </div>
             <div className="w-full px-4 text-sm flex place-content-between">
               <div>9oormthonuniv.skku</div>
