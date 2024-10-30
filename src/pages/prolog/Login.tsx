@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
 import AngledInputBox from '@/component/prolog/AngledInputBox';
 import AngledMonkeyBox from '@/component/prolog/AngledMonkeyBox';
@@ -6,22 +7,26 @@ import { useUserStore } from '@/store/useUserStore';
 import { useLoginUser } from '@/api/hooks';
 
 export default function Login() {
+  const { setPhone, setNickname } = useUserStore();
+  const urlParams = new URLSearchParams(window.location.search);
+  const navigate = useNavigate();
+
   const [nicknameState, setNicknameState] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [phoneError, setPhoneError] = useState<string | null>(null); // 전화번호 에러 상태
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
-  const { setPhone, setNickname } = useUserStore();
+  const character =
+    urlParams.get('character') === 'boy' ? 'YUL_UNG' : 'MYEONG_UNG';
 
   const { mutate: loginUser } = useLoginUser({
     onSuccess: () => {
       setPhone(phoneNumber);
       setNickname(nicknameState);
-      alert('로그인 성공!');
-      // TODO: 라우터 연결해주기
+      navigate(`/prolog`);
     },
     onError: () => {
       alert(
-        '로그인에 실패했습니다. 닉네임, 전화번호가 중복되지 않았는지 확인해주세요.'
+        '로그인에 실패했습니다. 닉네임, 전화번호가 중복되진 않았는지 확인해주세요.'
       );
     },
   });
@@ -30,7 +35,11 @@ export default function Login() {
     if (!phoneNumber || !nicknameState) {
       return alert('전화번호와 닉네임을 입력해 주세요.');
     }
-    loginUser({ phone: phoneNumber, nickname: nicknameState });
+    loginUser({
+      phone: phoneNumber,
+      nickname: nicknameState,
+      character: character,
+    });
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

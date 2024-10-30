@@ -8,7 +8,6 @@ export default function Ranking() {
 
   // 랭킹 조회
   const { data: rankingData, isLoading, isError } = useRanking();
-  console.log('🚀 ~ file: main-page.tsx:37 ~ Main ~ rankingData:', rankingData);
 
   const handleBackClick = () => {
     navigate(-1);

@@ -1,23 +1,24 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Landing from './pages/landing/Landing';
 import QuizOne from './pages/quiz1/QuizOne';
 import QuizTwo from './pages/quiz2/QuizTwo';
-import Ranking from './pages/prolog/Ranking';
 import QuizThree from './pages/quiz3/QuizThree';
 import QuizFour from './pages/quiz4/QuizFour';
 import QuizFive from './pages/quiz5/QuizFive';
-import LandingIntro from '@/pages/prolog/LandingIntro';
-import PrologStory from '@/pages/prolog/PrologStory';
+import Final from './pages/final/Final';
+import Ending from './pages/ending/Ending';
+import Ranking from './pages/prolog/Ranking';
+import ProtectedRoute from './component/route/ProtectRouter';
+import Home from './pages/prolog/Home';
+import QRPage from './pages/qr/QRPage';
+import Prolog from '@/pages/prolog/Prolog';
 import Play from '@/pages/prolog/Play';
 import CharacterSelection from '@/pages/prolog/CharacterSelection';
 import Login from '@/pages/prolog/Login';
 import Onboarding from '@/pages/onboarding';
 import Main from '@/pages/main-page';
 import TestPage from '@/pages/test-page';
-import Final from './pages/final/Final';
-import Ending from './pages/ending/Ending';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,73 +31,47 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/', // 삭제 예정
     element: <Main />,
   },
   {
-    path: '/onboarding', // 삭제하기
+    path: '/onboarding', // 삭제 예정
     element: <Onboarding />,
   },
   {
-    path: '/landing-intro',
-    element: <LandingIntro />,
+    path: '/prolog',
+    element: <Prolog />,
   },
   {
-    path: '/character-selection', // 캐릭터 선택 페이지 추가
+    path: '/character-selection',
     element: <CharacterSelection />,
   },
   {
-    path: '/login', // 로그인 페이지 추가
+    path: '/login',
     element: <Login />,
   },
   {
-    path: '/prolog',
-    element: <PrologStory />,
+    path: '/home',
+    element: <Home />,
   },
   {
-    path: '/play',
-    element: <Play />,
-  },
-  {
-    path: '/ranking',
-    element: <Ranking />,
-  },
-  {
-    path: '/landing',
-    element: <Landing />,
-  },
-  {
-    path: '/quiz1',
-    element: <QuizOne />,
-  },
-  {
-    path: '/quiz2',
-    element: <QuizTwo />,
-  },
-  {
-    path: '/quiz3',
-    element: <QuizThree />,
-  },
-  {
-    path: '/quiz4',
-    element: <QuizFour />,
-  },
-  {
-    path: '/quiz5',
-    element: <QuizFive />,
-  },
-  {
-    path: '/final',
-    element: <Final />,
-  },
-  {
-    path: '/ending',
-    element: <Ending />,
-  },
-
-  {
-    path: '/test',
+    path: '/test', // 삭제 예정
     element: <TestPage />,
+  },
+  { path: '/ranking', element: <Ranking /> },
+  {
+    element: <ProtectedRoute />, // 로그인 해야만 들어올 수 있는 페이지
+    children: [
+      { path: '/play', element: <Play /> },
+      { path: '/quiz1', element: <QuizOne /> },
+      { path: '/quiz2', element: <QuizTwo /> },
+      { path: '/quiz3', element: <QuizThree /> },
+      { path: '/quiz4', element: <QuizFour /> },
+      { path: '/quiz5', element: <QuizFive /> },
+      { path: '/final', element: <Final /> },
+      { path: '/ending', element: <Ending /> },
+      { path: '/qr', element: <QRPage /> },
+    ],
   },
 ]);
 

@@ -5,40 +5,42 @@ import Ncenter from '/src/assets/images/bg/ncenter.png';
 import Avatar2 from '/src/assets/images/avatar/2.png';
 // import Object from '@/component/answer/Object';
 import { useRef } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import Correct from './Correct';
 import Wrong from './Wrong';
 import Subject from '@/component/answer/Subject';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import TopBar from '@/component/bar/TopBar';
+import { dialog5 } from '@/constant/dialogs';
+import { useUserStore } from '@/store/useUserStore';
+import { useSubmitQuiz } from '@/api/hooks';
+
 export default function QuizFive() {
+  const phone = useUserStore((state) => state.phone);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: submitQuiz } = useSubmitQuiz({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
+    },
+    onError: (error: any) => {
+      if (error.response && error.response.data) {
+        const { code, message } = error.response.data;
+
+        if (code === 2002 || code === 2005) {
+          alert(message);
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      }
+      navigate('/play');
+    },
+  });
+
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-  const dialogues = [
-    {
-      idx: 1,
-      props: 9,
-      name: '행정실 직원',
-      text: '제가 그저께 입사해서...',
-    },
-    {
-      idx: 2,
-      props: 9,
-      name: '행정실 직원',
-      text: '이럴 때 연락해야 할 대학이 있다고 하셨는데..',
-    },
-    {
-      idx: 3,
-      props: 9,
-      name: '행정실 직원',
-      text: '저희와 비슷한 대학교 세 군데가 있다고 하시던데..',
-    },
-    {
-      idx: 4,
-      props: 9,
-      name: '행정실 직원',
-      text: '어느 대학들인지 알고 계신가요?',
-    },
-  ];
 
   const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
@@ -56,15 +58,17 @@ export default function QuizFive() {
     setSubjectAnswer(subject);
     if (subject == '하예프' || subject == '성하예프') {
       setIsCorrect(1);
+      submitQuiz({ phone, correct: 'true', stage: '5' });
     } else {
       setIsCorrect(2);
+      submitQuiz({ phone, correct: 'false', stage: '5' });
     }
   };
   const handleNext = (nextIdx: number) => {
     nextIdx++;
     setIdx(nextIdx);
     console.log('Next idx:', nextIdx);
-    if (nextIdx > dialogues.length) {
+    if (nextIdx > dialog5.length) {
       console.log('finish');
       setIsStart(true);
     }
@@ -72,7 +76,7 @@ export default function QuizFive() {
   const handleCloseSubject = () => {
     setIsModal(false); //안보임
   };
-  const currentDialogue = dialogues.find((dialogue) => dialogue.idx === idx);
+  const currentDialogue = dialog5.find((dialogue) => dialogue.idx === idx);
   const handleRetry = () => {
     console.log('다시');
     window.location.reload();
