@@ -21,7 +21,7 @@ export default function QuizTwo() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  const nickname = useUserStore((state) => state.nickname);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -92,7 +92,16 @@ export default function QuizTwo() {
   const handleRetry = () => {
     navigate('/play');
   };
-  const currentDialogue = dialog2.find((dialogue) => dialogue.idx === idx);
+  const updatedDialog2 = dialog2.map((dialogue) => ({
+    ...dialogue,
+    text: dialogue.text.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+  }));
+
+  // Usage with currentDialogue
+  const currentDialogue = updatedDialog2.find(
+    (dialogue) => dialogue.idx === idx
+  );
+
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
     if (audioRef.current) {
