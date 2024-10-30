@@ -17,7 +17,7 @@ interface AvatarBlackChatProps {
   handleNext: (idx: number | null) => void; // Pass idx or true
 }
 
-const avatars = {
+const avatars: any = {
   0: none,
   1: avatar1,
   2: avatar2,
