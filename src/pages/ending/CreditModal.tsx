@@ -23,7 +23,7 @@ export default function CreditModal({ onClose }: CreditModalProps) {
         },
         {
           role: '프론트엔드 개발',
-          name: '김태건 이재림 김민서',
+          name: '김태건 이재림 김민서 김동건',
         },
         {
           role: '백엔드 개발',
