@@ -17,6 +17,7 @@ import TopBar from '@/component/bar/TopBar';
 import { useUserStore } from '@/store/useUserStore';
 import { useUserInfo, useRanking } from '@/api/hooks';
 import BgLibrary from '/src/assets/images/bg/bg-library.png';
+import Bgm from '/src/assets/sound/bg_peaceful.mp3';
 
 const dataURLtoFile = (dataurl: string, filename: string) => {
   let arr = dataurl.split(',');
@@ -33,8 +34,8 @@ const dataURLtoFile = (dataurl: string, filename: string) => {
 export default function Ending() {
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
   const divRef = useRef<HTMLDivElement>(null); // 스크린샷 대상 객체
-  const [, setIsPlaying] = useState(1); // 음악 재생 상태
   const [myrank, setMyrank] = useState(0);
+  const [tailwindOverriding, setTailwindOverriding] = useState(false); // html2canvas와 tailwind 호환을 위한 코드
   const navigate = useNavigate();
 
   // 유저 정보 조회
@@ -122,7 +123,6 @@ export default function Ending() {
   const [isModalCredit, setIsModalCredit] = useState(false);
 
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생
@@ -134,7 +134,8 @@ export default function Ending() {
   // 첫 페이지 로드시 자동으로 소리를 재생
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5; // 볼륨 설정
+      audioRef.current.volume = 0.1; // 볼륨 설정
+      audioRef.current.loop = true; // 볼륨 설정
       const playAudio = async () => {
         try {
           await audioRef.current?.play();
@@ -161,7 +162,7 @@ export default function Ending() {
   const handleShowCert = () => {
     if (!phone) return alert('유저 정보가 없습니다');
     fetchUserInfo();
-    console.log(userInfo);
+    // console.log(userInfo);
     fetchRanking();
     setIsModalCert(true);
     const rank = rankingData.findIndex((rank) => rank.nickname === nickname);
@@ -171,13 +172,14 @@ export default function Ending() {
   const handleShare = async () => {
     if (!divRef.current) return;
 
+    setTailwindOverriding(true);
     try {
       const div = divRef.current;
       const canvas = await html2canvas(div, { scale: 2 });
       // 파일 공유 try
       const link = canvas.toDataURL('image/png');
       const file = dataURLtoFile(link, 'certificate.png');
-      console.log(file);
+      // console.log(file);
       if (file) {
         const shareData = {
           title: '지금 우리 율전은',
@@ -186,7 +188,6 @@ export default function Ending() {
         };
         await navigator.share(shareData);
         console.log('Image shared successfully.');
-        setIsModalCert(false);
       }
     } catch (error) {
       console.error('Error converting div to image:', error);
@@ -204,8 +205,10 @@ export default function Ending() {
       } catch (error) {
         // 안 되면 할 수 없지요
         console.error('Error again converting div to image:', error);
-        setIsModalCert(false);
       }
+    } finally {
+      setTailwindOverriding(false);
+      setIsModalCert(false);
     }
   };
   // 홈으로 클릭
@@ -220,6 +223,7 @@ export default function Ending() {
   return (
     <div className="flex flex-col w-screen relative" ref={divRef}>
       <TopBar onSound={handleSound} />
+      <audio ref={audioRef} src={Bgm} />
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full -z-10"
         style={{
@@ -228,17 +232,26 @@ export default function Ending() {
       />
 
       {isModalCert ? (
-        <CertModal
-          onShare={() => {
-            handleShare();
-          }}
-          clearInfo={{
-            nickname: nickname,
-            initTime: userInfo?.initTime ?? '0',
-            recordTime: userInfo?.recordTime ?? '0',
-            ranking: myrank,
-          }}
-        />
+        <>
+          {tailwindOverriding && (
+            // html2canvas와 tailwind 호환을 위한 코드
+            <style>{`img{
+              display: inline-block
+              !important;
+            }`}</style>
+          )}
+          <CertModal
+            onShare={() => {
+              handleShare();
+            }}
+            clearInfo={{
+              nickname: nickname,
+              initTime: userInfo?.initTime ?? '0',
+              recordTime: userInfo?.recordTime ?? '0',
+              ranking: myrank,
+            }}
+          />
+        </>
       ) : (
         currentDialogue && (
           <>
@@ -257,7 +270,10 @@ export default function Ending() {
             {idx === 6 && (
               <div className="absolute top-[25%] left-[50%] -translate-x-1/2">
                 <div className="mx-auto w-[75%]">
-                  <img src={HeartSrc} />
+                  <img
+                    src={HeartSrc}
+                    className="animate-rotate-axis transform-style-3d"
+                  />
                 </div>
               </div>
             )}
@@ -324,13 +340,13 @@ export default function Ending() {
             </div>
             <div
               className={
-                'mt-2 p-4 flex justify-center gap-2' +
+                'mt-2 p-2 flex justify-center gap-2' +
                 (isModalCredit ? ' opacity-0' : '')
               }
             >
               <span
                 onClick={onClickHome}
-                className="text-xl text-white drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] cursor-pointer"
+                className="text-lg text-gray-300 drop-shadow-[0.2px_0.2px_1.5px_rgba(0,0,0,0.8)] cursor-pointer"
               >
                 홈으로
               </span>

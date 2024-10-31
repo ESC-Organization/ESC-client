@@ -9,16 +9,17 @@ import Dido_mon from '/src/assets/images/items/dido_mon.png';
 import Monkey_dark1 from '/src/assets/images/items/monkey_dark1.png';
 import Monkey_dark2 from '/src/assets/images/items/monkey_dark2.png';
 import Monkey_light from '/src/assets/images/items/monkey_light.png';
+import bzbz from '/src/assets/gifs/star.gif';
+
 import { useQueryClient } from '@tanstack/react-query';
 import GameOverlay from './GameOverlay';
 import Game from './Game';
 import TopBar from '@/component/bar/TopBar';
 import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
-import bgMusic from '/src/assets/sound/bg_monkey.mp3'; // 배경 음악 파일 추가
+import bgMusic from '/src/assets/sound/bg_sound.mp3';
 import { dialog6 } from '@/constant/dialogs';
 import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';
-
 export default function Final() {
   const phone = useUserStore((state) => state.phone);
   const nickname = useUserStore((state) => state.nickname);
@@ -106,8 +107,8 @@ export default function Final() {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.loop = true; // 음악을 루프 설정
-      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+      audioRef.current.loop = true;
+      audioRef.current.play();
     }
   }, []);
 
@@ -169,10 +170,27 @@ export default function Final() {
                   className="animate-rotate-axis transition-transform duration-[2500ms] transform-style-3d"
                 />
               ) : idx === 2 ? (
-                <img
-                  src={Knight}
-                  className="animate-sparkle transform-style-3d"
-                />
+                <div className="relative">
+                  {' '}
+                  {/* Wrapper for Knight and sparkles */}
+                  <img
+                    src={Knight}
+                    className="animate-sparkle transform-style-3d"
+                    alt="Knight"
+                  />
+                  {/* Sparkle at the bottom-left */}
+                  <img
+                    src={bzbz}
+                    className="absolute -bottom-2 -left-2 w-20 h-20" /* Adjust size and position as needed */
+                    alt="Sparkle Left"
+                  />
+                  {/* Sparkle at the top-right */}
+                  <img
+                    src={bzbz}
+                    className="absolute -top-2 -right-2 w-20 h-20" /* Adjust size and position as needed */
+                    alt="Sparkle Right"
+                  />
+                </div>
               ) : idx === 3 ? (
                 <img src={Dido_mon} className="" />
               ) : (
