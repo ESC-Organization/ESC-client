@@ -59,7 +59,9 @@ export default function Ranking() {
                   className="grid grid-cols-3 text-white text-[1.2rem] text-center align-middle"
                 >
                   <div>{data.nickname}</div>
-                  <div className="text-[#14AE5C]">{data.stageStatus}</div>
+                  <div className="text-[#14AE5C]">
+                    {data.stageStatus === 7 ? '🏆' : data.stageStatus}
+                  </div>
                   <div>
                     {formatTimeDifference(data.initTime, data.recordTime)}
                   </div>
