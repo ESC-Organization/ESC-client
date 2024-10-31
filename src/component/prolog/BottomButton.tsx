@@ -1,4 +1,7 @@
 import AngledBox from '@/component/prolog/AngledBox';
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
+import characterMyungwoong from '@/assets/images/prolog/character-myungwoong.png';
+import characterYuloong from '@/assets/images/prolog/character-yuloong.png';
 
 interface BottomButtonProps {
   buttonText: string;
@@ -20,19 +23,19 @@ export default function BottomButton({
         </span>
       </AngledBox>
       <div className="mt-8 w-[50%] mx-auto">
-        <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+        <img src={skkuLogo} alt="SKKU Logo" />
       </div>
 
       <div className="absolute -right-0 bottom-32">
         <img
-          src="src/assets/images/prolog/character-myungwoong.png"
+          src={characterMyungwoong}
           alt="Character Myungwoong"
           className="w-[110px] h-auto"
         />
       </div>
       <div className="absolute -left-0 bottom-12">
         <img
-          src="src/assets/images/prolog/character-yuloong.png"
+          src={characterYuloong}
           alt="Character Yuloong"
           className="w-[100px] h-auto"
         />

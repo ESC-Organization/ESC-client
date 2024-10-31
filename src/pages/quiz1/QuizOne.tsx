@@ -13,12 +13,17 @@ import TopBar from '@/component/bar/TopBar';
 import { useSubmitQuiz } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
 import { dialog1 } from '@/constant/dialogs';
-
+import Bgm from '/src/assets/sound/bg_sound.mp3';
 export default function QuizOne() {
   const phone = useUserStore((state) => state.phone);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true; // 음악을 루프 설정
+      audioRef.current.play(); // 컴포넌트 렌더 시 자동 재생
+    }
+  }, []);
   const { mutate: submitQuiz } = useSubmitQuiz({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo', phone] });
@@ -38,15 +43,7 @@ export default function QuizOne() {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
-
   const [isCorrect, setIsCorrect] = useState(0);
-
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
-    0
-  );
-
-  const [subjectAnswer, setSubjectAnswer] = useState<string | null>('');
   const [isModal, setIsModal] = useState(false); // 처음엔 없음
   const [isStart, setIsStart] = useState(false);
   const answers = ['인관', '의관', '예관', '지관'];
@@ -54,7 +51,7 @@ export default function QuizOne() {
 
   const handleSelect = (index: number | null) => {
     setIsModal(false); // 모달 닫기
-    setSelectedAnswerIndex(index);
+
     console.log('Selected answer index:', index);
     if (index == 4) {
       setIsCorrect(1);
@@ -68,8 +65,6 @@ export default function QuizOne() {
   const showModal = () => {
     console.log('모달 열기 시도');
     setIsModal(true); //보임
-    setSelectedAnswerIndex(null);
-    setSubjectAnswer('0');
   };
 
   const handleNext = (nextIdx: number) => {
@@ -83,13 +78,11 @@ export default function QuizOne() {
   };
 
   const handleRetry = () => {
-    console.log('다시');
     window.location.reload();
   };
 
   const currentDialogue = dialog1.find((dialogue) => dialogue.idx === idx);
   const handleSound = (soundStatus: number) => {
-    setIsPlaying(soundStatus);
     if (audioRef.current) {
       if (soundStatus === 1) {
         audioRef.current.play(); // 소리 재생
@@ -102,7 +95,7 @@ export default function QuizOne() {
   return (
     <div className=" w-full h-full bg-[#793A1C] relative">
       <TopBar onSound={handleSound} />
-
+      <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Object
           q="연구생이 살고 있는 기숙사 건물은?"

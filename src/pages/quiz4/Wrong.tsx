@@ -9,7 +9,7 @@ interface WrongProps {
 const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
   const dialogues = [
     <>
-      <span>6각형 고리 모양이고, 탄소와 수소가 절묘하게</span>
+      <span>6각형 고리 모양,,탄소와 수소가 절묘하게</span>
       <br />
       <span>배열된 곳이지..새내기들은 이곳에 가서</span>
       <br />
@@ -24,10 +24,15 @@ const Wrong: React.FC<WrongProps> = ({ onRetry }) => {
       </div>
       <div className="w-full p-8 max-w-[500px] absolute bottom-0 h-[250px] bg-[#661AAF]">
         <div
-          className={`relative flex items-center justify-center z-[70] text-[1.2rem] p-5 text-white w-full text-center rounded-[15px] bg-[#0000007A]`}
+          className={`relative flex flex-col items-center justify-center z-[70] text-[1rem] p-5 text-white w-full text-center rounded-[15px] bg-[#0000007A]`}
           onClick={onRetry}
         >
-          다시
+          어이 이과생~ 이것도 모르나?
+          <br />
+          다시 코인을 모아서 재시도해보도록!
+          <br />
+          <br />
+          <span className="text-[1.5rem]">다시</span>
         </div>
       </div>
       <div

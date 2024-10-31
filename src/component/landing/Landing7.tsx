@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import ShadowBox from '../prolog/ShadowBox';
+import landingFifthBg from '@/assets/images/prolog/landing-fifth-bg.png';
+import handImage from '@/assets/images/prolog/hand.png';
 
 export default function Landing5() {
   const [hands, setHands] = useState<{ top: string; left: string }[]>([]);
-  const handCount = 12; // 손 최대 개수
+  const handCount = 12;
 
   useEffect(() => {
     if (hands.length >= handCount) return;
@@ -32,7 +34,7 @@ export default function Landing5() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-fifth-bg.png')`,
+          backgroundImage: `url(${landingFifthBg})`,
         }}
       />
 
@@ -48,11 +50,10 @@ export default function Landing5() {
         </div>
       </div>
 
-      {/* 랜덤한 위치에 hand.png를 렌더링 */}
       {hands.map((hand, index) => (
         <img
           key={index}
-          src="src/assets/images/prolog/hand.png"
+          src={handImage}
           alt="Hand"
           className="absolute"
           style={{

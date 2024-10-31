@@ -22,6 +22,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useSubmitQuiz } from '@/api/hooks';
 export default function Final() {
   const phone = useUserStore((state) => state.phone);
+  const nickname = useUserStore((state) => state.nickname);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -52,8 +53,16 @@ export default function Final() {
   const [gameOver, setGameOver] = useState(false);
   const [isPlaying, setIsPlaying] = useState(1);
 
-  const currentDialogue = dialog6.find((dialogue) => dialogue.idx === idx);
+  const updatedDialog6 = dialog6.map((dialogue) => ({
+    ...dialogue,
+    name: dialogue.name.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+    text: dialogue.text.replace(/미르미/g, `${nickname}`), // Replace all occurrences of '교수' with 'john'
+  }));
 
+  // Usage with currentDialogue
+  const currentDialogue = updatedDialog6.find(
+    (dialogue) => dialogue.idx === idx
+  );
   const handleSound = (soundStatus: number) => {
     setIsPlaying(soundStatus);
     if (audioRef.current) {

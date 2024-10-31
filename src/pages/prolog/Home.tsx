@@ -1,20 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import AngledBox from '@/component/prolog/AngledBox';
+import playBg from '@/assets/images/prolog/play-bg.png';
+import characterMyungwoong from '@/assets/images/prolog/character-myungwoong.png';
+import characterYuloong from '@/assets/images/prolog/character-yuloong.png';
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
 
 export default function Home() {
   const navigate = useNavigate();
 
-  // 지금 플레이 클릭 -> prologStory로 이동
   const handlePrologClick = () => {
     navigate('/prolog');
   };
 
-  // 로그인 클릭 시
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/character-selection');
   };
 
-  // 랭킹 확인 클릭 -> ranking으로 이동
   const handleRankingClick = () => {
     navigate('/ranking');
   };
@@ -24,11 +25,10 @@ export default function Home() {
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/play-bg.png')`,
+          backgroundImage: `url(${playBg})`,
         }}
       />
 
-      {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
         <div className="pt-16 text-[2.5rem]">
           <AngledBox>
@@ -37,7 +37,6 @@ export default function Home() {
             <span className="text-white">은</span>
           </AngledBox>
         </div>
-        {/* 하단 버튼 영역*/}
         <div className="flex flex-col w-full text-center">
           <div className="content-wrapper flex flex-col items-center gap-2 500px:mb-8 relative">
             <AngledBox>
@@ -66,14 +65,14 @@ export default function Home() {
             </AngledBox>
             <div className="absolute -right-0 bottom--4 500px:mr-12">
               <img
-                src="src/assets/images/prolog/character-myungwoong.png"
+                src={characterMyungwoong}
                 alt="Character Myungwoong"
                 className="w-[96px] h-auto"
               />
             </div>
             <div className="absolute -left-0 bottom-0 500px:ml-12 ">
               <img
-                src="src/assets/images/prolog/character-yuloong.png"
+                src={characterYuloong}
                 alt="Character Yuloong"
                 className="w-[96px] h-auto"
                 style={{ transform: 'scaleX(-1)' }}
@@ -81,9 +80,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 로고 */}
           <div className="mb-8 w-[50%] mx-auto">
-            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+            <img src={skkuLogo} alt="SKKU Logo" />
           </div>
         </div>
       </div>

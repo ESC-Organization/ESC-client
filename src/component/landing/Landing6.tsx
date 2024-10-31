@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import ShadowBox from '@/component/prolog/ShadowBox';
+import landingFourthBg from '@/assets/images/prolog/landing-fourth-bg.png';
 
 export default function Landing6() {
-  // 배경 회전 애니메이션 설정
   const rotateAnimation = {
     animate: { rotate: [0, 2, -2, 2, -2, 1, -1, 0] },
     transition: {
@@ -14,11 +14,10 @@ export default function Landing6() {
 
   return (
     <div className="flex justify-end items-center h-full relative">
-      {/* 배경 애니메이션 */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/landing-fourth-bg.png')`,
+          backgroundImage: `url(${landingFourthBg})`,
         }}
         animate={rotateAnimation.animate}
         transition={rotateAnimation.transition}

@@ -3,23 +3,23 @@ import AngledBox from '@/component/prolog/AngledBox';
 import { useUserInfo } from '@/api/hooks';
 import { useUserStore } from '@/store/useUserStore';
 import TopBar from '@/component/bar/TopBar';
+import playBg2 from '@/assets/images/prolog/play-bg2.png';
+import characterMyungwoong from '@/assets/images/prolog/character-myungwoong.png';
+import characterYuloong from '@/assets/images/prolog/character-yuloong.png';
+import skkuLogo from '@/assets/images/prolog/skku-logo.png';
 
 export default function Play() {
   const navigate = useNavigate();
   const phone = useUserStore((state) => state.phone);
 
-  // 유저 정보 조회
   const { data: userInfo, isError } = useUserInfo(phone);
-  console.log('🚀 ~ file: Play.tsx:12 ~ Play ~ userInfo:', userInfo);
   const stage = userInfo?.stageStatus;
   const coin = userInfo?.coin;
 
-  // 프롤로그 클릭 -> /prolog로 이동
   const handlePrologClick = () => {
     navigate('/prolog');
   };
 
-  // 지금 플레이 클릭 -> stage에 따라 이동
   const handlePlayClick = () => {
     if (stage === undefined || coin === undefined) {
       alert('스테이지 정보를 불러오는 중입니다. 잠시만 기다려 주세요.');
@@ -35,17 +35,18 @@ export default function Play() {
       navigate(`/quiz${stage}`);
     } else if (stage === 6) {
       navigate('/final');
+    } else if (stage === 7) {
+      alert('모든 스테이지를 클리어했습니다!!');
+      return;
     } else {
       alert('잘못된 스테이지 상태입니다.');
     }
   };
 
-  // 랭킹 확인 클릭 -> /ranking으로 이동
   const handleRankingClick = () => {
     navigate('/ranking');
   };
 
-  // 에러 처리
   if (isError) {
     return (
       <div className="flex justify-center items-center w-screen h-screen">
@@ -61,15 +62,13 @@ export default function Play() {
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{
-          backgroundImage: `url('/src/assets/images/prolog/play-bg2.png')`,
+          backgroundImage: `url(${playBg2})`,
         }}
       />
 
-      {/* 콘텐츠 */}
       <div className="z-10 flex flex-1 flex-col items-center justify-between overflow-hidden">
         <TopBar />
         <div />
-        {/* 하단 버튼 영역*/}
         <div className="flex flex-col w-full text-center">
           <div className="content-wrapper flex flex-col items-center gap-2 500px:mb-8 relative">
             <AngledBox
@@ -110,14 +109,14 @@ export default function Play() {
             </AngledBox>
             <div className="absolute -right-0 bottom--4 500px:mr-12">
               <img
-                src="src/assets/images/prolog/character-myungwoong.png"
+                src={characterMyungwoong}
                 alt="Character Myungwoong"
                 className="w-[96px] h-auto"
               />
             </div>
             <div className="absolute -left-0 bottom-0 500px:ml-12 ">
               <img
-                src="src/assets/images/prolog/character-yuloong.png"
+                src={characterYuloong}
                 alt="Character Yuloong"
                 className="w-[96px] h-auto"
                 style={{ transform: 'scaleX(-1)' }}
@@ -125,9 +124,8 @@ export default function Play() {
             </div>
           </div>
 
-          {/* 로고 */}
           <div className="mb-8 w-[50%] mx-auto">
-            <img src="src/assets/images/prolog/skku-logo.png" alt="SKKU Logo" />
+            <img src={skkuLogo} alt="SKKU Logo" />
           </div>
         </div>
       </div>

@@ -6,16 +6,9 @@ import AvatarBlackChat from '@/component/chatbox/AvatarBlackChat';
 import Radio from '/src/assets/sound/2.mp3';
 export default function Correct() {
   const [showFinish, setShowFinish] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(1); // 음악 재생 상태
+
   const audioRef = useRef<HTMLAudioElement | null>(null); // 오디오 객체 레퍼런스
-  // WhiteBox의 대사들
-  const dialogues = [
-    <>
-      <span>정말 고맙네! </span>
-      <br />
-      <span>우리 연구생이 지관에 있었구만!</span>
-    </>,
-  ];
+
   const showIt = () => {
     setShowFinish(true);
     if (audioRef.current) {
@@ -58,7 +51,7 @@ export default function Correct() {
           idx={1}
           props={7}
           name={'오타쿠'}
-          text={`@@군의 패기라면, 위험에 빠진 율전마저도 구할 수 있겠어~~자, 이 마스크를 들고 가. 이게 내가 해줄 수 있는 전부다! 👊`}
+          text={`자네의 패기라면, 위험에 빠진 율전마저도 구할 수 있겠어~~자, 이 마스크를 들고 가. 이게 내가 해줄 수 있는 전부다! 👊`}
           handleNext={() => setShowFinish(true)}
         />
       </div>
