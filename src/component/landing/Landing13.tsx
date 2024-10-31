@@ -17,8 +17,8 @@ export default function Landing13() {
             <br />
             <span>
               퀴즈를 모두 해결한다면
-              <span className="text-[#14AE5C]"> ??????</span>를 얻어 이 사태를
-              해결할 수 있어!
+              <span className="text-[#14AE5C]"> "정보처리기사" </span>를 얻어 이
+              사태를 해결할 수 있어!
             </span>
             <br />
             <br />
