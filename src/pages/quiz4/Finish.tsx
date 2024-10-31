@@ -33,7 +33,7 @@ export default function Finish() {
       </div>
       <div className="w-full flex justify-center h-[50%] absolute top-[10%] p-4 max-w-[500px] space-y-4">
         <div className={`w-full transform transition-transform duration-500`}>
-          <BlackBox text="단풍 방패도 장착!" />
+          <BlackBox text="손전등도 장착!" />
         </div>
       </div>
 

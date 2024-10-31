@@ -118,7 +118,7 @@ export default function QuizFour() {
       <audio ref={audioRef} src={Bgm} />
       {isModal && (
         <Subject
-          q="지금 이들이 말하고 있는 건물 이름은?"
+          q="지금 이들이 말하고 있는 건물 이름은?(5글자)"
           onSubject={handleSubjectAnswer}
           onClose={handleCloseSubject}
         />

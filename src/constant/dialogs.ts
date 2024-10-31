@@ -114,7 +114,7 @@ export const dialog4 = [
     idx: 4,
     props: 1,
     name: '미르미',
-    text: '네 그리너까 빨리 도와주세요!',
+    text: '네 그러니까 빨리 도와주세요!',
   },
   {
     idx: 5,
