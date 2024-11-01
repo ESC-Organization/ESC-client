@@ -23,9 +23,12 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
     left: string;
     top: string;
   } | null>(null);
+  // Updated to include 4 dark monkeys and 1 light monkey
   const [monkeyStatus, setMonkeyStatus] = useState<MonkeyState[]>([
     { type: 'dark1', x: '10%', y: '50%', active: true },
-    { type: 'dark2', x: '50%', y: '20%', active: true },
+    { type: 'dark2', x: '30%', y: '20%', active: true },
+    { type: 'dark1', x: '50%', y: '70%', active: true },
+    { type: 'dark2', x: '70%', y: '40%', active: true },
     { type: 'light', x: '90%', y: '50%', active: true },
   ]);
 
@@ -63,12 +66,16 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
         )
       );
 
+      // Recalculate remaining dark monkeys after updating state
       const remainingDarkMonkeys = monkeyStatus.filter(
-        (monkey) =>
-          monkey.active && (monkey.type === 'dark1' || monkey.type === 'dark2')
+        (monkey, i) =>
+          monkey.active &&
+          (monkey.type === 'dark1' || monkey.type === 'dark2') &&
+          i !== index
       ).length;
 
-      if (remainingDarkMonkeys === 1) {
+      if (remainingDarkMonkeys === 0) {
+        // Adjust condition based on new number of monkeys
         setTimeout(() => {
           onGameClear();
         }, 600);
@@ -77,13 +84,13 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
     }
   };
 
-  // 원숭이 위치 자동 변경
+  // 원숭이 위치 자동 변경 - increased speed by reducing interval from 800ms to 500ms
   useEffect(() => {
-    const intervalId = setInterval(randomizeMonkeyPositions, 800);
+    const intervalId = setInterval(randomizeMonkeyPositions, 500); // Faster interval
     return () => clearInterval(intervalId);
   }, []);
 
-  // 게임 시간 제한
+  // 게임 시간 제한 - optionally adjust if needed
   useEffect(() => {
     const timer = setTimeout(() => {
       onGameOver();
@@ -121,7 +128,7 @@ export default function Game({ onGameOver, onGameClear }: GameProps) {
               key={index}
               src={getMonkeyImage(monkey.type)}
               style={{ left: monkey.x, top: monkey.y }}
-              className="absolute w-30 h-30 sm:w-40 sm:h-40 md:w-48 md:h-48 transition-all duration-700 cursor-pointer"
+              className="absolute w-25 h-25 sm:w-30 sm:h-30 md:w-35 md:h-35 transition-all duration-500 cursor-pointer"
               alt={`원숭이 ${index + 1}`}
               onClick={() => handleMonkeyClick(index)}
             />
