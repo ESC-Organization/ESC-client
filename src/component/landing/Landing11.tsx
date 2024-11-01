@@ -17,7 +17,7 @@ export default function Landing11() {
             <br />
             <span>
               이봐 자네.. 혹시 <br />
-              <span className="text-[#14AE5C]">trIC ON treat</span>에 참여
+              <span className="text-[#14AE5C]">소프트의 밤</span>에 참여
               중인가..?
             </span>
             <br />
